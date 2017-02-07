@@ -81,10 +81,10 @@ using unsigned_list = type_list<unsigned int,
                                 unsigned long long>;
 using floating_point_list = type_list<float, double, long double>;
 
-using s8  = find_size_type_t<signed_list, 1>;
-using s16 = find_size_type_t<signed_list, 2>;
-using s32 = find_size_type_t<signed_list, 4>;
-using s64 = find_size_type_t<signed_list, 8>;
+using i8  = find_size_type_t<signed_list, 1>;
+using i16 = find_size_type_t<signed_list, 2>;
+using i32 = find_size_type_t<signed_list, 4>;
+using i64 = find_size_type_t<signed_list, 8>;
 
 using u8  = find_size_type_t<unsigned_list, 1>;
 using u16 = find_size_type_t<unsigned_list, 2>;
@@ -98,10 +98,10 @@ using isize = find_size_type_t<signed_list, sizeof( int* )>;
 using usize = find_size_type_t<unsigned_list, sizeof( int* )>;
 } // _type_impl
 
-using s8  = _type_impl::s8;
-using s16 = _type_impl::s16;
-using s32 = _type_impl::s32;
-using s64 = _type_impl::s64;
+using i8  = _type_impl::i8;
+using i16 = _type_impl::i16;
+using i32 = _type_impl::i32;
+using i64 = _type_impl::i64;
 
 using u8  = _type_impl::u8;
 using u16 = _type_impl::u16;
