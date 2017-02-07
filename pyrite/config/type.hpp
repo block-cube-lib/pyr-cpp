@@ -115,6 +115,10 @@ using isize = _type_impl::isize;
 using usize = _type_impl::usize;
 
 using byte = u8;
+
+using ipointer = isize;
+using upointer = usize;
+using pointer_diff = isize;
 } // namespace pyrite
 
 #endif // PYRITE_CONFIG_TYPE_HPP
