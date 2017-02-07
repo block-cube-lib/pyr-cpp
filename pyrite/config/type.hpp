@@ -111,6 +111,10 @@ using u64 = _type_impl::u64;
 using f32 = _type_impl::f32;
 using f64 = _type_impl::f64;
 
+using isize = _type_impl::isize;
+using usize = _type_impl::usize;
+
+using byte = u8;
 } // namespace pyrite
 
 #endif // PYRITE_CONFIG_TYPE_HPP
