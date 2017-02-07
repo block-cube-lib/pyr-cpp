@@ -51,7 +51,7 @@ struct type_holder
 };
 
 template <typename List, unsigned long long Size>
-auto find_size_type
+auto find_size_type()
 {
   static_assert( !is_empty_list<List>::value, "not found." );
 
