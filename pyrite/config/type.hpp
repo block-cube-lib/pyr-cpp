@@ -22,9 +22,11 @@ namespace pyrite
 {
 namespace _type_impl
 {
+template <typename... Args>
+struct type_list;
 
 template <typename Head, typename... Tail>
-struct type_list
+struct type_list<Head, Tail...>
 {
   using head = Head;
   using tail = type_list<Tail...>;
@@ -36,7 +38,7 @@ struct is_empty_list
   static constexpr bool value = false;
 };
 
-template <typename T>
+template <>
 struct is_empty_list<type_list<>>
 {
   static constexpr bool value = true;
@@ -51,7 +53,7 @@ struct type_holder
 template <typename List, unsigned long long Size>
 auto find_size_type
 {
-  static_assert( is_empty_list<List>::value, "not found." );
+  static_assert( !is_empty_list<List>::value, "not found." );
 
   using head = typename List::head;
 
