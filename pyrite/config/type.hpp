@@ -14,8 +14,6 @@
 
 #if defined( CHAR_BIT )
 static_assert( CHAR_BIT == 8, "not support." );
-#else
-static_assert( false, "not support." );
 #endif
 
 namespace pyrite
