@@ -44,30 +44,33 @@ struct is_empty_list<type_list<>>
   static constexpr bool value = true;
 };
 
-template <typename T>
-struct type_holder
+template <bool Cond, typename Then, typename Else>
+struct conditional;
+
+template <typename Then, typename Else>
+struct conditional<true, Then, Else>
 {
-  using type = T;
+  using type = Then;
+};
+template <typename Then, typename Else>
+struct conditional<false, Then, Else>
+{
+  using type = Else;
 };
 
 template <typename List, unsigned long long Size>
-auto find_size_type()
+struct find_size_type
 {
-  static_assert( !is_empty_list<List>::value, "not found." );
-
   using head = typename List::head;
+  using tail = typename List::tail;
 
-  if
-    constexpr( sizeof( head ) == Size ) { return type_holder<head>{}; }
-  else
-  {
-    return find_size_type<typename List::tail, Size>();
-  }
-}
+  using type = typename conditional<sizeof( head ) == Size,
+                                    head,
+                                    typename tail::head>::type;
+};
 
 template <typename List, unsigned long long Size>
-using find_size_type_t =
-  typename decltype( find_size_type<List, Size>() )::type;
+using find_size_type_t = typename find_size_type<List, Size>::type;
 
 using signed_list = type_list<signed int,
                               signed char,
@@ -116,8 +119,8 @@ using usize = _type_impl::usize;
 
 using byte = u8;
 
-using ipointer = isize;
-using upointer = usize;
+using ipointer     = isize;
+using upointer     = usize;
 using pointer_diff = isize;
 } // namespace pyrite
 
