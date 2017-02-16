@@ -42,29 +42,27 @@ struct is_empty_list<type_list<>>
   static constexpr bool value = true;
 };
 
-template <bool Cond, typename Then, typename Else>
-struct conditional;
+template <typename List,
+          unsigned long long Size,
+          bool               IsHead = sizeof( typename List::head ) == Size>
+struct find_size_type;
 
-template <typename Then, typename Else>
-struct conditional<true, Then, Else>
+template <typename List, unsigned long long Size>
+struct find_size_type<List, Size, true>
 {
-  using type = Then;
-};
-template <typename Then, typename Else>
-struct conditional<false, Then, Else>
-{
-  using type = Else;
+  static_assert( !is_empty_list<List>::value, "not found" );
+
+  using type = typename List::head;
 };
 
 template <typename List, unsigned long long Size>
-struct find_size_type
+struct find_size_type<List, Size, false>
 {
-  using head = typename List::head;
+  static_assert( !is_empty_list<List>::value, "not found" );
+
   using tail = typename List::tail;
 
-  using type = typename conditional<sizeof( head ) == Size,
-                                    head,
-                                    typename tail::head>::type;
+  using type = typename find_size_type<tail, Size>::type;
 };
 
 template <typename List, unsigned long long Size>
