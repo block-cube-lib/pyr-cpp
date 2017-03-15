@@ -42,56 +42,56 @@ public:
    */
   ~stopwatch() = default;
 
-  /**
-   * Restart measure.
-   */
-  void restart() noexcept
+  void reset()
   {
-    nanoseconds_             = nanoseconds{0};
-    last_resumed_time_point_ = std::chrono::steady_clock::now();
-    is_stoped_               = false;
+    nanoseconds_ = nanoseconds{0};
+    is_running_  = false;
   }
 
-  void stop() noexcept
+  void start()
   {
-    if( is_stoped() )
+    if( !is_running() )
     {
-      return;
-    }
-
-    nanoseconds_ += from_last_resume();
-    is_stoped_ = true;
-  }
-
-  void resume() noexcept
-  {
-    if( is_stoped() )
-    {
-      last_resumed_time_point_ = std::chrono::steady_clock::now();
-      is_stoped_               = false;
+      start_time_point_ = std::chrono::steady_clock::now();
+      is_running_       = true;
     }
   }
 
-  bool is_stoped() const noexcept { return is_stoped_; }
+  void restart()
+  {
+    reset();
+    start();
+  }
+
+  void stop()
+  {
+    if( is_running() )
+    {
+      nanoseconds_ += from_startd();
+      is_running_ = false;
+    }
+  }
+
+  bool is_running() const noexcept { return is_running_; }
 
   template <typename Duration>
   typename Duration::rep elapsed() const noexcept
   {
-    if( is_stoped() )
-    {
-      return std::chrono::duration_cast<Duration>( nanoseconds_ ).count();
-    }
-    else
-    {
-      auto const count = nanoseconds_ + from_last_resume();
-      return std::chrono::duration_cast<Duration>( count ).count();
-    }
+    auto const count = nanoseconds_ + from_startd();
+    return std::chrono::duration_cast<Duration>( count ).count();
   }
 
   template <typename T>
-  T seconds() const noexcept
+  T elapsed_seconds() const noexcept
   {
     using result_t = std::chrono::duration<T, std::ratio<1, 1>>;
+    return elapsed<result_t>();
+  }
+
+  template <typename T>
+  T elapsed_milliseconds() const noexcept
+  {
+    using result_t = std::chrono::duration<T, std::ratio<1, 1000>>;
     return elapsed<result_t>();
   }
 
@@ -99,16 +99,23 @@ public:
   stopwatch& operator=( stopwatch&& ) = default;
 
 private:
-  nanoseconds from_last_resume() const noexcept
+  nanoseconds from_startd() const noexcept
   {
-    auto const now      = std::chrono::steady_clock::now();
-    auto const duration = now - last_resumed_time_point_;
-    return std::chrono::duration_cast<nanoseconds>( duration );
+    if( is_running() )
+    {
+      auto const now      = std::chrono::steady_clock::now();
+      auto const duration = now - start_time_point_;
+      return std::chrono::duration_cast<nanoseconds>( duration );
+    }
+    else
+    {
+      return nanoseconds{0};
+    }
   }
 
 private:
-  nanoseconds nanoseconds_{0};            // count nanoseconds
-  time_point  last_resumed_time_point_{}; // time point
-  bool        is_stoped_{false};
+  nanoseconds nanoseconds_{0};     // count nanoseconds
+  time_point  start_time_point_{}; // time point
+  bool        is_running_{false};
 };
 } // namespace pyrite
