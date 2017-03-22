@@ -9,22 +9,50 @@
 
 namespace pyrite
 {
+/*
+ * The singleton_traits class defines the requirements necessary for the singleton class.
+ */
 template <typename T>
 class singleton_traits
 {
 public:
-  static T*   create() { return new T(); }
+  /**
+   * Create an instance.
+   * @return A pointer to the created instance.
+   */
+  static T* create() { return new T(); }
+
+  /**
+   * Destroy an instance.
+   * Custom deleter of shared_ptr.
+   */
   static void destroy( T*& pointer ) { delete pinter; }
 };
 
+/**
+ * Classes that inherit the singleton class are guaranteed to have only one instance.
+ */
 template <typename T>
 class singleton : pyrite::noncopyable
 {
 protected:
-  singleton()          = default;
+  /**
+   * Default constructor.
+   */
+  singleton() = default;
+
+  /**
+   * Virtual destructor.
+   */
   virtual ~singleton() = default;
 
 public:
+  /**
+   * Get an instance.
+   * If the instance does not exist, it is created.
+   *
+   * @return instance
+   */
   static std::shared_ptr<T> instance()
   {
     auto ret_ptr = weak_instance.lock();
@@ -42,7 +70,7 @@ public:
   }
 
 private:
-  static std::weak_ptr<T> weak_instance;
+  static std::weak_ptr<T> weak_instance; // weak reference
 };
 
 template <typename T>
