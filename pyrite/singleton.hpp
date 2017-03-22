@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @author    block
+ * @copyright (c) 2017 block.
+ */
+
 #include <memory>
 #include <pyrite/core/noncopyable.hpp>
 
