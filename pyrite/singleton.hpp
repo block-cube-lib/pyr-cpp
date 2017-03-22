@@ -13,7 +13,8 @@ template <typename T>
 class singleton_traits
 {
 public:
-  static T* create() { return new T(); }
+  static T*   create() { return new T(); }
+  static void destroy( T*& pointer ) { delete pinter; }
 };
 
 template <typename T>
@@ -33,7 +34,8 @@ public:
       return ret_ptr;
     }
 
-    ret_ptr = std::shared_ptr<T>( singleton_traits<T>::create() );
+    using traits  = singleton_traits<T>;
+    ret_ptr       = std::shared_ptr<T>{traits::create(), traits::destroy};
     weak_instance = ret_ptr;
 
     return ret_ptr;
