@@ -4,6 +4,9 @@
  * @copyright (c) 2017 block.
  */
 
+#ifndef PYRITE_SINGLETON_HPP
+#define PYRITE_SINGLETON_HPP
+
 #include <memory>
 #include <pyrite/core/noncopyable.hpp>
 
@@ -77,3 +80,4 @@ template <typename T>
 std::weak_ptr<T> singleton<T>::weak_instance;
 
 } // namespace pyrite
+#endif // PYRITE_SINGLETON_HPP
