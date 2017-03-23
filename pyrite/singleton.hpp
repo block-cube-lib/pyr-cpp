@@ -8,6 +8,7 @@
 #define PYRITE_SINGLETON_HPP
 
 #include <memory>
+#include <pyrite/core/checked_delete.hpp>
 #include <pyrite/core/noncopyable.hpp>
 
 namespace pyrite
@@ -29,7 +30,7 @@ public:
    * Destroy an instance.
    * Custom deleter of shared_ptr.
    */
-  static void destroy( T*& pointer ) { delete pinter; }
+  static void destroy( T*& ptr ) { checked_delete( ptr ); }
 };
 
 /**
