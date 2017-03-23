@@ -4,6 +4,9 @@
  * @copyright 2016 block (c)copyright all rights reserved.
  */
 
+#ifndef PYRITE_STOPWATCH_HPP
+#define PYRITE_STOPWATCH_HPP
+
 #include <chrono>
 
 namespace pyrite
@@ -162,3 +165,4 @@ private:
   bool is_running_{false}; // Indicating whether the stopwatch timer is running.
 };
 } // namespace pyrite
+#endif // PYRITE_STOPWATCH_HPP
