@@ -1,7 +1,7 @@
 /**
  * @file
  * @author    block
- * @copyrite  (c)
+ * @copyright (c) 2017 block.
  */
 
 #ifndef PYRITE_CORE_IS_COMPLETE_TYPE_HPP

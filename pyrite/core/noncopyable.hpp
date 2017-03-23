@@ -1,12 +1,7 @@
 /**
  * @file
- * @brief     Define noncopyable.
- *
- * @date      2017/02/27 Create
- *
  * @author    block
- *
- * @copyright 2016 block (c)copyright all rights reserved.
+ * @copyright (c) 2017 block.
  */
 
 #ifndef PYRITE_CORE_NONCOPYABLE

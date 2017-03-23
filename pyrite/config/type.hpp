@@ -1,16 +1,11 @@
-#ifndef PYRITE_CONFIG_TYPE_HPP
-#define PYRITE_CONFIG_TYPE_HPP
-
 /**
  * @file
- * @brief     Define types
- *
- * @date      2017/01/22 Create.
- *
  * @author    block
- *
- * @copyrite  2017 block (c)copyrite add rights reserved.
+ * @copyright (c) 2017 block.
  */
+
+#ifndef PYRITE_CONFIG_TYPE_HPP
+#define PYRITE_CONFIG_TYPE_HPP
 
 #if defined( CHAR_BIT )
 static_assert( CHAR_BIT == 8, "not support." );
