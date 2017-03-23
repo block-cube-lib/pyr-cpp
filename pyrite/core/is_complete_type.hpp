@@ -34,6 +34,13 @@ template <typename T>
 class is_complete_type : public _impl::is_complete_type<T>::type
 {
 };
+
+/**
+ * Variable template version of is_complete_type.
+ */
+template <typename T>
+constexpr bool is_complete_type_v = is_complete_type<T>::value;
+
 } // namespace pyrite
 
 #endif // PYRITE_CORE_IS_COMPLETE_TYPE_HPP
