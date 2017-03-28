@@ -88,7 +88,7 @@ public:
   }
 
   /**
-   *
+   * Indicating whether the stopwatch timer is running.
    */
   bool is_running() const noexcept { return is_running_; }
 
