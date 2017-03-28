@@ -1,12 +1,7 @@
 /**
  * @file
- * @brief     Define scope_exit
- *
- * @date      2017/02/16 Create
- *
  * @author    block
- *
- * @copyright 2016 block (c)copyright all rights reserved.
+ * @copyright (c) 2017 block.
  */
 
 #ifndef PYRITE_SCOPE_EXIT
@@ -59,16 +54,36 @@ struct call<F, false>
 
 } // namespace _scope_exit_impl
 
+/**
+ * Call the function when you exit the scope.
+ * @tparam F The type of function to call.
+ */
 template <typename F>
 class scope_exit
 {
 public:
+  /**
+   * Constructor.
+   *
+   * @param[in] function Function to be called when exiting the scope.
+   */
   scope_exit( F const& function ) : function_( function ) {}
-  scope_exit( scope_exit && ) = default;
 
+  /**
+   * Move constructor.
+   */
+  scope_exit( scope_exit&& ) = default;
+
+  /**
+   * Destructor.
+   * Call the function received in the constructor.
+   */
   ~scope_exit() { _scope_exit_impl::call<F>::apply( function_ ); }
 
-  scope_exit& operator=(scope_exit&& rhs) = default;
+  /**
+   * Move assignment operator.
+   */
+  scope_exit& operator=( scope_exit&& ) = default;
 
   //
   // delete functions
@@ -81,6 +96,11 @@ private:
   F function_;
 }; // class scope_exit
 
+/**
+ * Create scope_exit with the received function as an argument.
+ * @param[in] function Function to be called when exiting the scope.
+ * @return scope_exit witch calls the argument function.
+ */
 template <typename F>
 scope_exit<F> make_scope_exit( F const& function )
 {

@@ -1,7 +1,7 @@
 /**
  * @file
  * @author    block
- * @copyright 2016 block (c)copyright all rights reserved.
+ * @copyright (c) 2017 block.
  */
 
 #ifndef PYRITE_STOPWATCH_HPP
@@ -94,7 +94,7 @@ public:
 
   /**
    * Get the total elapsed time.
-   * @tparam Duration 
+   * @tparam Duration Result type.
    * @return Total elapsed time.
    */
   template <typename Duration>
@@ -106,8 +106,8 @@ public:
 
   /**
    * Get total elapsed time seconds.
-   * @tparam T result type
-   * @return total elapsed time seconds.
+   * @tparam T Result type
+   * @return Total elapsed time seconds.
    */
   template <typename T>
   T elapsed_seconds() const noexcept
@@ -119,7 +119,7 @@ public:
   /**
    * Get total elapsed time milliseconds.
    * @tparam T result type
-   * @return total elapsed time milliseconds.
+   * @return Total elapsed time milliseconds.
    */
   template <typename T>
   T elapsed_milliseconds() const noexcept

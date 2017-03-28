@@ -56,7 +56,6 @@ public:
   /**
    * Get an instance.
    * If the instance does not exist, it is created.
-   *
    * @return instance
    */
   static std::shared_ptr<T> instance()
