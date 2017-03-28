@@ -27,7 +27,6 @@ public:
 
 /**
  * Checks whether T is an complete type.
- *
  * @tparam T A a type to check.
  */
 template <typename T>

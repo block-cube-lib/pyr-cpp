@@ -15,6 +15,7 @@ namespace pyrite
 {
 /*
  * The singleton_traits class defines the requirements necessary for the singleton class.
+ * @param T Type to make singleton.
  */
 template <typename T>
 class singleton_traits
@@ -35,6 +36,7 @@ public:
 
 /**
  * Classes that inherit the singleton class are guaranteed to have only one instance.
+ * @param T Type to make singleton.
  */
 template <typename T>
 class singleton : pyrite::noncopyable

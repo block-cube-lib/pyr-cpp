@@ -13,7 +13,6 @@ namespace pyrite
 {
 /**
  * After deleting the pointer, assing nullptr.
- *
  * @tparam T T must be a complete type.
  * @param ptr pointer.
  */
@@ -29,7 +28,6 @@ void checked_delete( T*& ptr )
 /**
  * After deleting the pointer, assing nullptr.
  * Array version of checked_delete.
- *
  * @tparam T T must be a complete type.
  * @param ptr pointer.
  */
@@ -44,7 +42,6 @@ void checked_array_delete( T*& ptr )
 
 /**
  * A function object thet calls checked_delete with operator().
- *
  * @tparam T Must be a complete type.
  */
 template <typename T>
@@ -56,7 +53,6 @@ public:
 
   /**
    * Call checked_delete.
-   *
    * @param ptr pointer.
    */
   void operator()( T*& ptr ) const { checked_delete( ptr ); }
@@ -64,7 +60,6 @@ public:
 
 /**
  * A function object thet calls checked_delete with operator().
- *
  * @tparam T Must be a complete type.
  */
 template <typename T>
@@ -76,7 +71,6 @@ public:
 
   /**
    * Call checked_array_delete.
-   *
    * @param ptr pointer.
    */
   void operator()( T*& ptr ) const { checked_array_delete( ptr ); }
