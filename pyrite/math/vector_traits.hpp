@@ -12,6 +12,8 @@
 
 namespace pyrite
 {
+namespace math
+{
 /**
  * Traits for abstract access to vector type.
  */
@@ -56,6 +58,7 @@ struct vector_traits
     return vector[index];
   }
 }; // vector_traits
+} // namespace math
 } // namespace pyrite
 
 #endif // PYRITE_MATH_VECTOR_TRAITS_HPP
