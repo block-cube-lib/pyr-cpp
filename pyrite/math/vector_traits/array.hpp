@@ -62,7 +62,7 @@ struct vector_traits<std::array<T, N>>
 
 /**
  * Traits for abstract access to vector type.
- * Specialization for embedded sequences.
+ * Specialization for embedded array.
  */
 template <typename T, std::size_t N>
 struct vector_traits<T[N]>
