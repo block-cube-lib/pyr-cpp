@@ -4,8 +4,8 @@
  * @copyright (c) 2017 block.
  */
 
-#ifndef PYRITE_SCOPE_EXIT
-#define PYRITE_SCOPE_EXIT
+#ifndef PYRITE_SCOPE_EXIT_HPP
+#define PYRITE_SCOPE_EXIT_HPP
 
 namespace pyrite
 {
@@ -108,4 +108,4 @@ scope_exit<F> make_scope_exit( F const& function )
 }
 } // namespace pyrite
 
-#endif // PYRITE_SCOPE_EXIT
+#endif // PYRITE_SCOPE_EXIT_HPP

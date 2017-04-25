@@ -4,8 +4,8 @@
  * @copyright (c) 2017 block.
  */
 
-#ifndef PYRITE_CORE_NONCOPYABLE
-#define PYRITE_CORE_NONCOPYABLE
+#ifndef PYRITE_CORE_NONCOPYABLE_HPP
+#define PYRITE_CORE_NONCOPYABLE_HPP
 
 namespace pyrite
 {
@@ -48,4 +48,4 @@ using noncopyable = pyrite::noncopyable_::noncopyable;
 
 } // namespace pyrite
 
-#endif // PYRITE_CORE_NONCOPYABLE
+#endif // PYRITE_CORE_NONCOPYABLE_HPP
