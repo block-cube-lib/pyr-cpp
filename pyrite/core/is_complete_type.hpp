@@ -7,6 +7,8 @@
 #ifndef PYRITE_CORE_IS_COMPLETE_TYPE_HPP
 #define PYRITE_CORE_IS_COMPLETE_TYPE_HPP
 
+#include <pyrite/core/integral_constant.hpp>
+
 namespace pyrite
 {
 namespace _impl
