@@ -14,13 +14,16 @@ namespace pyrite
 {
 /**
  * Checks whether T is an complete type.
- * @tparam T A a type to check.
+ * @tparam T A type to check.
  */
 template <typename T, typename = void>
 class is_complete_type : public false_type
 {
 };
 
+/**
+ * Template specialization when T is complete type.
+ */
 template <typename T>
 class is_complete_type<T, void_t<decltype( sizeof( T ) )>> : public true_type
 {
