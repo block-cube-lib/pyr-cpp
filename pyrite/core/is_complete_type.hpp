@@ -8,31 +8,21 @@
 #define PYRITE_CORE_IS_COMPLETE_TYPE_HPP
 
 #include <pyrite/core/integral_constant.hpp>
+#include <pyrite/core/void_t.hpp>
 
 namespace pyrite
 {
-namespace detail
-{
-template <typename T>
-class is_complete_type
-{
-private:
-  template <typename U>
-  static auto check( U* ) -> decltype( sizeof( U ), pyrite::true_type{} );
-  template <typename U>
-  static auto check( ... ) -> decltype( pyrite::false_type{} );
-
-public:
-  using type = decltype( check<T>( nullptr ) );
-};
-} // namespace detail
-
 /**
  * Checks whether T is an complete type.
  * @tparam T A a type to check.
  */
+template <typename T, typename = void>
+class is_complete_type : public false_type
+{
+};
+
 template <typename T>
-class is_complete_type : public detail::is_complete_type<T>::type
+class is_complete_type<T, void_t<decltype( sizeof( T ) )>> : public true_type
 {
 };
 
