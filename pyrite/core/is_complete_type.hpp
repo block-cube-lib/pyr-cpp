@@ -11,7 +11,7 @@
 
 namespace pyrite
 {
-namespace _impl
+namespace detail
 {
 template <typename T>
 class is_complete_type
@@ -25,14 +25,14 @@ private:
 public:
   using type = decltype( check<T>( nullptr ) );
 };
-} // namespace _impl
+} // namespace detail
 
 /**
  * Checks whether T is an complete type.
  * @tparam T A a type to check.
  */
 template <typename T>
-class is_complete_type : public _impl::is_complete_type<T>::type
+class is_complete_type : public detail::is_complete_type<T>::type
 {
 };
 
