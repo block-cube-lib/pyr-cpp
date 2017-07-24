@@ -7,31 +7,14 @@
 #ifndef PYRITE_SCOPE_EXIT_HPP
 #define PYRITE_SCOPE_EXIT_HPP
 
+#include <pyrite/type_traits/is_comparable.hpp>
+
 namespace pyrite
 {
 namespace _scope_exit_impl
 {
-template <typename T>
-struct is_null_comparable
-{
-private:
-  template <typename U>
-  static constexpr auto check( U* u ) -> decltype( *u == nullptr, bool{} )
-  {
-    return true;
-  }
 
-  template <typename U>
-  static constexpr auto check( ... ) -> bool
-  {
-    return false;
-  }
-
-public:
-  static constexpr bool value = check<T>( nullptr );
-};
-
-template <typename F, bool IsNullComparable = is_null_comparable<F>::value>
+template <typename F, bool IsNullComparable = is_null_equality_comparable_v<F>>
 struct call;
 
 template <typename F>
