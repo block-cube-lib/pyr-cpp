@@ -11,7 +11,9 @@
 
 namespace pyrite
 {
-namespace _scope_exit_impl
+namespace detail
+{
+namespace scope_exit
 {
 
 template <typename F, bool IsNullComparable = is_null_equality_comparable_v<F>>
@@ -35,7 +37,8 @@ struct call<F, false>
   static void apply( F& function ) { function(); }
 };
 
-} // namespace _scope_exit_impl
+} // namespace detail
+} // namespace scope_exit
 
 /**
  * Call the function when you exit the scope.
@@ -61,7 +64,7 @@ public:
    * Destructor.
    * Call the function received in the constructor.
    */
-  ~scope_exit() { _scope_exit_impl::call<F>::apply( function_ ); }
+  ~scope_exit() { detail::scope_exit::call<F>::apply( function_ ); }
 
   /**
    * Move assignment operator.
