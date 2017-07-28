@@ -3,9 +3,12 @@
  * @author    block
  * @copyright (c) 2017 block.
  */
-#ifndef PYRITE_TYPE_TRAITS_IS_EQUALITY_COMPARABLE_HPP
-#define PYRITE_TYPE_TRAITS_IS_EQUALITY_COMPARABLE_HPP
+#ifndef PYRITE_TYPE_TRAITS_IS_COMPARABLE_HPP
+#define PYRITE_TYPE_TRAITS_IS_COMPARABLE_HPP
 
+#include <utility>
+
+#include <pyrite/core/integral_constant.hpp>
 #include <pyrite/core/void_t.hpp>
 
 namespace pyrite
@@ -47,7 +50,8 @@ using is_null_equality_comparable = is_equality_comparable<T, std::nullptr_t>;
  * Helper variable template of is_null_equality_comparable.
  */
 template <typename T>
-constexpr bool is_null_equality_comparable_v = is_null_equality_comparable<T>::value;
+constexpr bool is_null_equality_comparable_v =
+  is_null_equality_comparable<T>::value;
 }
 
 #endif // PYRITE_TYPE_TRAITS_IS_COMPARABLE_HPP
