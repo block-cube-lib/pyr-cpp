@@ -3,8 +3,8 @@
  * @author    block
  * @copyright (c) 2017 block.
  */
-#ifndef PYRITE_TYPE_TRAITS_IS_EQUALITY_COMPARABLE_HPP
-#define PYRITE_TYPE_TRAITS_IS_EQUALITY_COMPARABLE_HPP
+#ifndef PYRITE_TYPE_TRAITS_IS_COMPARABLE_HPP
+#define PYRITE_TYPE_TRAITS_IS_COMPARABLE_HPP
 
 #include <utility>
 
