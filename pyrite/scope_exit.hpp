@@ -8,6 +8,7 @@
 #define PYRITE_SCOPE_EXIT_HPP
 
 #include <pyrite/type_traits/is_comparable.hpp>
+#include <pyrite/core/noncopyable.hpp>
 
 namespace pyrite
 {
@@ -45,7 +46,7 @@ struct call<F, false>
  * @tparam F The type of function to call.
  */
 template <typename F>
-class scope_exit
+class scope_exit : private noncopyable
 {
 public:
   /**
@@ -70,13 +71,6 @@ public:
    * Move assignment operator.
    */
   scope_exit& operator=( scope_exit&& ) = default;
-
-  //
-  // delete functions
-  //
-  scope_exit()                    = delete;
-  scope_exit( scope_exit const& ) = delete;
-  scope_exit& operator=( scope_exit& ) = delete;
 
 private:
   F function_;
