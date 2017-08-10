@@ -7,31 +7,17 @@
 #ifndef PYRITE_SCOPE_EXIT_HPP
 #define PYRITE_SCOPE_EXIT_HPP
 
+#include <pyrite/type_traits/is_comparable.hpp>
+#include <pyrite/core/noncopyable.hpp>
+
 namespace pyrite
 {
-namespace _scope_exit_impl
+namespace detail
 {
-template <typename T>
-struct is_null_comparable
+namespace scope_exit
 {
-private:
-  template <typename U>
-  static constexpr auto check( U* u ) -> decltype( *u == nullptr, bool{} )
-  {
-    return true;
-  }
 
-  template <typename U>
-  static constexpr auto check( ... ) -> bool
-  {
-    return false;
-  }
-
-public:
-  static constexpr bool value = check<T>( nullptr );
-};
-
-template <typename F, bool IsNullComparable = is_null_comparable<F>::value>
+template <typename F, bool IsNullComparable = is_null_equality_comparable_v<F>>
 struct call;
 
 template <typename F>
@@ -52,14 +38,15 @@ struct call<F, false>
   static void apply( F& function ) { function(); }
 };
 
-} // namespace _scope_exit_impl
+} // namespace detail
+} // namespace scope_exit
 
 /**
  * Call the function when you exit the scope.
  * @tparam F The type of function to call.
  */
 template <typename F>
-class scope_exit
+class scope_exit : private noncopyable
 {
 public:
   /**
@@ -78,19 +65,12 @@ public:
    * Destructor.
    * Call the function received in the constructor.
    */
-  ~scope_exit() { _scope_exit_impl::call<F>::apply( function_ ); }
+  ~scope_exit() { detail::scope_exit::call<F>::apply( function_ ); }
 
   /**
    * Move assignment operator.
    */
   scope_exit& operator=( scope_exit&& ) = default;
-
-  //
-  // delete functions
-  //
-  scope_exit()                    = delete;
-  scope_exit( scope_exit const& ) = delete;
-  scope_exit& operator=( scope_exit& ) = delete;
 
 private:
   F function_;
