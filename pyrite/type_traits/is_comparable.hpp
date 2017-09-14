@@ -15,7 +15,7 @@ namespace pyrite
 {
 /**
  * Whether T and U can be compared with operator==.
- * @tparam T Left  Type.
+ * @tparam T Left Type.
  * @tparam U Right Type.
  */
 template <typename T, typename U, typename = void>
