@@ -15,8 +15,8 @@ namespace pyrite
 {
 /**
  * Whether T and U can be compared with operator==.
- * @tparam Left Type.
- * @tparam Right Type.
+ * @tparam T Left Type.
+ * @tparam U Right Type.
  */
 template <typename T, typename U, typename = void>
 struct is_equality_comparable : false_type
