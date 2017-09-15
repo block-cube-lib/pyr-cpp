@@ -13,7 +13,6 @@ namespace math
 
 /**
  * pi
- * @tparam T type.
  */
 template <typename T>
 constexpr T pi = static_cast<T>( 3.141592653589793 );
