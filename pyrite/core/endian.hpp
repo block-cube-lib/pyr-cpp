@@ -7,6 +7,8 @@
 #ifndef PYRITE_CORE_ENDIAN_HPP
 #define PYRITE_CORE_ENDIAN_HPP
 
+#include <pyrite/config/type.hpp>
+
 namespace pyrite
 {
 inline namespace core
@@ -14,7 +16,7 @@ inline namespace core
 /**
  * An enumerated type representing the order of bytes (endian).
  */
-enum class endian
+enum class endian : i8
 {
   /** Big endian. */
   big,
