@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @author    block
+ * @copyright (c) 2017 block.
+ */
+
 #ifndef PYRITE_CORE_ENDIAN_HPP
 #define PYRITE_CORE_ENDIAN_HPP
 
@@ -5,11 +11,17 @@ namespace pyrite
 {
 inline namespace core
 {
+/**
+ * An enumerated type representing the order of bytes (endian).
+ */
 enum class endian
 {
-  little,
+  /** Big endian. */
   big,
+  /** Little endian. */
+  little,
 
+  /** Endian of execution environment. big or little */
   native =
 #if __BIG_ENDIAN__
     big
