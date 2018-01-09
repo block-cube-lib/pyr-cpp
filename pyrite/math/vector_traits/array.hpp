@@ -42,7 +42,7 @@ struct vector_traits<std::array<T, N>>
    * @param[in] index Index of vector.
    * @return A reference to an element of an editable vector.
    */
-  static constexpr value_type& at( vector_type& vector, usize const& index )
+  static constexpr value_type& at(vector_type& vector, usize const& index)
   {
     return vector[index];
   }
@@ -54,7 +54,7 @@ struct vector_traits<std::array<T, N>>
    * @return A reference to an element of an uneditable vector.
    */
   static constexpr value_type const&
-    at( vector_type const& vector, usize const& index )
+    at(vector_type const& vector, usize const& index)
   {
     return vector[index];
   }
@@ -88,7 +88,7 @@ struct vector_traits<T[N]>
    * @param[in] index Index of vector.
    * @return A reference to an element of an editable vector.
    */
-  static constexpr value_type& at( vector_type& vector, usize const& index )
+  static constexpr value_type& at(vector_type& vector, usize const& index)
   {
     return vector[index];
   }
@@ -100,7 +100,7 @@ struct vector_traits<T[N]>
    * @return A reference to an element of an uneditable vector.
    */
   static constexpr value_type const&
-    at( vector_type const& vector, usize const& index )
+    at(vector_type const& vector, usize const& index)
   {
     return vector[index];
   }

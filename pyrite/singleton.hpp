@@ -31,7 +31,7 @@ public:
    * Destroy an instance.
    * Custom deleter of shared_ptr.
    */
-  static void destroy( T*& ptr ) { checked_delete( ptr ); }
+  static void destroy(T*& ptr) { checked_delete(ptr); }
 };
 
 /**
@@ -62,7 +62,7 @@ public:
   {
     auto ret_ptr = weak_instance.lock();
 
-    if( ret_ptr )
+    if (ret_ptr)
     {
       return ret_ptr;
     }

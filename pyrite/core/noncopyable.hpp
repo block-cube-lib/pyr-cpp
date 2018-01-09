@@ -34,12 +34,12 @@ protected:
   /**
    * Delete copy constructor.
    */
-  noncopyable( noncopyable const& ) = delete;
+  noncopyable(noncopyable const&) = delete;
 
   /**
    * Delete copy assignment operator.
    */
-  noncopyable& operator=( noncopyable const& ) = delete;
+  noncopyable& operator=(noncopyable const&) = delete;
 }; // class noncopyable
 
 } // namespace noncopyable_

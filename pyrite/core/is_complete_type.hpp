@@ -25,7 +25,7 @@ class is_complete_type : public false_type
  * Template specialization when T is complete type.
  */
 template <typename T>
-class is_complete_type<T, void_t<decltype( sizeof( T ) )>> : public true_type
+class is_complete_type<T, void_t<decltype(sizeof(T))>> : public true_type
 {
 };
 

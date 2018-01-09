@@ -7,8 +7,8 @@
 #ifndef PYRITE_CONFIG_TYPE_HPP
 #define PYRITE_CONFIG_TYPE_HPP
 
-#if defined( CHAR_BIT )
-static_assert( CHAR_BIT == 8, "not support." );
+#if defined(CHAR_BIT)
+static_assert(CHAR_BIT == 8, "not support.");
 #endif
 
 namespace pyrite
@@ -39,13 +39,13 @@ struct is_empty_list<type_list<>>
 
 template <typename List,
           unsigned long long Size,
-          bool               IsHead = sizeof( typename List::head ) == Size>
+          bool               IsHead = sizeof(typename List::head) == Size>
 struct find_size_type;
 
 template <typename List, unsigned long long Size>
 struct find_size_type<List, Size, true>
 {
-  static_assert( !is_empty_list<List>::value, "not found" );
+  static_assert(!is_empty_list<List>::value, "not found");
 
   using type = typename List::head;
 };
@@ -53,7 +53,7 @@ struct find_size_type<List, Size, true>
 template <typename List, unsigned long long Size>
 struct find_size_type<List, Size, false>
 {
-  static_assert( !is_empty_list<List>::value, "not found" );
+  static_assert(!is_empty_list<List>::value, "not found");
 
   using tail = typename List::tail;
 
@@ -63,12 +63,12 @@ struct find_size_type<List, Size, false>
 template <typename List, unsigned long long Size>
 using find_size_type_t = typename find_size_type<List, Size>::type;
 
-using signed_list = type_list<signed int,
+using signed_list         = type_list<signed int,
                               signed char,
                               signed short,
                               signed long,
                               signed long long>;
-using unsigned_list = type_list<unsigned int,
+using unsigned_list       = type_list<unsigned int,
                                 unsigned char,
                                 unsigned short,
                                 unsigned long,
@@ -88,9 +88,9 @@ using u64 = find_size_type_t<unsigned_list, 8>;
 using f32 = find_size_type_t<floating_point_list, 4>;
 using f64 = find_size_type_t<floating_point_list, 8>;
 
-using isize = find_size_type_t<signed_list, sizeof( int* )>;
-using usize = find_size_type_t<unsigned_list, sizeof( int* )>;
-} // _type_impl
+using isize = find_size_type_t<signed_list, sizeof(int*)>;
+using usize = find_size_type_t<unsigned_list, sizeof(int*)>;
+} // namespace _type_impl
 
 using i8  = _type_impl::i8;
 using i16 = _type_impl::i16;

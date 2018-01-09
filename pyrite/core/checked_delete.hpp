@@ -17,9 +17,9 @@ namespace pyrite
  * @param ptr pointer.
  */
 template <typename T>
-void checked_delete( T*& ptr )
+void checked_delete(T*& ptr)
 {
-  static_assert( is_complete_type<T>::value, "type T is not a complete type." );
+  static_assert(is_complete_type<T>::value, "type T is not a complete type.");
 
   delete ptr;
   ptr = nullptr;
@@ -32,9 +32,9 @@ void checked_delete( T*& ptr )
  * @param ptr pointer.
  */
 template <typename T>
-void checked_array_delete( T*& ptr )
+void checked_array_delete(T*& ptr)
 {
-  static_assert( is_complete_type<T>::value, "type T is not a complete type." );
+  static_assert(is_complete_type<T>::value, "type T is not a complete type.");
 
   delete[] ptr;
   ptr = nullptr;
@@ -55,7 +55,7 @@ public:
    * Call checked_delete.
    * @param ptr pointer.
    */
-  void operator()( T*& ptr ) const { checked_delete( ptr ); }
+  void operator()(T*& ptr) const { checked_delete(ptr); }
 };
 
 /**
@@ -73,7 +73,7 @@ public:
    * Call checked_array_delete.
    * @param ptr pointer.
    */
-  void operator()( T*& ptr ) const { checked_array_delete( ptr ); }
+  void operator()(T*& ptr) const { checked_array_delete(ptr); }
 };
 } // namespace pyrite
 
