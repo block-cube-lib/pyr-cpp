@@ -7,7 +7,7 @@
 #ifndef PYRITE_CORE_ENDIAN_HPP
 #define PYRITE_CORE_ENDIAN_HPP
 
-#include <pyrite/config/type.hpp>
+#include <pyrite/core/type.hpp>
 
 namespace pyrite
 {

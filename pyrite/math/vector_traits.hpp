@@ -7,8 +7,7 @@
 #ifndef PYRITE_MATH_VECTOR_TRAITS_HPP
 #define PYRITE_MATH_VECTOR_TRAITS_HPP
 
-#include <pyrite/config/type.hpp>
-#include <pyrite/core/integral_constant.hpp>
+#include <pyrite/core/type.hpp>
 
 namespace pyrite
 {

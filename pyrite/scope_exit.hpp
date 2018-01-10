@@ -7,40 +7,12 @@
 #ifndef PYRITE_SCOPE_EXIT_HPP
 #define PYRITE_SCOPE_EXIT_HPP
 
+#include <type_traits>
+
 #include <pyrite/core/noncopyable.hpp>
-#include <pyrite/type_traits/is_comparable.hpp>
 
 namespace pyrite
 {
-namespace detail
-{
-namespace scope_exit
-{
-
-template <typename F, bool IsNullComparable = is_null_equality_comparable_v<F>>
-struct call;
-
-template <typename F>
-struct call<F, true>
-{
-  static void apply(F& function)
-  {
-    if (function != nullptr)
-    {
-      function();
-    }
-  }
-};
-
-template <typename F>
-struct call<F, false>
-{
-  static void apply(F& function) { function(); }
-};
-
-} // namespace scope_exit
-} // namespace detail
-
 /**
  * Call the function when you exit the scope.
  * @tparam F The type of function to call.
@@ -65,7 +37,18 @@ public:
    * Destructor.
    * Call the function received in the constructor.
    */
-  ~scope_exit() { detail::scope_exit::call<F>::apply(function_); }
+  ~scope_exit()
+  {
+    if constexpr (std::is_assignable_v<F, std::nullptr_t>)
+    {
+      if (!function_)
+      {
+        return;
+      }
+    }
+
+    function_();
+  }
 
   /**
    * Move assignment operator.
