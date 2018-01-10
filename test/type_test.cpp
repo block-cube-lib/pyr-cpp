@@ -7,20 +7,20 @@
 TEST(type_test, type_size)
 {
   using namespace pyrite;
-  EXPECT_EQ(sizeof(i8), 1);
-  EXPECT_EQ(sizeof(i16), 2);
-  EXPECT_EQ(sizeof(i32), 4);
-  EXPECT_EQ(sizeof(i64), 8);
+  EXPECT_EQ(sizeof(i8), 1u);
+  EXPECT_EQ(sizeof(i16), 2u);
+  EXPECT_EQ(sizeof(i32), 4u);
+  EXPECT_EQ(sizeof(i64), 8u);
 
-  EXPECT_EQ(sizeof(u8), 1);
-  EXPECT_EQ(sizeof(u16), 2);
-  EXPECT_EQ(sizeof(u32), 4);
-  EXPECT_EQ(sizeof(u64), 8);
+  EXPECT_EQ(sizeof(u8), 1u);
+  EXPECT_EQ(sizeof(u16), 2u);
+  EXPECT_EQ(sizeof(u32), 4u);
+  EXPECT_EQ(sizeof(u64), 8u);
 
-  EXPECT_EQ(sizeof(f32), 4);
-  EXPECT_EQ(sizeof(f64), 8);
+  EXPECT_EQ(sizeof(f32), 4u);
+  EXPECT_EQ(sizeof(f64), 8u);
 
-  EXPECT_EQ(sizeof(byte), 1);
+  EXPECT_EQ(sizeof(byte), 1u);
 
   EXPECT_EQ(sizeof(ipointer), sizeof(void*));
   EXPECT_EQ(sizeof(upointer), sizeof(void*));
