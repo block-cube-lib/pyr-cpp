@@ -22,6 +22,7 @@ set(pyrite_test_source
   scope_exit_test.cpp
   singleton_test.cpp
   singleton_test.cpp
+  stopwatch_test.cpp
   type_test.cpp
   void_t_test.cpp
   )
