@@ -21,6 +21,7 @@ set(pyrite_test_source
   is_complete_type_test.cpp
   scope_exit_test.cpp
   singleton_test.cpp
+  singleton_test.cpp
   type_test.cpp
   void_t_test.cpp
   )
