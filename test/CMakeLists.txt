@@ -18,13 +18,13 @@ add_subdirectory(lib/googletest/googletest)
 
 # source
 set(pyrite_test_source
-  is_complete_type_test.cpp
-  scope_exit_test.cpp
-  singleton_test.cpp
-  singleton_test.cpp
-  stopwatch_test.cpp
-  type_test.cpp
-  void_t_test.cpp
+  ./src/config/type_test.cpp
+  ./src/core/is_complete_type_test.cpp
+  ./src/stopwatch_test.cpp
+  ./src/core/void_t_test.cpp
+  ./src/scope_exit_test.cpp
+  ./src/singleton_test.cpp
+  ./src/singleton_test.cpp
   )
 
 if(MSVC)
