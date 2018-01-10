@@ -1,5 +1,3 @@
-#include <type_traits>
-
 #include <pyrite/scope_exit.hpp>
 
 #include "gtest/gtest.h"
