@@ -26,8 +26,8 @@ TEST(type_test, type_size)
   EXPECT_EQ(sizeof(upointer), sizeof(void*));
   EXPECT_EQ(sizeof(pointer_diff), sizeof(void*));
 
-  EXPECT_TRUE(sizeof(void*) <= sizeof(isize));
-  EXPECT_TRUE(sizeof(void*) <= sizeof(usize));
+  EXPECT_LE(sizeof(void*), sizeof(isize));
+  EXPECT_LE(sizeof(void*), sizeof(usize));
 }
 
 TEST(type_test, sign)
