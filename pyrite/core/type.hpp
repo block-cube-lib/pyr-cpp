@@ -4,8 +4,8 @@
  * @copyright (c) 2017 block.
  */
 
-#ifndef PYRITE_CONFIG_TYPE_HPP
-#define PYRITE_CONFIG_TYPE_HPP
+#ifndef PYRITE_CORE_TYPE_HPP
+#define PYRITE_CORE_TYPE_HPP
 
 #if defined(CHAR_BIT)
 static_assert(CHAR_BIT == 8, "not support.");
@@ -115,4 +115,4 @@ using upointer     = usize;
 using pointer_diff = isize;
 } // namespace pyrite
 
-#endif // PYRITE_CONFIG_TYPE_HPP
+#endif // PYRITE_CORE_TYPE_HPP
