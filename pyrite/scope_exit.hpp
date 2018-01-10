@@ -10,6 +10,7 @@
 #include <type_traits>
 
 #include <pyrite/core/noncopyable.hpp>
+#include <pyrite/type_traits/is_equality_comparable.hpp>
 
 namespace pyrite
 {
@@ -39,9 +40,9 @@ public:
    */
   ~scope_exit()
   {
-    if constexpr (std::is_assignable_v<F, std::nullptr_t>)
+    if constexpr (type_traits::is_equality_comparable_v<F, std::nullptr_t>)
     {
-      if (!function_)
+      if (function_ == nullptr)
       {
         return;
       }
