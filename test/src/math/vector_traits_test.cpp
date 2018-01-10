@@ -3,7 +3,7 @@
 #include <utility>
 #include <array>
 
-#include <pyrite/config/type.hpp>
+#include <pyrite/core/type.hpp>
 #include <pyrite/math/vector_traits.hpp>
 #include <pyrite/math/vector_traits/array.hpp>
 

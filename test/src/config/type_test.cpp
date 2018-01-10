@@ -1,6 +1,6 @@
 #include <type_traits>
 
-#include <pyrite/config/type.hpp>
+#include <pyrite/core/type.hpp>
 
 #include "gtest/gtest.h"
 
