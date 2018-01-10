@@ -25,6 +25,7 @@ set(pyrite_test_source
   ./src/scope_exit_test.cpp
   ./src/singleton_test.cpp
   ./src/singleton_test.cpp
+  ./src/math/vector_traits_test.cpp
   )
 
 if(MSVC)
