@@ -82,7 +82,7 @@ public:
   {
     if (is_running())
     {
-      nanoseconds_ += from_startd();
+      nanoseconds_ += from_started();
       is_running_ = false;
     }
   }
@@ -100,7 +100,7 @@ public:
   template <typename Duration>
   typename Duration::rep elapsed() const noexcept
   {
-    auto const count = nanoseconds_ + from_startd();
+    auto const count = nanoseconds_ + from_started();
     return std::chrono::duration_cast<Duration>(count).count();
   }
 
@@ -145,7 +145,7 @@ private:
    * Get nanoseconds from at last start.
    * @return from at last start or 0 if stopwatch timer is running.
    */
-  nanoseconds from_startd() const noexcept
+  nanoseconds from_started() const noexcept
   {
     if (is_running())
     {
