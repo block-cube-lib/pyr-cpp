@@ -8,6 +8,8 @@
 #define PYRITE_SINGLETON_HPP
 
 #include <memory>
+#include <mutex>
+
 #include <pyrite/core/checked_delete.hpp>
 #include <pyrite/core/noncopyable.hpp>
 
@@ -60,24 +62,31 @@ public:
    */
   static std::shared_ptr<T> instance()
   {
-    auto ret_ptr = weak_instance.lock();
-
-    if (ret_ptr)
+    if (auto ret_ptr = weak_instance.lock(); ret_ptr)
     {
       return ret_ptr;
     }
 
-    using traits  = singleton_traits<T>;
-    ret_ptr       = std::shared_ptr<T>{traits::create(), traits::destroy};
-    weak_instance = ret_ptr;
+    [[maybe_unused]] std::lock_guard<std::mutex> lock(creation_mutex);
+
+    auto ret_ptr = weak_instance.lock();
+    if (!ret_ptr)
+    {
+      using traits  = singleton_traits<T>;
+      ret_ptr       = std::shared_ptr<T>{traits::create(), traits::destroy};
+      weak_instance = ret_ptr;
+    }
 
     return ret_ptr;
   }
 
 private:
+  static std::mutex       creation_mutex;
   static std::weak_ptr<T> weak_instance; // weak reference
 };
 
+template <typename T>
+std::mutex singleton<T>::creation_mutex;
 template <typename T>
 std::weak_ptr<T> singleton<T>::weak_instance;
 
