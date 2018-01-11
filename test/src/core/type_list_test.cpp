@@ -1,0 +1,65 @@
+#include "gtest/gtest.h"
+
+#include <type_traits>
+
+#include <pyrite/core/type_list.hpp>
+
+using pyrite::core::type_list;
+
+TEST(type_list_test, length)
+{
+  EXPECT_EQ((type_list<>::length), 0u);
+  EXPECT_EQ((type_list<int>::length), 1u);
+  EXPECT_EQ((type_list<int, float>::length), 2u);
+  EXPECT_EQ((type_list<int, float, char>::length), 3u);
+}
+
+TEST(type_list_test, head)
+{
+  ::testing::StaticAssertTypeEq<type_list<>::head, pyrite::null_type>();
+  ::testing::StaticAssertTypeEq<type_list<int>::head, int>();
+  ::testing::StaticAssertTypeEq<type_list<char, float>::head, char>();
+  ::testing::StaticAssertTypeEq<type_list<float, int, int>::head, float>();
+  ::testing::StaticAssertTypeEq<type_list<int const*, double const>::head,
+                                int const*>();
+}
+
+TEST(type_list_test, tail)
+{
+  ::testing::StaticAssertTypeEq<type_list<>::tail, pyrite::null_type>();
+  ::testing::StaticAssertTypeEq<type_list<int>::tail, type_list<>>();
+  ::testing::StaticAssertTypeEq<type_list<char, float>::tail,
+                                type_list<float>>();
+  ::testing::StaticAssertTypeEq<type_list<float, int, int>::tail,
+                                type_list<int, int>>();
+  ::testing::StaticAssertTypeEq<type_list<int const*, double const>::tail,
+                                type_list<double const>>();
+}
+
+TEST(type_list_test, join)
+{
+  {
+    using list1 = type_list<>;
+    using list2 = type_list<>;
+    ::testing::StaticAssertTypeEq<list1::join<list2>, type_list<>>();
+  }
+
+  {
+    using list   = type_list<int>;
+    using result = list::join<list>::join<list>::join<list>;
+    ::testing::StaticAssertTypeEq<result, type_list<int, int, int, int>>();
+
+    // list::join<int>; // compile error
+  }
+}
+
+TEST(type_list_test, at)
+{
+  using list = type_list<int, char, float, double, char const, std::nullptr_t>;
+  ::testing::StaticAssertTypeEq<list::at<0>, int>();
+  ::testing::StaticAssertTypeEq<list::at<1>, char>();
+  ::testing::StaticAssertTypeEq<list::at<2>, float>();
+  ::testing::StaticAssertTypeEq<list::at<3>, double>();
+  ::testing::StaticAssertTypeEq<list::at<4>, char const>();
+  ::testing::StaticAssertTypeEq<list::at<5>, std::nullptr_t>();
+}
