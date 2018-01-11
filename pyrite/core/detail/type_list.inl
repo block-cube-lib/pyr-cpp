@@ -34,12 +34,18 @@ constexpr bool is_type_list_v = is_type_list<T>::value;
 
 namespace detail
 {
+///
+// utility
+///
 template <typename T>
 struct type_holder
 {
   using type = T;
 };
 
+///
+// head
+///
 template <typename>
 struct head_
 {
@@ -52,6 +58,9 @@ struct head_<type_list<Head, Tail...>>
   using type = Head;
 };
 
+///
+// tail
+///
 template <typename>
 struct tail_
 {
@@ -64,6 +73,42 @@ struct tail_<type_list<Head, Tail...>>
   using type = type_list<Tail...>;
 };
 
+///
+// at
+///
+template <typename T, std::size_t>
+struct at_
+{
+  static_assert(mpl::is_type_list_v<T>);
+};
+
+template <typename... Args, std::size_t Index>
+struct at_<type_list<Args...>, Index>
+{
+private:
+  static auto apply()
+  {
+    using list = type_list<Args...>;
+    if constexpr (Index == 0)
+    {
+      using head = typename  head_<list>::type;
+      return type_holder<head>{};
+    }
+    else
+    {
+      using tail = typename tail_<list>::type;
+      return at_<tail, Index - 1>();
+    }
+  }
+
+public:
+  static_assert(Index < type_list<Args...>::length);
+  using type = typename decltype(apply())::type;
+};
+
+///
+// join
+///
 template <typename L, typename R>
 struct join_
 {

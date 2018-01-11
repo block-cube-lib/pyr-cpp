@@ -24,10 +24,13 @@ struct type_list
 public:
   using type = type_list<Args...>;
 
-  static constexpr decltype(sizeof...(Args)) length = sizeof...(Args);
+  static constexpr std::size_t length = sizeof...(Args);
 
   using head = typename detail::head_<type>::type;
   using tail = typename detail::tail_<type>::type;
+
+  template <std::size_t Index>
+  using at = typename detail::at_<type, Index>::type;
 
   template <typename T>
   using join = typename detail::join_<type, T>::type;
