@@ -91,7 +91,7 @@ private:
     using list = type_list<Args...>;
     if constexpr (Index == 0)
     {
-      using head = typename  head_<list>::type;
+      using head = typename head_<list>::type;
       return type_holder<head>{};
     }
     else
@@ -120,6 +120,13 @@ template <typename... L, typename... R>
 struct join_<type_list<L...>, type_list<R...>>
 {
   using type = type_list<L..., R...>;
+};
+
+template <typename List, typename T>
+struct push_back_
+{
+  static_assert(mpl::is_type_list_v<List>);
+  using type = typename join_<List, type_list<T>>::type;
 };
 
 } // namespace detail

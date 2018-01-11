@@ -34,6 +34,9 @@ public:
 
   template <typename T>
   using join = typename detail::join_<type, T>::type;
+
+  template <typename T>
+  using push_back = typename detail::push_back_<type, T>::type;
 };
 } // namespace core
 } // namespace pyrite

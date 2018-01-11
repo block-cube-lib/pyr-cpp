@@ -35,6 +35,16 @@ TEST(type_list_test, tail)
   ::testing::StaticAssertTypeEq<type_list<int const*, double const>::tail,
                                 type_list<double const>>();
 }
+TEST(type_list_test, at)
+{
+  using list = type_list<int, char, float, double, char const, std::nullptr_t>;
+  ::testing::StaticAssertTypeEq<list::at<0>, int>();
+  ::testing::StaticAssertTypeEq<list::at<1>, char>();
+  ::testing::StaticAssertTypeEq<list::at<2>, float>();
+  ::testing::StaticAssertTypeEq<list::at<3>, double>();
+  ::testing::StaticAssertTypeEq<list::at<4>, char const>();
+  ::testing::StaticAssertTypeEq<list::at<5>, std::nullptr_t>();
+}
 
 TEST(type_list_test, join)
 {
@@ -53,13 +63,16 @@ TEST(type_list_test, join)
   }
 }
 
-TEST(type_list_test, at)
+TEST(type_list_test, push_back)
 {
-  using list = type_list<int, char, float, double, char const, std::nullptr_t>;
-  ::testing::StaticAssertTypeEq<list::at<0>, int>();
-  ::testing::StaticAssertTypeEq<list::at<1>, char>();
-  ::testing::StaticAssertTypeEq<list::at<2>, float>();
-  ::testing::StaticAssertTypeEq<list::at<3>, double>();
-  ::testing::StaticAssertTypeEq<list::at<4>, char const>();
-  ::testing::StaticAssertTypeEq<list::at<5>, std::nullptr_t>();
+  using empty = type_list<>;
+  using list1 = empty::push_back<int>;
+  using list2 = list1::push_back<int>;
+  using list3 = list2::push_back<char>;
+  using list4 = list3::push_back<list1>;
+
+  ::testing::StaticAssertTypeEq<list1, type_list<int>>();
+  ::testing::StaticAssertTypeEq<list2, type_list<int, int>>();
+  ::testing::StaticAssertTypeEq<list3, type_list<int, int, char>>();
+  ::testing::StaticAssertTypeEq<list4, type_list<int, int, char, list1>>();
 }
