@@ -129,6 +129,13 @@ struct push_back_
   using type = typename join_<List, type_list<T>>::type;
 };
 
+template <typename List, typename T>
+struct push_front_
+{
+  static_assert(mpl::is_type_list_v<List>);
+  using type = typename join_<type_list<T>, List>::type;
+};
+
 } // namespace detail
 
 } // namespace core

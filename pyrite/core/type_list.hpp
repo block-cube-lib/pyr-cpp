@@ -37,6 +37,9 @@ public:
 
   template <typename T>
   using push_back = typename detail::push_back_<type, T>::type;
+
+  template <typename T>
+  using push_front = typename detail::push_front_<type, T>::type;
 };
 } // namespace core
 } // namespace pyrite

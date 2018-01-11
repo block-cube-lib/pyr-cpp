@@ -76,3 +76,17 @@ TEST(type_list_test, push_back)
   ::testing::StaticAssertTypeEq<list3, type_list<int, int, char>>();
   ::testing::StaticAssertTypeEq<list4, type_list<int, int, char, list1>>();
 }
+
+TEST(type_list_test, push_front)
+{
+  using empty = type_list<>;
+  using list1 = empty::push_front<int>;
+  using list2 = list1::push_front<int>;
+  using list3 = list2::push_front<char>;
+  using list4 = list3::push_front<list1>;
+
+  ::testing::StaticAssertTypeEq<list1, type_list<int>>();
+  ::testing::StaticAssertTypeEq<list2, type_list<int, int>>();
+  ::testing::StaticAssertTypeEq<list3, type_list<char, int, int>>();
+  ::testing::StaticAssertTypeEq<list4, type_list<list1, char, int, int>>();
+}
