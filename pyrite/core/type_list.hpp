@@ -40,6 +40,9 @@ public:
 
   template <typename T>
   using push_front = typename detail::push_front_<type, T>::type;
+
+  template <template <typename> typename Pred>
+  static constexpr bool all_of = detail::all_of_<Pred, Args...>::value;
 };
 
 template <typename T, std::size_t Size>

@@ -136,6 +136,12 @@ struct push_front_
   using type = typename join_<type_list<T>, List>::type;
 };
 
+template <template <typename> typename F, typename... Args>
+struct all_of_
+{
+  static constexpr bool value = (sizeof...(Args) == 0u) || (F<Args>::value && ...);
+};
+
 template <typename T, std::size_t Count>
 struct make_type_list_
 {

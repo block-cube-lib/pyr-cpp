@@ -91,6 +91,29 @@ TEST(type_list_test, push_front)
   ::testing::StaticAssertTypeEq<list4, type_list<list1, char, int, int>>();
 }
 
+TEST(type_list_test, all_of)
+{
+  {
+    using list = type_list<long, short>;
+    EXPECT_TRUE(list::all_of<std::is_integral>);
+  }
+
+  {
+    using list = type_list<double, float, long double>;
+    EXPECT_TRUE(list::all_of<std::is_floating_point>);
+  }
+
+  {
+    using list = type_list<int, float, long double>;
+    EXPECT_FALSE(list::all_of<std::is_floating_point>);
+  }
+
+  {
+    using list = type_list<>;
+    EXPECT_TRUE(list::all_of<std::is_floating_point>);
+  }
+}
+
 TEST(type_list_test, make_type_list)
 {
   using namespace pyrite::core;
