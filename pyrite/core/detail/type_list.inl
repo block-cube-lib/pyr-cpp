@@ -143,7 +143,7 @@ private:
   template <typename... Args>
   static auto apply()
   {
-    using add_list = type_list<Args...>;
+    using add_list        = type_list<Args...>;
     constexpr auto length = sizeof...(Args);
 
     if constexpr (Count == 0)
@@ -165,8 +165,8 @@ private:
     }
     else
     {
-      using join_list  = typename make_type_list_<T, Count - length>::type;
-      using result = typename join_<add_list, join_list>::type;
+      using join_list = typename make_type_list_<T, Count - length>::type;
+      using result    = typename join_<add_list, join_list>::type;
       return result{};
     }
   }
