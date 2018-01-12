@@ -136,6 +136,44 @@ struct push_front_
   using type = typename join_<type_list<T>, List>::type;
 };
 
+template <typename T, std::size_t Count>
+struct make_type_list_
+{
+private:
+  template <typename... Args>
+  static auto apply()
+  {
+    using add_list = type_list<Args...>;
+    constexpr auto length = sizeof...(Args);
+
+    if constexpr (Count == 0)
+    {
+      return add_list{};
+    }
+    else if constexpr (Count == 1)
+    {
+      using result = typename join_<add_list, type_list<T>>::type;
+      return result{};
+    }
+    else if constexpr (length == 0)
+    {
+      return apply<T>();
+    }
+    else if constexpr (length < Count / 2)
+    {
+      return apply<Args..., Args...>();
+    }
+    else
+    {
+      using join_list  = typename make_type_list_<T, Count - length>::type;
+      using result = typename join_<add_list, join_list>::type;
+      return result{};
+    }
+  }
+
+public:
+  using type = decltype(apply());
+};
 } // namespace detail
 
 } // namespace core

@@ -90,3 +90,41 @@ TEST(type_list_test, push_front)
   ::testing::StaticAssertTypeEq<list3, type_list<char, int, int>>();
   ::testing::StaticAssertTypeEq<list4, type_list<list1, char, int, int>>();
 }
+
+TEST(type_list_test, make_type_list)
+{
+  using namespace pyrite::core;
+
+  {
+    using list = make_type_list<int, 0>;
+    ::testing::StaticAssertTypeEq<list, type_list<>>();
+  }
+  {
+    using list = make_type_list<int, 1>;
+    ::testing::StaticAssertTypeEq<list, type_list<int>>();
+  }
+  {
+    using list = make_type_list<int, 2>;
+    ::testing::StaticAssertTypeEq<list, type_list<int, int>>();
+  }
+  {
+    using list = make_type_list<int, 3>;
+    ::testing::StaticAssertTypeEq<list, type_list<int, int, int>>();
+  }
+  {
+    using list = make_type_list<int, 4>;
+    ::testing::StaticAssertTypeEq<list, type_list<int, int, int, int>>();
+  }
+  {
+    using list = make_type_list<int, 1023>;
+    EXPECT_EQ(list::length, 1023u);
+  }
+  {
+    using list = make_type_list<int, 2000>;
+    EXPECT_EQ(list::length, 2000u);
+  }
+  {
+    using list = make_type_list<int, 2001>;
+    EXPECT_EQ(list::length, 2001u);
+  }
+}

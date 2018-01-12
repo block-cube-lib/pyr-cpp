@@ -42,42 +42,8 @@ public:
   using push_front = typename detail::push_front_<type, T>::type;
 };
 
-template <typename T, std::size_t Count>
-struct make_type_list
-{
-private:
-  template <typename AddList = type_list<>>
-  static auto apply()
-  {
-    if constexpr (Count == 0)
-    {
-      return AddList{};
-    }
-    else if constexpr (Count == 1)
-    {
-      using result = typename AddList::template join<type_list<T>>;
-      return result{};
-    }
-    else if constexpr (AddList::length == 0)
-    {
-      return apply<type_list<T>>();
-    }
-    else if constexpr (AddList::length < Count / 2)
-    {
-      using add_list = typename AddList::template join<AddList>;
-      return apply<add_list>();
-    }
-    else
-    {
-      using list2 = typename make_type_list<T, Count - AddList::length>::type;
-      using result = typename AddList::template join<list2>;
-      return result{};
-    }
-  }
-
-public:
-  using type = decltype(apply());
-};
+template <typename T, std::size_t Size>
+using make_type_list = typename detail::make_type_list_<T, Size>::type;
 
 } // namespace core
 } // namespace pyrite
