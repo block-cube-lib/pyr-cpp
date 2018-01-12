@@ -137,6 +137,29 @@ TEST(type_list_test, any_of)
   }
 }
 
+TEST(type_list_test, none_of)
+{
+  {
+    using list = type_list<void, void>;
+    EXPECT_TRUE(list::none_of<std::is_integral>);
+  }
+
+  {
+    using list = type_list<int, void, short>;
+    EXPECT_TRUE(list::none_of<std::is_floating_point>);
+  }
+
+  {
+    using list = type_list<int, long, float>;
+    EXPECT_FALSE(list::none_of<std::is_floating_point>);
+  }
+
+  {
+    using list = type_list<>;
+    EXPECT_TRUE(list::none_of<std::is_floating_point>);
+  }
+}
+
 TEST(type_list_test, make_type_list)
 {
   using namespace pyrite::core;

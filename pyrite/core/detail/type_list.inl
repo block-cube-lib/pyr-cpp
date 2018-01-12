@@ -150,6 +150,13 @@ struct any_of_
                                 (F<Args>::value || ...);
 };
 
+template <template <typename> typename F, typename... Args>
+struct none_of_
+{
+  static constexpr bool value = (sizeof...(Args) == 0u) ||
+                                (!F<Args>::value && ...);
+};
+
 template <typename T, std::size_t Count>
 struct make_type_list_
 {

@@ -46,6 +46,9 @@ public:
 
   template <template <typename> typename Pred>
   static constexpr bool any_of = detail::any_of_<Pred, Args...>::value;
+
+  template <template <typename> typename Pred>
+  static constexpr bool none_of = detail::none_of_<Pred, Args...>::value;
 };
 
 template <typename T, std::size_t Size>
