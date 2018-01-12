@@ -122,6 +122,9 @@ struct join_<type_list<L...>, type_list<R...>>
   using type = type_list<L..., R...>;
 };
 
+///
+// push_back
+///
 template <typename List, typename T>
 struct push_back_
 {
@@ -129,6 +132,9 @@ struct push_back_
   using type = typename join_<List, type_list<T>>::type;
 };
 
+///
+// push_front
+///
 template <typename List, typename T>
 struct push_front_
 {
@@ -136,6 +142,9 @@ struct push_front_
   using type = typename join_<type_list<T>, List>::type;
 };
 
+///
+// all_of
+///
 template <template <typename> typename F, typename... Args>
 struct all_of_
 {
@@ -143,6 +152,9 @@ struct all_of_
                                 (F<Args>::value && ...);
 };
 
+///
+// any_of
+///
 template <template <typename> typename F, typename... Args>
 struct any_of_
 {
@@ -150,6 +162,9 @@ struct any_of_
                                 (F<Args>::value || ...);
 };
 
+///
+// none_of
+///
 template <template <typename> typename F, typename... Args>
 struct none_of_
 {
@@ -157,6 +172,9 @@ struct none_of_
                                 (!F<Args>::value && ...);
 };
 
+///
+// make_type_list
+///
 template <typename T, std::size_t Count>
 struct make_type_list_
 {
