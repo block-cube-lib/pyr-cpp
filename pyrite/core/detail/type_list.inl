@@ -139,7 +139,15 @@ struct push_front_
 template <template <typename> typename F, typename... Args>
 struct all_of_
 {
-  static constexpr bool value = (sizeof...(Args) == 0u) || (F<Args>::value && ...);
+  static constexpr bool value = (sizeof...(Args) == 0u) ||
+                                (F<Args>::value && ...);
+};
+
+template <template <typename> typename F, typename... Args>
+struct any_of_
+{
+  static constexpr bool value = (sizeof...(Args) == 0u) ||
+                                (F<Args>::value || ...);
 };
 
 template <typename T, std::size_t Count>

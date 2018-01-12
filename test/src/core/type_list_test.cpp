@@ -114,6 +114,29 @@ TEST(type_list_test, all_of)
   }
 }
 
+TEST(type_list_test, any_of)
+{
+  {
+    using list = type_list<long, double>;
+    EXPECT_TRUE(list::any_of<std::is_integral>);
+  }
+
+  {
+    using list = type_list<double, double, double, int>;
+    EXPECT_TRUE(list::any_of<std::is_floating_point>);
+  }
+
+  {
+    using list = type_list<int, long, short>;
+    EXPECT_FALSE(list::any_of<std::is_floating_point>);
+  }
+
+  {
+    using list = type_list<>;
+    EXPECT_TRUE(list::any_of<std::is_floating_point>);
+  }
+}
+
 TEST(type_list_test, make_type_list)
 {
   using namespace pyrite::core;
