@@ -165,6 +165,15 @@ struct none_of_
 };
 
 ///
+// transform
+///
+template <template <typename> typename F, typename... Args>
+struct transform_
+{
+  using type = type_list<typename F<Args>::type ...>;
+};
+
+///
 // make_type_list
 ///
 template <typename T, std::size_t Count>

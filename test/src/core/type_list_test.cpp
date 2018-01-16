@@ -163,6 +163,22 @@ TEST(type_list_test, none_of)
   }
 }
 
+TEST(type_list_test, transform)
+{
+  {
+    using list = type_list<>::transform<std::add_const>;
+    ::testing::StaticAssertTypeEq<list, type_list<>>();
+  }
+  {
+    using list = type_list<int>::transform<std::add_const>;
+    ::testing::StaticAssertTypeEq<list, type_list<int const>>();
+  }
+  {
+    using list = type_list<int, void>::transform<std::add_pointer>;
+    ::testing::StaticAssertTypeEq<list, type_list<int*, void*>>();
+  }
+}
+
 TEST(type_list_test, make_type_list)
 {
   using namespace pyrite::core;

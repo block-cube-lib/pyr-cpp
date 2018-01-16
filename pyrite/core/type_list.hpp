@@ -43,6 +43,9 @@ public:
 
   template <template <typename> typename Pred>
   static constexpr bool none_of = detail::none_of_<Pred, Args...>::value;
+
+  template <template <typename> typename F>
+  using transform = typename detail::transform_<F, Args...>::type;
 };
 
 template <typename T, std::size_t Size>
