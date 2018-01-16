@@ -28,13 +28,15 @@ using u64 = detail::u64; //!< 64 bit unsigned integer type.
 using f32 = detail::f32; //!< 32 bit floating point type.
 using f64 = detail::f64; //!< 64 bit floating point type.
 
-using isize = detail::isize;
-using usize = detail::usize;
+using isize =
+  detail::isize; //!< Signed intger type large enough to represent size.
+using usize =
+  detail::usize; //!< Unsigned intger type large enough to represent size.
 
-using byte = u8;
+using byte = u8; // 8 bit unsigned integer type.
 
-using ipointer     = isize;
-using upointer     = usize;
+using ipointer     = isize; // Signed integer type capable of holding a pointer.
+using upointer     = usize; // Unsigned integer type capable of holding a pointer.
 using pointer_diff = isize;
 } // namespace pyrite
 
