@@ -49,6 +49,12 @@ public:
 
 template <typename List, std::size_t Size>
 using find_from_size_t = typename find_from_size<List, Size>::type;
+
+template <typename T>
+constexpr auto max(T a, T b)
+{
+  return a < b ? b : a;
+}
 } // namespace
 
 using i8  = find_from_size_t<signed_list, 1u>;
@@ -64,8 +70,14 @@ using u64 = find_from_size_t<unsigned_list, 8u>;
 using f32 = find_from_size_t<floating_point_list, 4u>;
 using f64 = find_from_size_t<floating_point_list, 8u>;
 
-using isize = find_from_size_t<signed_list, sizeof(int*)>;
-using usize = find_from_size_t<unsigned_list, sizeof(int*)>;
+using isize =
+  find_from_size_t<signed_list, max(sizeof(std::size_t), std::size_t{8u})>;
+using usize =
+  find_from_size_t<unsigned_list, max(sizeof(std::size_t), std::size_t{8u})>;
+
+using iptr    = find_from_size_t<signed_list, sizeof(int*)>;
+using uptr    = find_from_size_t<unsigned_list, sizeof(int*)>;
+using ptrdiff = decltype(std::declval<int*>() - std::declval<int*>());
 } // namespace pyrite::detail
 
 #endif // PYRITE_CORE_DETAIL_TYPE_HPP
