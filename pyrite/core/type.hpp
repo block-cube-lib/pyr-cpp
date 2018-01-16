@@ -35,9 +35,9 @@ using usize =
 
 using byte = u8; // 8 bit unsigned integer type.
 
-using ipointer     = isize; // Signed integer type capable of holding a pointer.
-using upointer     = usize; // Unsigned integer type capable of holding a pointer.
-using pointer_diff = isize;
+using iptr = isize; // Signed integer type capable of holding a pointer.
+using uptr = usize; // Unsigned integer type capable of holding a pointer.
+using ptr_diff = isize;
 } // namespace pyrite
 
 #endif // PYRITE_CORE_TYPE_HPP
