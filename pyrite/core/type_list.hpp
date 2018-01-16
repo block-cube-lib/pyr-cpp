@@ -7,16 +7,10 @@
 #ifndef PYRITE_CORE_TYPE_LIST
 #define PYRITE_CORE_TYPE_LIST
 
-namespace pyrite
-{
-struct null_type;
-}
-
+#include <pyrite/core/type_holder.hpp>
 #include <pyrite/core/detail/type_list.inl>
 
-namespace pyrite
-{
-namespace core
+namespace pyrite::core
 {
 template <typename... Args>
 struct type_list
@@ -54,7 +48,6 @@ public:
 template <typename T, std::size_t Size>
 using make_type_list = typename detail::make_type_list_<T, Size>::type;
 
-} // namespace core
-} // namespace pyrite
+} // namespace pyrite::core
 
 #endif // PYRITE_CORE_TYPE_LIST

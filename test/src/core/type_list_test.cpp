@@ -16,17 +16,19 @@ TEST(type_list_test, length)
 
 TEST(type_list_test, head)
 {
-  ::testing::StaticAssertTypeEq<type_list<>::head, pyrite::null_type>();
-  ::testing::StaticAssertTypeEq<type_list<int>::head, int>();
-  ::testing::StaticAssertTypeEq<type_list<char, float>::head, char>();
-  ::testing::StaticAssertTypeEq<type_list<float, int, int>::head, float>();
+  using pyrite::core::type_holder;
+  using pyrite::core::null_type_holder;
+  ::testing::StaticAssertTypeEq<type_list<>::head, null_type_holder>();
+  ::testing::StaticAssertTypeEq<type_list<int>::head, type_holder<int>>();
+  ::testing::StaticAssertTypeEq<type_list<char, float>::head, type_holder<char>>();
+  ::testing::StaticAssertTypeEq<type_list<float, int, int>::head, type_holder<float>>();
   ::testing::StaticAssertTypeEq<type_list<int const*, double const>::head,
-                                int const*>();
+                                type_holder<int const*>>();
 }
 
 TEST(type_list_test, tail)
 {
-  ::testing::StaticAssertTypeEq<type_list<>::tail, pyrite::null_type>();
+  ::testing::StaticAssertTypeEq<type_list<>::tail, type_list<>>();
   ::testing::StaticAssertTypeEq<type_list<int>::tail, type_list<>>();
   ::testing::StaticAssertTypeEq<type_list<char, float>::tail,
                                 type_list<float>>();
@@ -35,6 +37,7 @@ TEST(type_list_test, tail)
   ::testing::StaticAssertTypeEq<type_list<int const*, double const>::tail,
                                 type_list<double const>>();
 }
+
 TEST(type_list_test, at)
 {
   using list = type_list<int, char, float, double, char const, std::nullptr_t>;
