@@ -170,7 +170,40 @@ struct none_of_
 template <template <typename> typename F, typename... Args>
 struct transform_
 {
-  using type = type_list<typename F<Args>::type ...>;
+  using type = type_list<typename F<Args>::type...>;
+};
+
+///
+// find_if
+///
+template <typename List, template <typename> typename F>
+struct find_if_
+{
+private:
+  template <typename L>
+  static auto find()
+  {
+    using head_holder = typename head_<L>::type;
+    if constexpr (head_holder::has_type)
+    {
+      using head = typename head_holder::type;
+      if constexpr (F<head>::value)
+      {
+        return type_holder<head>{};
+      }
+      else
+      {
+        return find<typename tail_<L>::type>();
+      }
+    }
+    else
+    {
+      return type_holder<>{};
+    }
+  }
+
+public:
+  using type = decltype(find<List>());
 };
 
 ///

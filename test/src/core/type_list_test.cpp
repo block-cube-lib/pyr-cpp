@@ -179,6 +179,19 @@ TEST(type_list_test, transform)
   }
 }
 
+TEST(type_list_test, find_if)
+{
+  using pyrite::core::type_holder;
+  using pyrite::core::null_type_holder;
+  using list = type_list<void, float, unsigned char, long volatile, short, int, double const>;
+  ::testing::StaticAssertTypeEq<list::find_if<std::is_pointer>, null_type_holder>();
+  ::testing::StaticAssertTypeEq<list::find_if<std::is_void>, type_holder<void>>();
+  ::testing::StaticAssertTypeEq<list::find_if<std::is_floating_point>, type_holder<float>>();
+  ::testing::StaticAssertTypeEq<list::find_if<std::is_integral>, type_holder<unsigned char>>();
+  ::testing::StaticAssertTypeEq<list::find_if<std::is_volatile>, type_holder<long volatile>>();
+  ::testing::StaticAssertTypeEq<list::find_if<std::is_const>, type_holder<double const>>();
+}
+
 TEST(type_list_test, make_type_list)
 {
   using namespace pyrite::core;
