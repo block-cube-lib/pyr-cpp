@@ -4,8 +4,8 @@
  * @copyright (c) 2017 block.
  */
 
-#ifndef PYRITE_CORE_TYPE_LIST
-#define PYRITE_CORE_TYPE_LIST
+#ifndef PYRITE_CORE_TYPE_LIST_HPP
+#define PYRITE_CORE_TYPE_LIST_HPP
 
 #include <pyrite/core/type_holder.hpp>
 #include <pyrite/core/detail/type_list.inl>
@@ -50,4 +50,4 @@ using make_type_list = typename detail::make_type_list_<T, Size>::type;
 
 } // namespace pyrite::core
 
-#endif // PYRITE_CORE_TYPE_LIST
+#endif // PYRITE_CORE_TYPE_LIST_HPP
