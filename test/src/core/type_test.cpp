@@ -22,9 +22,9 @@ TEST(type_test, type_size)
 
   EXPECT_EQ(sizeof(byte), 1u);
 
-  EXPECT_EQ(sizeof(ipointer), sizeof(void*));
-  EXPECT_EQ(sizeof(upointer), sizeof(void*));
-  EXPECT_EQ(sizeof(pointer_diff), sizeof(void*));
+  EXPECT_LE(sizeof(iptr), sizeof(void*));
+  EXPECT_LE(sizeof(uptr), sizeof(void*));
+  EXPECT_LE(sizeof(ptrdiff), sizeof(decltype((int*)0 - (int*)0)));
 
   EXPECT_LE(sizeof(void*), sizeof(isize));
   EXPECT_LE(sizeof(void*), sizeof(usize));
@@ -40,7 +40,7 @@ TEST(type_test, sign)
   EXPECT_TRUE(std::is_signed_v<f32>);
   EXPECT_TRUE(std::is_signed_v<f64>);
   EXPECT_TRUE(std::is_signed_v<isize>);
-  EXPECT_TRUE(std::is_signed_v<ipointer>);
+  EXPECT_TRUE(std::is_signed_v<iptr>);
 
   EXPECT_TRUE(std::is_unsigned_v<u8>);
   EXPECT_TRUE(std::is_unsigned_v<u16>);
@@ -48,5 +48,5 @@ TEST(type_test, sign)
   EXPECT_TRUE(std::is_unsigned_v<u64>);
   EXPECT_TRUE(std::is_unsigned_v<byte>);
   EXPECT_TRUE(std::is_unsigned_v<usize>);
-  EXPECT_TRUE(std::is_unsigned_v<upointer>);
+  EXPECT_TRUE(std::is_unsigned_v<uptr>);
 }
