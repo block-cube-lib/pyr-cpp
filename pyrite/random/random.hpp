@@ -3,6 +3,7 @@
 
 #include <random>
 
+#include <pyrite/core/type.hpp>
 #include <pyrite/random/random_state.hpp>
 
 namespace pyrite
@@ -13,7 +14,7 @@ public:
   using seed_type = decltype(random_state::seed);
 
   random();
-  random(u64 seed);
+  random(seed_type seed);
   random(random const& other);
   random(random&& other);
   ~random() = default;

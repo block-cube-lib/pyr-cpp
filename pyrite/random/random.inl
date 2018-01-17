@@ -15,11 +15,11 @@ namespace pyrite
 // consructor
 ///
 random::random()
-  : state_{static_cast<u64>(random_device()), 0u}, engine_{state_.seed}
+  : state_{static_cast<seed_type>(random_device()), 0u}, engine_{state_.seed}
 {
 }
 
-random::random(u64 seed) : state_{seed, 0u}, engine_{seed} {}
+random::random(random::seed_type seed) : state_{seed, 0u}, engine_{seed} {}
 random::random(random const& other)
   : state_{other.state_}, engine_{other.state_.seed}
 {
