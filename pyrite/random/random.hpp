@@ -14,8 +14,11 @@ public:
   using seed_type = decltype(random_state::seed);
 
   random();
-  random(seed_type seed);
+
+  explicit random(seed_type seed);
+
   random(random const& other);
+
   random(random&& other);
   ~random() = default;
 

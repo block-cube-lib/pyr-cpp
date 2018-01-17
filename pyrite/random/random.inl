@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @author    block
+ * @copyright (c) 2017 block.
+ */
+
 #ifndef PYRITE_RANDOM_RANDOM_INL
 #define PYRITE_RANDOM_RANDOM_INL
 
@@ -5,9 +11,7 @@
 #include <limits>
 #include <type_traits>
 
-#include <pyrite/core/type.hpp>
 #include <pyrite/mpl/false_v.hpp>
-#include <pyrite/random/random.hpp>
 
 namespace pyrite
 {
@@ -20,6 +24,7 @@ random::random()
 }
 
 random::random(random::seed_type seed) : state_{seed, 0u}, engine_{seed} {}
+
 random::random(random const& other)
   : state_{other.state_}, engine_{other.state_.seed}
 {
