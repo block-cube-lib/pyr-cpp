@@ -1,14 +1,8 @@
 #ifndef PYRITE_RANDOM_RANDOM_HPP
 #define PYRITE_RANDOM_RANDOM_HPP
 
-#include <atomic>
-#include <cassert>
-#include <limits>
 #include <random>
-#include <type_traits>
 
-#include <pyrite/core/type.hpp>
-#include <pyrite/mpl/false_v.hpp>
 #include <pyrite/random/random_state.hpp>
 
 namespace pyrite
@@ -21,7 +15,7 @@ public:
   random();
   random(u64 seed);
   random(random const& other);
-  random(random && other);
+  random(random&& other);
   ~random() = default;
 
   template <typename T>

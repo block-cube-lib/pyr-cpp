@@ -1,6 +1,12 @@
 #ifndef PYRITE_RANDOM_RANDOM_INL
 #define PYRITE_RANDOM_RANDOM_INL
 
+#include <cassert>
+#include <limits>
+#include <type_traits>
+
+#include <pyrite/core/type.hpp>
+#include <pyrite/mpl/false_v.hpp>
 #include <pyrite/random/random.hpp>
 
 namespace pyrite
