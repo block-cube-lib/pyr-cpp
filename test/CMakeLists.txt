@@ -23,6 +23,7 @@ set(pyrite_test_source
   ./src/core/type_test.cpp
   ./src/core/void_t_test.cpp
   ./src/math/vector_traits_test.cpp
+  ./src/random_test.cpp
   ./src/scope_exit_test.cpp
   ./src/singleton_test.cpp
   ./src/singleton_test.cpp
