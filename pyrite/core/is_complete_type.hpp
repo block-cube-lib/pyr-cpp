@@ -13,6 +13,8 @@
 
 namespace pyrite
 {
+inline namespace core
+{
 /**
  * Checks whether T is an complete type.
  * @tparam T A type to check.
@@ -35,7 +37,7 @@ class is_complete_type<T, void_t<decltype(sizeof(T))>> : public std::true_type
  */
 template <typename T>
 constexpr bool is_complete_type_v = is_complete_type<T>::value;
-
+} // namespace core
 } // namespace pyrite
 
 #endif // PYRITE_CORE_IS_COMPLETE_TYPE_HPP

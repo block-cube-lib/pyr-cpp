@@ -7,10 +7,11 @@
 #ifndef PYRITE_CORE_TYPE_LIST_HPP
 #define PYRITE_CORE_TYPE_LIST_HPP
 
-#include <pyrite/core/type_holder.hpp>
 #include <pyrite/core/detail/type_list.inl>
 
-namespace pyrite::core
+namespace pyrite
+{
+inline namespace core
 {
 template <typename... Args>
 struct type_list
@@ -49,11 +50,11 @@ public:
 
   template <template <typename> typename Pred>
   using find_if = typename detail::find_if_<type, Pred>::type;
-};
+}; // namespace coretemplate<typename...Args>structtype_list
 
 template <typename T, std::size_t Size>
 using make_type_list = typename detail::make_type_list_<T, Size>::type;
-
-} // namespace pyrite::core
+} // namespace core
+} // namespace pyrite
 
 #endif // PYRITE_CORE_TYPE_LIST_HPP

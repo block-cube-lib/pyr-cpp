@@ -8,9 +8,11 @@
 
 #include <type_traits>
 
+#include <pyrite/core/type_holder.hpp>
+
 namespace pyrite
 {
-namespace core
+inline namespace core
 {
 // proto type
 template <typename... Args>
