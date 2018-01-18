@@ -153,10 +153,10 @@ public:
   random& operator=(random&& rhs);
 
 private:
+  static seed_type generate_seed();
+
   random_state    state_;  //!< object state
   std::mt19937_64 engine_; //!< random number generator
-
-  static thread_local inline std::random_device random_device;
 };
 } // namespace pyrite
 
