@@ -1,3 +1,5 @@
+#include <pyrite/random.hpp>
+
 #include "gtest/gtest.h"
 
 #include <algorithm>
@@ -5,7 +7,6 @@
 #include <vector>
 
 #include <pyrite/core/type.hpp>
-#include <pyrite/random.hpp>
 
 namespace
 {
@@ -14,8 +15,9 @@ TEST(random_test, construct)
 {
   [[maybe_unused]] pyrite::random r0;
   [[maybe_unused]] pyrite::random r1 { 0 };
-  [[maybe_unused]] pyrite::random r2 { r1 };
-  [[maybe_unused]] pyrite::random r3 { std::move(r2) };
+  [[maybe_unused]] pyrite::random r2 { pyrite::random_state{} };
+  [[maybe_unused]] pyrite::random r3 { r1 };
+  [[maybe_unused]] pyrite::random r4 { std::move(r3) };
 }
 
 TEST(random_test, next)
@@ -186,5 +188,39 @@ TEST(random_test, move)
     random2 = std::move(random1);
     EXPECT_EQ(state, random2.state());
   }
+}
+
+TEST(random_test, operator_equal)
+{
+  pyrite::random lhs{0};
+  pyrite::random rhs{0};
+  EXPECT_TRUE(lhs == rhs);
+
+  lhs.discard(1);
+  EXPECT_FALSE(lhs == rhs);
+
+  lhs.reset(1);
+  EXPECT_FALSE(lhs == rhs);
+
+  lhs.reset(1);
+  lhs.discard(1);
+  EXPECT_FALSE(lhs == rhs);
+}
+
+TEST(random_test, operator_not_equal)
+{
+  pyrite::random lhs{0};
+  pyrite::random rhs{0};
+  EXPECT_FALSE(lhs != rhs);
+
+  lhs.discard(1);
+  EXPECT_TRUE(lhs != rhs);
+
+  lhs.reset(1);
+  EXPECT_TRUE(lhs != rhs);
+
+  lhs.reset(1);
+  lhs.discard(1);
+  EXPECT_TRUE(lhs != rhs);
 }
 } // namespace
