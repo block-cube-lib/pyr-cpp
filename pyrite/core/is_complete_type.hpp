@@ -9,9 +9,9 @@
 
 #include <type_traits>
 
-#include <pyrite/core/void_t.hpp>
-
 namespace pyrite
+{
+namespace core
 {
 /**
  * Checks whether T is an complete type.
@@ -26,7 +26,7 @@ class is_complete_type : public std::false_type
  * Template specialization when T is complete type.
  */
 template <typename T>
-class is_complete_type<T, void_t<decltype(sizeof(T))>> : public std::true_type
+class is_complete_type<T, std::void_t<decltype(sizeof(T))>> : public std::true_type
 {
 };
 
@@ -35,7 +35,7 @@ class is_complete_type<T, void_t<decltype(sizeof(T))>> : public std::true_type
  */
 template <typename T>
 constexpr bool is_complete_type_v = is_complete_type<T>::value;
-
+} // namespace core
 } // namespace pyrite
 
 #endif // PYRITE_CORE_IS_COMPLETE_TYPE_HPP

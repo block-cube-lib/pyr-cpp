@@ -3,10 +3,12 @@
  * @author    block
  * @copyright (c) 2017 block.
  */
-#ifndef PYRITE_CORE_DETAIL_TYPE_LIST
-#define PYRITE_CORE_DETAIL_TYPE_LIST
+#ifndef PYRITE_CORE_DETAIL_TYPE_LIST_HPP
+#define PYRITE_CORE_DETAIL_TYPE_LIST_HPP
 
 #include <type_traits>
+
+#include <pyrite/core/type_holder.hpp>
 
 namespace pyrite
 {
@@ -251,4 +253,4 @@ public:
 
 } // namespace core
 } // namespace pyrite
-#endif // PYRITE_CORE_DETAIL_TYPE_LIST
+#endif // PYRITE_CORE_DETAIL_TYPE_LIST_HPP

@@ -6,9 +6,8 @@
 #ifndef PYRITE_TYPE_TRAITS_IS_EQUALITY_COMPARABLE_HPP
 #define PYRITE_TYPE_TRAITS_IS_EQUALITY_COMPARABLE_HPP
 
+#include <type_traits>
 #include <utility>
-
-#include <pyrite/core/void_t.hpp>
 
 namespace pyrite
 {
@@ -31,7 +30,7 @@ template <typename T, typename U>
 struct is_equality_comparable<
   T,
   U,
-  void_t<decltype(std::declval<T&>() == std::declval<U&>())>> : std::true_type
+  std::void_t<decltype(std::declval<T&>() == std::declval<U&>())>> : std::true_type
 {
 };
 

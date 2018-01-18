@@ -11,7 +11,9 @@
 
 #include <pyrite/core/type_list.hpp>
 
-namespace pyrite::detail
+namespace pyrite
+{
+namespace core
 {
 namespace
 {
@@ -78,6 +80,7 @@ using usize =
 using iptr    = find_from_size_t<signed_list, sizeof(int*)>;
 using uptr    = find_from_size_t<unsigned_list, sizeof(int*)>;
 using ptrdiff = decltype(std::declval<int*>() - std::declval<int*>());
-} // namespace pyrite::detail
+} // namespace core
+} // namespace pyrite
 
 #endif // PYRITE_CORE_DETAIL_TYPE_HPP

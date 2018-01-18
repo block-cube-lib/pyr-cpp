@@ -1,7 +1,15 @@
+/**
+ * @file
+ * @author    block
+ * @copyright (c) 2017 block.
+ */
+
 #ifndef PYRITE_CORE_TYPE_HOLDER_HPP
 #define PYRITE_CORE_TYPE_HOLDER_HPP
 
-namespace pyrite::core
+namespace pyrite
+{
+namespace core
 {
 template <typename... T>
 struct type_holder
@@ -30,6 +38,7 @@ struct type_holder<>
 };
 
 using null_type_holder = type_holder<>;
-} // namespace pyrite::core
+} // namespace core
+} // namespace pyrite
 
 #endif // PYRITE_CORE_TYPE_HOLDER_HPP

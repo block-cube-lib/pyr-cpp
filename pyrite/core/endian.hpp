@@ -11,7 +11,7 @@
 
 namespace pyrite
 {
-inline namespace core
+namespace core
 {
 /**
  * An enumerated type representing the order of bytes (endian).
@@ -38,6 +38,8 @@ enum class endian : i8
 #endif
 };
 } // namespace core
+
+using core::endian;
 } // namespace pyrite
 
 #endif // PYRITE_CORE_ENDIAN_HPP

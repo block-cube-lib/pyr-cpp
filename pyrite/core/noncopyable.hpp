@@ -9,7 +9,8 @@
 
 namespace pyrite
 {
-
+namespace core
+{
 /**
  * class noncopyable cannot be copied.
  */
@@ -41,11 +42,10 @@ protected:
    */
   noncopyable& operator=(noncopyable const&) = delete;
 }; // class noncopyable
-
 } // namespace noncopyable_
+} // namespace core
 
-using noncopyable = pyrite::noncopyable_::noncopyable;
-
+using noncopyable = pyrite::core::noncopyable_::noncopyable;
 } // namespace pyrite
 
 #endif // PYRITE_CORE_NONCOPYABLE_HPP
