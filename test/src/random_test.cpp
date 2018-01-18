@@ -15,7 +15,9 @@ TEST(random_test, construct)
 {
   [[maybe_unused]] pyrite::random r0;
   [[maybe_unused]] pyrite::random r1 { 0 };
-  [[maybe_unused]] pyrite::random r2 { pyrite::random_state{} };
+  [[maybe_unused]] pyrite::random r2 {
+    pyrite::random_state {}
+  };
   [[maybe_unused]] pyrite::random r3 { r1 };
   [[maybe_unused]] pyrite::random r4 { std::move(r3) };
 }
@@ -174,7 +176,7 @@ TEST(random_test, move)
   {
     pyrite::random random1;
     random1.discard(i);
-    auto const state = random1.state();
+    auto const     state = random1.state();
     pyrite::random random2{std::move(random1)};
     EXPECT_EQ(state, random2.state());
   }
@@ -183,7 +185,7 @@ TEST(random_test, move)
   {
     pyrite::random random1;
     random1.discard(i);
-    auto const state = random1.state();
+    auto const     state = random1.state();
     pyrite::random random2;
     random2 = std::move(random1);
     EXPECT_EQ(state, random2.state());
