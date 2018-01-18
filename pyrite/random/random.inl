@@ -23,6 +23,11 @@ random::random()
 {
 }
 
+random::random(random_state const& state) : state_{state}, engine_{state.seed}
+{
+  engine_.discard(state_.count);
+}
+
 random::random(random::seed_type seed) : state_{seed, 0u}, engine_{seed} {}
 
 random::random(random const& other)

@@ -33,6 +33,13 @@ public:
   random();
 
   /**
+   * Constructor initialized with random_state.
+   *
+   * @param[in] state Random_state object.
+   */
+  explicit random(random_state const& state);
+
+  /**
    * Constructor initialized with seed.
    *
    * @param[in] seed Seed for initialize random number generator.
