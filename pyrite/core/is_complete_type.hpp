@@ -9,8 +9,6 @@
 
 #include <type_traits>
 
-#include <pyrite/core/void_t.hpp>
-
 namespace pyrite
 {
 inline namespace core
@@ -28,7 +26,7 @@ class is_complete_type : public std::false_type
  * Template specialization when T is complete type.
  */
 template <typename T>
-class is_complete_type<T, void_t<decltype(sizeof(T))>> : public std::true_type
+class is_complete_type<T, std::void_t<decltype(sizeof(T))>> : public std::true_type
 {
 };
 
