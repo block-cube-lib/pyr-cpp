@@ -1,7 +1,7 @@
 /**
  * @file
  * @author    block
- * @copyright (c) 2017 block.
+ * @copyright (c) 2018 block.
  */
 
 #ifndef PYRITE_CORE_DETAIL_TYPE_HPP
