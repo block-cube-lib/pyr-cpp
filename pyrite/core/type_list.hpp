@@ -7,7 +7,7 @@
 #ifndef PYRITE_CORE_TYPE_LIST_HPP
 #define PYRITE_CORE_TYPE_LIST_HPP
 
-#include <pyrite/core/detail/type_list.inl>
+#include <pyrite/core/detail/type_list.hpp>
 
 namespace pyrite
 {
