@@ -87,10 +87,10 @@ random::seed_type random::seed() const noexcept { return state_.seed; }
 
 random_state random::state() const noexcept { return state_; }
 
-void random::discard(u64 count)
+void random::discard(u64 z)
 {
-  engine_.discard(static_cast<unsigned long long>(count));
-  state_.count += count;
+  engine_.discard(static_cast<unsigned long long>(z));
+  state_.count += z;
 }
 
 void random::reset() { reset(state_.seed); }
