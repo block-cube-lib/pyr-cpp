@@ -13,9 +13,7 @@
 
 namespace pyrite
 {
-inline namespace core
-{
-namespace detail
+namespace core
 {
 namespace
 {
@@ -82,7 +80,6 @@ using usize =
 using iptr    = find_from_size_t<signed_list, sizeof(int*)>;
 using uptr    = find_from_size_t<unsigned_list, sizeof(int*)>;
 using ptrdiff = decltype(std::declval<int*>() - std::declval<int*>());
-} // namespace detail
 } // namespace core
 } // namespace pyrite
 

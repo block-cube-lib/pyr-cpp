@@ -15,33 +15,29 @@ static_assert(CHAR_BIT == 8, "not support.");
 
 namespace pyrite
 {
-inline namespace core
-{
-using i8  = detail::i8;  //!< 8 bit signed integer type.
-using i16 = detail::i16; //!< 16 bit signed integer type.
-using i32 = detail::i32; //!< 32 bit signed integer type.
-using i64 = detail::i64; //!< 64 bit signed integer type.
+using i8  = core::i8;  //!< 8 bit signed integer type.
+using i16 = core::i16; //!< 16 bit signed integer type.
+using i32 = core::i32; //!< 32 bit signed integer type.
+using i64 = core::i64; //!< 64 bit signed integer type.
 
-using u8  = detail::u8;  //!< 8 bit unsigned integer type.
-using u16 = detail::u16; //!< 16 bit unsigned integer type.
-using u32 = detail::u32; //!< 32 bit unsigned integer type.
-using u64 = detail::u64; //!< 64 bit unsigned integer type.
+using u8  = core::u8;  //!< 8 bit unsigned integer type.
+using u16 = core::u16; //!< 16 bit unsigned integer type.
+using u32 = core::u32; //!< 32 bit unsigned integer type.
+using u64 = core::u64; //!< 64 bit unsigned integer type.
 
-using f32 = detail::f32; //!< 32 bit floating point type.
-using f64 = detail::f64; //!< 64 bit floating point type.
+using f32 = core::f32; //!< 32 bit floating point type.
+using f64 = core::f64; //!< 64 bit floating point type.
 
 using isize =
-  detail::isize; //!< Signed intger type large enough to represent size.
+  core::isize; //!< Signed intger type large enough to represent size.
 using usize =
-  detail::usize; //!< Unsigned intger type large enough to represent size.
+  core::usize; //!< Unsigned intger type large enough to represent size.
 
 using byte = u8; // 8 bit unsigned integer type.
 
-using iptr = detail::iptr; // Signed integer type capable of holding a pointer.
-using uptr =
-  detail::uptr; // Unsigned integer type capable of holding a pointer.
-using ptrdiff = detail::ptrdiff; // Result of subtracting two pointers.
-} // namespace core
+using iptr = core::iptr; // Signed integer type capable of holding a pointer.
+using uptr = core::uptr; // Unsigned integer type capable of holding a pointer.
+using ptrdiff = core::ptrdiff; // Result of subtracting two pointers.
 } // namespace pyrite
 
 #endif // PYRITE_CORE_TYPE_HPP

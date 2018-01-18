@@ -11,7 +11,7 @@
 
 namespace pyrite
 {
-inline namespace core
+namespace core
 {
 template <typename... Args>
 struct type_list

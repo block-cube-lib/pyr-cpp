@@ -1,9 +1,15 @@
+/**
+ * @file
+ * @author    block
+ * @copyright (c) 2017 block.
+ */
+
 #ifndef PYRITE_CORE_TYPE_HOLDER_HPP
 #define PYRITE_CORE_TYPE_HOLDER_HPP
 
 namespace pyrite
 {
-inline namespace core
+namespace core
 {
 template <typename... T>
 struct type_holder

@@ -12,7 +12,7 @@
 
 namespace pyrite
 {
-inline namespace core
+namespace core
 {
 // proto type
 template <typename... Args>

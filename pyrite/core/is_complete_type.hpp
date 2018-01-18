@@ -11,7 +11,7 @@
 
 namespace pyrite
 {
-inline namespace core
+namespace core
 {
 /**
  * Checks whether T is an complete type.

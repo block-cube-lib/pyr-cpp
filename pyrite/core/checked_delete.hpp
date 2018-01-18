@@ -11,7 +11,7 @@
 
 namespace pyrite
 {
-inline namespace core
+namespace core
 {
 /**
  * After deleting the pointer, assing nullptr.
@@ -78,6 +78,11 @@ public:
   void operator()(T*& ptr) const { checked_array_delete(ptr); }
 };
 } // namespace core
+
+using core::checked_array_delete;
+using core::checked_array_deleter;
+using core::checked_delete;
+using core::checked_deleter;
 } // namespace pyrite
 
 #endif // PYRITE_CHECKED_DELETE_HPP
