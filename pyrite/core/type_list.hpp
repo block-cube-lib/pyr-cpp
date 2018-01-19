@@ -19,7 +19,7 @@ struct type_list
 public:
   using type = type_list<Args...>;
 
-  static constexpr std::size_t length = sizeof...(Args);
+  static constexpr std::size_t size = detail::list_size_v<type>;
 
   using head = typename detail::head_<type>::type;
   using tail = typename detail::tail_<type>::type;

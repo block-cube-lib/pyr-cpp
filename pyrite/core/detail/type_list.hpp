@@ -41,6 +41,21 @@ constexpr bool is_type_list_v = is_type_list<T>::value;
 
 namespace detail
 {
+template <typename List>
+struct list_size
+{
+  static_assert(mpl::is_type_list_v<List>);
+};
+
+template <typename... Args>
+struct list_size<type_list<Args...>>
+{
+  static constexpr std::size_t value = sizeof...(Args);
+};
+
+template <typename List>
+static constexpr std::size_t list_size_v = list_size<List>::value;
+
 ///
 // utility
 ///
@@ -62,7 +77,7 @@ struct list_to_with_index_list<type_list<Types...>,
 };
 
 template <typename List>
-using list_sequence = std::make_index_sequence<List::length>;
+using list_sequence = std::make_index_sequence<list_size_v<List>>;
 
 template <typename List>
 using to_with_index_list =

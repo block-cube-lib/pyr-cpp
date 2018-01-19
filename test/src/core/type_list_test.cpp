@@ -10,12 +10,12 @@ using ::pyrite::mpl::null_type_holder;
 using ::pyrite::mpl::type_holder;
 using ::pyrite::mpl::type_list;
 
-TEST(type_list_test, length)
+TEST(type_list_test, size)
 {
-  EXPECT_EQ((type_list<>::length), 0u);
-  EXPECT_EQ((type_list<int>::length), 1u);
-  EXPECT_EQ((type_list<int, float>::length), 2u);
-  EXPECT_EQ((type_list<int, float, char>::length), 3u);
+  EXPECT_EQ((type_list<>::size), 0u);
+  EXPECT_EQ((type_list<int>::size), 1u);
+  EXPECT_EQ((type_list<int, float>::size), 2u);
+  EXPECT_EQ((type_list<int, float, char>::size), 3u);
 }
 
 TEST(type_list_test, head)
@@ -258,14 +258,14 @@ TEST(type_list_test, make_type_list)
   }
   {
     using list = make_type_list<int, 1023>;
-    EXPECT_EQ(list::length, 1023u);
+    EXPECT_EQ(list::size, 1023u);
   }
   {
     using list = make_type_list<int, 2000>;
-    EXPECT_EQ(list::length, 2000u);
+    EXPECT_EQ(list::size, 2000u);
   }
   {
     using list = make_type_list<int, 2001>;
-    EXPECT_EQ(list::length, 2001u);
+    EXPECT_EQ(list::size, 2001u);
   }
 }
