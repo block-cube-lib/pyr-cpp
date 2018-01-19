@@ -18,6 +18,10 @@ namespace core
 template <typename... Args>
 struct type_list;
 
+template <typename... T, typename... U>
+auto operator+(type_list<T...> const&, type_list<U...> const&)
+  -> type_list<T..., U...>;
+
 namespace mpl
 {
 template <typename T>
@@ -173,6 +177,22 @@ template <template <typename> typename F, typename... Args>
 struct transform_
 {
   using type = type_list<typename F<Args>::type...>;
+};
+
+///
+// filter
+///
+template <typename List, template <typename> typename F>
+struct filter_
+{
+  static_assert(mpl::is_type_list_v<List>);
+};
+
+template <template <typename> typename F, typename... Args>
+struct filter_<type_list<Args...>, F>
+{
+  using type = decltype(
+    (std::conditional_t<F<Args>::value, type_list<Args>, type_list<>>{} + ...));
 };
 
 ///

@@ -3,12 +3,12 @@
 #include <type_traits>
 
 //#include <pyrite/core/type_list.hpp>
-#include <pyrite/mpl/type_list.hpp>
 #include <pyrite/mpl/type_holder.hpp>
+#include <pyrite/mpl/type_list.hpp>
 
-using ::pyrite::mpl::type_list;
-using ::pyrite::mpl::type_holder;
 using ::pyrite::mpl::null_type_holder;
+using ::pyrite::mpl::type_holder;
+using ::pyrite::mpl::type_list;
 
 TEST(type_list_test, length)
 {
@@ -180,6 +180,31 @@ TEST(type_list_test, transform)
   {
     using list = type_list<int, void>::transform<std::add_pointer>;
     ::testing::StaticAssertTypeEq<list, type_list<int*, void*>>();
+  }
+}
+
+TEST(type_list_test, filter)
+{
+  using list = type_list<signed char,
+                         double,
+                         char*,
+                         short,
+                         unsigned long,
+                         float,
+                         void*,
+                         long double>;
+
+  {
+    using result = type_list<signed char, short, unsigned long>;
+    ::testing::StaticAssertTypeEq<list::filter<std::is_integral>, result>();
+  }
+  {
+    using result = type_list<double, float, long double>;
+    ::testing::StaticAssertTypeEq<list::filter<std::is_floating_point>, result>();
+  }
+  {
+    using result = type_list<char*, void*>;
+    ::testing::StaticAssertTypeEq<list::filter<std::is_pointer>, result>();
   }
 }
 

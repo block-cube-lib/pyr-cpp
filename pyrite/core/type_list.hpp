@@ -49,6 +49,9 @@ public:
   using transform = typename detail::transform_<Pred, Args...>::type;
 
   template <template <typename> typename Pred>
+  using filter = typename detail::filter_<type, Pred>::type;
+
+  template <template <typename> typename Pred>
   using find_if = typename detail::find_if_<type, Pred>::type;
 }; // namespace coretemplate<typename...Args>structtype_list
 
