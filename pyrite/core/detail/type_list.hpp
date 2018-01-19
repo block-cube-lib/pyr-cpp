@@ -233,6 +233,22 @@ public:
 };
 
 ///
+// reverse
+///
+template <typename Sequence>
+struct sequence_reverse;
+
+template <std::size_t... I>
+struct sequence_reverse<std::index_sequence<I...>>
+{
+private:
+  static constexpr std::size_t last_index = (sizeof...(I) - 1);
+
+public:
+  using type = std::index_sequence<(last_index - I)...>;
+};
+
+///
 // make_type_list
 ///
 template <typename T, std::size_t Count>
