@@ -200,7 +200,8 @@ TEST(type_list_test, filter)
   }
   {
     using result = type_list<double, float, long double>;
-    ::testing::StaticAssertTypeEq<list::filter<std::is_floating_point>, result>();
+    ::testing::StaticAssertTypeEq<list::filter<std::is_floating_point>,
+                                  result>();
   }
   {
     using result = type_list<char*, void*>;

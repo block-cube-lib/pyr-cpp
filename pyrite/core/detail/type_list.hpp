@@ -7,6 +7,7 @@
 #define PYRITE_CORE_DETAIL_TYPE_LIST_HPP
 
 #include <type_traits>
+#include <utility>
 
 #include <pyrite/core/type_holder.hpp>
 
@@ -41,6 +42,33 @@ constexpr bool is_type_list_v = is_type_list<T>::value;
 namespace detail
 {
 ///
+// utility
+///
+template <typename T, std::size_t Index>
+struct with_index
+{
+  using type                         = T;
+  static constexpr std::size_t index = Index;
+};
+
+template <typename List, typename Sequence>
+struct list_to_with_index_list;
+
+template <typename... Types, std::size_t... Indices>
+struct list_to_with_index_list<type_list<Types...>,
+                               std::index_sequence<Indices...>>
+{
+  using type = type_list<with_index<Types, Indices>...>;
+};
+
+template <typename List>
+using list_sequence = std::make_index_sequence<List::length>;
+
+template <typename List>
+using to_with_index_list =
+  typename list_to_with_index_list<List, list_sequence<List>>::type;
+
+///
 // head
 ///
 template <typename T>
@@ -74,34 +102,30 @@ struct tail_<type_list<Head, Tail...>>
 ///
 // at
 ///
-template <typename T, std::size_t>
-struct at_
-{
-  static_assert(mpl::is_type_list_v<T>);
-};
+template <typename List, std::size_t Index>
+struct with_index_list_at;
 
 template <typename... Args, std::size_t Index>
-struct at_<type_list<Args...>, Index>
+struct with_index_list_at<type_list<Args...>, Index>
 {
+  using list        = decltype((std::conditional_t<Args::index == Index,
+                                            type_list<typename Args::type>,
+                                            type_list<>>{} +
+                         ...));
+  using head_holder = typename list::head;
+  using type        = typename head_holder::type;
+};
+
+template <typename List, std::size_t Index>
+struct at_
+{
+  static_assert(mpl::is_type_list_v<List>);
+
 private:
-  static auto apply()
-  {
-    using list = type_list<Args...>;
-    if constexpr (Index == 0)
-    {
-      using head_holder = typename head_<list>::type;
-      return type_holder<typename head_holder::type>{};
-    }
-    else
-    {
-      using tail = typename tail_<list>::type;
-      return at_<tail, Index - 1>();
-    }
-  }
+  using with_index_list = to_with_index_list<List>;
 
 public:
-  static_assert(Index < type_list<Args...>::length);
-  using type = typename decltype(apply())::type;
+  using type = typename with_index_list_at<with_index_list, Index>::type;
 };
 
 ///
