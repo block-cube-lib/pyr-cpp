@@ -41,6 +41,9 @@ constexpr bool is_type_list_v = is_type_list<T>::value;
 
 namespace detail
 {
+///
+// size
+///
 template <typename List>
 struct list_size
 {
@@ -212,8 +215,11 @@ struct none_of_
 ///
 // transform
 ///
+template <template <typename> typename F, typename List>
+struct transform_;
+
 template <template <typename> typename F, typename... Args>
-struct transform_
+struct transform_<F, type_list<Args...>>
 {
   using type = type_list<typename F<Args>::type...>;
 };
@@ -250,17 +256,23 @@ public:
 ///
 // reverse
 ///
-template <typename Sequence>
-struct sequence_reverse;
-
-template <std::size_t... I>
-struct sequence_reverse<std::index_sequence<I...>>
+template <typename List>
+struct reverse_
 {
 private:
-  static constexpr std::size_t last_index = (sizeof...(I) - 1);
+  static constexpr std::size_t last_index = list_size_v<List> - 1;
+  using with_index_list = to_with_index_list<List>;
+
+  template <typename WithIndex>
+  struct apply
+  {
+    using type = typename at_<List, last_index - WithIndex::index>::type;
+  };
+
+  using transformed = typename transform_<apply, with_index_list>::type;
 
 public:
-  using type = std::index_sequence<(last_index - I)...>;
+  using type = transformed;
 };
 
 ///

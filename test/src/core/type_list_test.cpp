@@ -6,9 +6,10 @@
 #include <pyrite/mpl/type_holder.hpp>
 #include <pyrite/mpl/type_list.hpp>
 
-using ::pyrite::mpl::null_type_holder;
 using ::pyrite::mpl::type_holder;
+using ::pyrite::mpl::null_type_holder;
 using ::pyrite::mpl::type_list;
+using ::pyrite::mpl::make_type_list;
 
 TEST(type_list_test, size)
 {
@@ -232,10 +233,12 @@ TEST(type_list_test, find_if)
                                 type_holder<double const>>();
 }
 
+TEST(type_list_test, reverse)
+{
+}
+
 TEST(type_list_test, make_type_list)
 {
-  using namespace pyrite::core;
-
   {
     using list = make_type_list<int, 0>;
     ::testing::StaticAssertTypeEq<list, type_list<>>();

@@ -46,14 +46,16 @@ public:
   static constexpr bool none_of = detail::none_of_<Pred, Args...>::value;
 
   template <template <typename> typename Pred>
-  using transform = typename detail::transform_<Pred, Args...>::type;
+  using transform = typename detail::transform_<Pred, type>::type;
 
   template <template <typename> typename Pred>
   using filter = typename detail::filter_<type, Pred>::type;
 
   template <template <typename> typename Pred>
   using find_if = typename detail::find_if_<type, Pred>::type;
-}; // namespace coretemplate<typename...Args>structtype_list
+
+  using reverse = typename detail::reverse_<type>::type;
+}; // struct type_list
 
 template <typename T, std::size_t Size>
 using make_type_list = typename detail::make_type_list_<T, Size>::type;
