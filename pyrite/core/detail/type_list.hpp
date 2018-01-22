@@ -123,15 +123,20 @@ struct tail_<type_list<Head, Tail...>>
 template <typename List, std::size_t Index>
 struct with_index_list_at;
 
-template <typename... Args, std::size_t Index>
-struct with_index_list_at<type_list<Args...>, Index>
+template <typename... WithIndex, std::size_t Index>
+struct with_index_list_at<type_list<WithIndex...>, Index>
 {
-  using list        = decltype((std::conditional_t<Args::index == Index,
-                                            type_list<typename Args::type>,
-                                            type_list<>>{} +
-                         ...));
+private:
+  template <typename T, std::size_t I>
+  static auto type_to_list()
+    -> std::conditional_t<I == Index, type_list<T>, type_list<>>;
+
+  using list = decltype(
+    (type_to_list<typename WithIndex::type, WithIndex::index>() + ...));
   using head_holder = typename list::head;
-  using type        = typename head_holder::type;
+
+public:
+  using type = typename head_holder::type;
 };
 
 template <typename List, std::size_t Index>
@@ -261,7 +266,7 @@ struct reverse_
 {
 private:
   static constexpr std::size_t last_index = list_size_v<List> - 1;
-  using with_index_list = to_with_index_list<List>;
+  using with_index_list                   = to_with_index_list<List>;
 
   template <typename WithIndex>
   struct apply
@@ -273,6 +278,12 @@ private:
 
 public:
   using type = transformed;
+};
+
+template <>
+struct reverse_<type_list<>>
+{
+  using type = type_list<>;
 };
 
 ///

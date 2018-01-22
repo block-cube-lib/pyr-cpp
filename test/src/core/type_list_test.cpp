@@ -235,6 +235,30 @@ TEST(type_list_test, find_if)
 
 TEST(type_list_test, reverse)
 {
+  {
+    using list = typename type_list<>::reverse;
+    ::testing::StaticAssertTypeEq<list, type_list<>>();
+  }
+  {
+    using list = typename type_list<int>::reverse;
+    ::testing::StaticAssertTypeEq<list, type_list<int>>();
+  }
+  {
+    using list = typename type_list<int, float>::reverse;
+    ::testing::StaticAssertTypeEq<list, type_list<float, int>>();
+  }
+  {
+    using list = typename type_list<int, float, double>::reverse;
+    ::testing::StaticAssertTypeEq<list, type_list<double, float, int>>();
+  }
+  {
+    using list = typename type_list<int, float, double, char const>::reverse;
+    ::testing::StaticAssertTypeEq<list, type_list<char const, double, float, int>>();
+  }
+  {
+    using list = typename make_type_list<int, 2000>::reverse;
+    ::testing::StaticAssertTypeEq<list, typename list::reverse>();
+  }
 }
 
 TEST(type_list_test, make_type_list)
