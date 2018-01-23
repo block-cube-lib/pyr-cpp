@@ -7,7 +7,7 @@
 #ifndef PYRITE_MPL_TYPE_LIST_HPP
 #define PYRITE_MPL_TYPE_LIST_HPP
 
-#include <pyrite/core/type_list.hpp>
+#include <pyrite/core/mpl/type_list.hpp>
 
 namespace pyrite::mpl
 {

@@ -4,10 +4,10 @@
  * @copyright (c) 2018 block.
  */
 
-#ifndef PYRITE_CORE_TYPE_LIST_HPP
-#define PYRITE_CORE_TYPE_LIST_HPP
+#ifndef PYRITE_CORE_MPL_TYPE_LIST_HPP
+#define PYRITE_CORE_MPL_TYPE_LIST_HPP
 
-#include <pyrite/core/detail/type_list.hpp>
+#include <pyrite/core/mpl/type_list/type_list.hpp>
 
 namespace pyrite
 {
@@ -62,4 +62,4 @@ using make_type_list = typename detail::make_type_list_<T, Size>::type;
 } // namespace core
 } // namespace pyrite
 
-#endif // PYRITE_CORE_TYPE_LIST_HPP
+#endif // PYRITE_CORE_MPL_TYPE_LIST_HPP

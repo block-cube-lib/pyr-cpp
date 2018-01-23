@@ -4,8 +4,8 @@
  * @copyright (c) 2018 block.
  */
 
-#ifndef PYRITE_CORE_TYPE_HOLDER_HPP
-#define PYRITE_CORE_TYPE_HOLDER_HPP
+#ifndef PYRITE_CORE_MPL_TYPE_HOLDER_HPP
+#define PYRITE_CORE_MPL_TYPE_HOLDER_HPP
 
 namespace pyrite
 {
@@ -41,4 +41,4 @@ using null_type_holder = type_holder<>;
 } // namespace core
 } // namespace pyrite
 
-#endif // PYRITE_CORE_TYPE_HOLDER_HPP
+#endif // PYRITE_CORE_MPL_TYPE_HOLDER_HPP

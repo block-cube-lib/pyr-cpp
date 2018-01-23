@@ -3,13 +3,13 @@
  * @author    block
  * @copyright (c) 2018 block.
  */
-#ifndef PYRITE_CORE_DETAIL_TYPE_LIST_HPP
-#define PYRITE_CORE_DETAIL_TYPE_LIST_HPP
+#ifndef PYRITE_CORE_MPL_TYPE_LIST_TYPE_LIST_HPP
+#define PYRITE_CORE_MPL_TYPE_LIST_TYPE_LIST_HPP
 
 #include <type_traits>
 #include <utility>
 
-#include <pyrite/core/type_holder.hpp>
+#include <pyrite/core/mpl/type_holder.hpp>
 
 namespace pyrite
 {
@@ -322,4 +322,4 @@ struct make_type_list_<T, 0>
 
 } // namespace core
 } // namespace pyrite
-#endif // PYRITE_CORE_DETAIL_TYPE_LIST_HPP
+#endif // PYRITE_CORE_MPL_TYPE_LIST_TYPE_LIST_HPP

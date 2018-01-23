@@ -9,7 +9,7 @@
 
 #include <type_traits>
 
-#include <pyrite/core/type_list.hpp>
+#include <pyrite/core/mpl/type_list.hpp>
 
 namespace pyrite
 {
