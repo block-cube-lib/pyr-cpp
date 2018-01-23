@@ -7,9 +7,7 @@
 #ifndef PYRITE_CORE_MPL_TYPE_HOLDER_HPP
 #define PYRITE_CORE_MPL_TYPE_HOLDER_HPP
 
-namespace pyrite
-{
-namespace core
+namespace pyrite::core::mpl
 {
 template <typename... T>
 struct type_holder
@@ -38,7 +36,6 @@ struct type_holder<>
 };
 
 using null_type_holder = type_holder<>;
-} // namespace core
 } // namespace pyrite
 
 #endif // PYRITE_CORE_MPL_TYPE_HOLDER_HPP

@@ -9,9 +9,7 @@
 
 #include <pyrite/core/mpl/type_list/type_list.hpp>
 
-namespace pyrite
-{
-namespace core
+namespace pyrite::core::mpl
 {
 template <typename... Args>
 struct type_list
@@ -59,7 +57,6 @@ public:
 
 template <typename T, std::size_t Size>
 using make_type_list = typename detail::make_type_list_<T, Size>::type;
-} // namespace core
-} // namespace pyrite
+} // namespace pyrite::core::mpl
 
 #endif // PYRITE_CORE_MPL_TYPE_LIST_HPP

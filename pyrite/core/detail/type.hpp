@@ -11,29 +11,27 @@
 
 #include <pyrite/core/mpl/type_list.hpp>
 
-namespace pyrite
-{
-namespace core
+namespace pyrite::core
 {
 namespace
 {
-using signed_list         = pyrite::core::type_list<signed int,
+using signed_list         = ::pyrite::core::mpl::type_list<signed int,
                                             signed char,
                                             signed short,
                                             signed long,
                                             signed long long>;
-using unsigned_list       = pyrite::core::type_list<unsigned int,
+using unsigned_list       = ::pyrite::core::mpl::type_list<unsigned int,
                                               unsigned char,
                                               unsigned short,
                                               unsigned long,
                                               unsigned long long>;
-using floating_point_list = pyrite::core::type_list<float, double, long double>;
+using floating_point_list = ::pyrite::core::mpl::type_list<float, double, long double>;
 
 template <typename List, std::size_t Size>
 struct find_from_size;
 
 template <typename... Args, std::size_t Size>
-struct find_from_size<pyrite::core::type_list<Args...>, Size>
+struct find_from_size<::pyrite::core::mpl::type_list<Args...>, Size>
 {
 private:
   template <typename T>
@@ -41,7 +39,7 @@ private:
   {
   };
 
-  using list   = pyrite::core::type_list<Args...>;
+  using list   = ::pyrite::core::mpl::type_list<Args...>;
   using holder = typename list::template find_if<find_function>;
   static_assert(holder::has_type, "not found");
 
@@ -80,7 +78,6 @@ using usize =
 using iptr    = find_from_size_t<signed_list, sizeof(int*)>;
 using uptr    = find_from_size_t<unsigned_list, sizeof(int*)>;
 using ptrdiff = decltype(std::declval<int*>() - std::declval<int*>());
-} // namespace core
-} // namespace pyrite
+} // namespace pyrite::core
 
 #endif // PYRITE_CORE_DETAIL_TYPE_HPP

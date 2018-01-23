@@ -11,9 +11,7 @@
 
 #include <pyrite/core/mpl/type_holder.hpp>
 
-namespace pyrite
-{
-namespace core
+namespace pyrite::core::mpl
 {
 // proto type
 template <typename... Args>
@@ -320,6 +318,5 @@ struct make_type_list_<T, 0>
 };
 } // namespace detail
 
-} // namespace core
-} // namespace pyrite
+} // namespace pyrite::core::mpl
 #endif // PYRITE_CORE_MPL_TYPE_LIST_TYPE_LIST_HPP
