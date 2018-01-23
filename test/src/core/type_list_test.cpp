@@ -6,10 +6,10 @@
 #include <pyrite/mpl/type_holder.hpp>
 #include <pyrite/mpl/type_list.hpp>
 
-using ::pyrite::mpl::type_holder;
-using ::pyrite::mpl::null_type_holder;
-using ::pyrite::mpl::type_list;
 using ::pyrite::mpl::make_type_list;
+using ::pyrite::mpl::null_type_holder;
+using ::pyrite::mpl::type_holder;
+using ::pyrite::mpl::type_list;
 
 TEST(type_list_test, size)
 {
@@ -253,11 +253,8 @@ TEST(type_list_test, reverse)
   }
   {
     using list = typename type_list<int, float, double, char const>::reverse;
-    ::testing::StaticAssertTypeEq<list, type_list<char const, double, float, int>>();
-  }
-  {
-    using list = typename make_type_list<int, 2000>::reverse;
-    ::testing::StaticAssertTypeEq<list, typename list::reverse>();
+    ::testing::StaticAssertTypeEq<list,
+                                  type_list<char const, double, float, int>>();
   }
 }
 
@@ -286,6 +283,14 @@ TEST(type_list_test, make_type_list)
   {
     using list = make_type_list<int, 1023>;
     EXPECT_EQ(list::size, 1023u);
+  }
+  {
+    using list = make_type_list<int, 1024>;
+    EXPECT_EQ(list::size, 1024u);
+  }
+  {
+    using list = make_type_list<int, 1025>;
+    EXPECT_EQ(list::size, 1025u);
   }
   {
     using list = make_type_list<int, 2000>;

@@ -143,6 +143,8 @@ template <typename List, std::size_t Index>
 struct at_
 {
   static_assert(mpl::is_type_list_v<List>);
+  static_assert(0 < list_size_v<List> && Index < list_size_v<List>,
+                "out of range");
 
 private:
   using with_index_list = to_with_index_list<List>;
@@ -223,6 +225,12 @@ struct none_of_
 template <template <typename> typename F, typename List>
 struct transform_;
 
+template <template <typename> typename F>
+struct transform_<F, type_list<>>
+{
+  using type = type_list<>;
+};
+
 template <template <typename> typename F, typename... Args>
 struct transform_<F, type_list<Args...>>
 {
@@ -293,39 +301,22 @@ template <typename T, std::size_t Count>
 struct make_type_list_
 {
 private:
-  template <typename... Args>
-  static auto apply()
-  {
-    using add_list        = type_list<Args...>;
-    constexpr auto length = sizeof...(Args);
+  template <std::size_t I>
+  using index_to_type = T;
 
-    if constexpr (Count == 0)
-    {
-      return add_list{};
-    }
-    else if constexpr (Count == 1)
-    {
-      using result = typename join_<add_list, type_list<T>>::type;
-      return result{};
-    }
-    else if constexpr (length == 0)
-    {
-      return apply<T>();
-    }
-    else if constexpr (length < Count / 2)
-    {
-      return apply<Args..., Args...>();
-    }
-    else
-    {
-      using join_list = typename make_type_list_<T, Count - length>::type;
-      using result    = typename join_<add_list, join_list>::type;
-      return result{};
-    }
-  }
+  template <std::size_t... Index>
+  static auto apply(std::index_sequence<Index...>)
+    -> decltype((type_list<index_to_type<Index>>{} + ...));
+
+  using sequence = std::make_index_sequence<Count>;
 
 public:
-  using type = decltype(apply());
+  using type = decltype(apply(sequence{}));
+};
+template <typename T>
+struct make_type_list_<T, 0>
+{
+  using type = type_list<>;
 };
 } // namespace detail
 
