@@ -7,8 +7,7 @@
 #ifndef PYRITE_MPL_TYPE_HOLDER_HPP
 #define PYRITE_MPL_TYPE_HOLDER_HPP
 
-#include <pyrite/core/type_holder.hpp>
-#include <pyrite/mpl/type_holder.hpp>
+#include <pyrite/core/mpl/type_holder.hpp>
 
 namespace pyrite::mpl
 {
