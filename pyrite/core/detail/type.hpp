@@ -10,22 +10,24 @@
 #include <type_traits>
 
 #include <pyrite/core/mpl/type_list.hpp>
+#include <pyrite/core/mpl/type_list/find_if.hpp>
 
 namespace pyrite::core
 {
 namespace
 {
-using signed_list         = ::pyrite::core::mpl::type_list<signed int,
-                                            signed char,
-                                            signed short,
-                                            signed long,
-                                            signed long long>;
-using unsigned_list       = ::pyrite::core::mpl::type_list<unsigned int,
-                                              unsigned char,
-                                              unsigned short,
-                                              unsigned long,
-                                              unsigned long long>;
-using floating_point_list = ::pyrite::core::mpl::type_list<float, double, long double>;
+using signed_list   = ::pyrite::core::mpl::type_list<signed int,
+                                                   signed char,
+                                                   signed short,
+                                                   signed long,
+                                                   signed long long>;
+using unsigned_list = ::pyrite::core::mpl::type_list<unsigned int,
+                                                     unsigned char,
+                                                     unsigned short,
+                                                     unsigned long,
+                                                     unsigned long long>;
+using floating_point_list =
+  ::pyrite::core::mpl::type_list<float, double, long double>;
 
 template <typename List, std::size_t Size>
 struct find_from_size;
@@ -39,12 +41,12 @@ private:
   {
   };
 
-  using list   = ::pyrite::core::mpl::type_list<Args...>;
-  using holder = typename list::template find_if<find_function>;
-  static_assert(holder::has_type, "not found");
+  using list = ::pyrite::core::mpl::type_list<Args...>;
+  using opt  = ::pyrite::core::mpl::find_if_t<list, find_function>;
+  static_assert(opt::has_type, "not found");
 
 public:
-  using type = typename holder::type;
+  using type = typename opt::type;
 };
 
 template <typename List, std::size_t Size>
