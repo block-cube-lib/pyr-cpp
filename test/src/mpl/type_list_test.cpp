@@ -276,7 +276,7 @@ void replace_if_check()
 TEST(type_list_test, replace_if)
 {
   replace_if_check<type_list<>, std::is_void, int, type_list<>>();
-  mreplace_if_check<type_list<void>, std::is_void, int, type_list<int>>();
+  replace_if_check<type_list<void>, std::is_void, int, type_list<int>>();
   replace_if_check<type_list<int, void, int>,
                    std::is_void,
                    int,
