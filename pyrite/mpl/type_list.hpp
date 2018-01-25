@@ -21,10 +21,11 @@
 #include <pyrite/mpl/type_list/operators.hpp>
 #include <pyrite/mpl/type_list/push_bach.hpp>
 #include <pyrite/mpl/type_list/push_front.hpp>
+#include <pyrite/mpl/type_list/replace_if.hpp>
+#include <pyrite/mpl/type_list/reverse.hpp>
 #include <pyrite/mpl/type_list/tail.hpp>
 #include <pyrite/mpl/type_list/transform.hpp>
 #include <pyrite/mpl/type_list/zip.hpp>
-#include <pyrite/mpl/type_list/reverse.hpp>
 
 #include <pyrite/mpl/type_list/make_type_list.hpp>
 

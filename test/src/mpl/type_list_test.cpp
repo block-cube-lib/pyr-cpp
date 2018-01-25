@@ -263,4 +263,24 @@ TEST(type_list_test, make_type_list)
 
   EXPECT_EQ((make_type_list<t, 2000>::size), 2000u);
 }
+
+template <typename List,
+          template <typename> typename Pred,
+          typename NewType,
+          typename Result>
+void replace_if_check()
+{
+  ::testing::StaticAssertTypeEq<replace_if_t<List, Pred, NewType>, Result>();
+}
+
+TEST(type_list_test, replace_if)
+{
+  replace_if_check<type_list<>, std::is_void, int, type_list<>>();
+  mreplace_if_check<type_list<void>, std::is_void, int, type_list<int>>();
+  replace_if_check<type_list<int, void, int>,
+                   std::is_void,
+                   int,
+                   type_list<int, int, int>>();
+}
+
 } // namespace
