@@ -1,7 +1,7 @@
 /**
  * @file
  * @author    block
- * @copyright (c) 2017 block.
+ * @copyright (c) 2018 block.
  */
 
 #ifndef PYRITE_CORE_NONCOPYABLE_HPP
@@ -9,7 +9,8 @@
 
 namespace pyrite
 {
-
+namespace core
+{
 /**
  * class noncopyable cannot be copied.
  */
@@ -34,18 +35,17 @@ protected:
   /**
    * Delete copy constructor.
    */
-  noncopyable( noncopyable const& ) = delete;
+  noncopyable(noncopyable const&) = delete;
 
   /**
    * Delete copy assignment operator.
    */
-  noncopyable& operator=( noncopyable const& ) = delete;
+  noncopyable& operator=(noncopyable const&) = delete;
 }; // class noncopyable
-
 } // namespace noncopyable_
+} // namespace core
 
-using noncopyable = pyrite::noncopyable_::noncopyable;
-
+using noncopyable = pyrite::core::noncopyable_::noncopyable;
 } // namespace pyrite
 
 #endif // PYRITE_CORE_NONCOPYABLE_HPP

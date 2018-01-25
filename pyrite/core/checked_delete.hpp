@@ -1,7 +1,7 @@
 /**
  * @file
  * @author    block
- * @copyright (c) 2017 block.
+ * @copyright (c) 2018 block.
  */
 
 #ifndef PYRITE_CHECKED_DELETE_HPP
@@ -11,15 +11,17 @@
 
 namespace pyrite
 {
+namespace core
+{
 /**
  * After deleting the pointer, assing nullptr.
  * @tparam T T must be a complete type.
  * @param ptr pointer.
  */
 template <typename T>
-void checked_delete( T*& ptr )
+void checked_delete(T*& ptr)
 {
-  static_assert( is_complete_type<T>::value, "type T is not a complete type." );
+  static_assert(is_complete_type<T>::value, "type T is not a complete type.");
 
   delete ptr;
   ptr = nullptr;
@@ -32,9 +34,9 @@ void checked_delete( T*& ptr )
  * @param ptr pointer.
  */
 template <typename T>
-void checked_array_delete( T*& ptr )
+void checked_array_delete(T*& ptr)
 {
-  static_assert( is_complete_type<T>::value, "type T is not a complete type." );
+  static_assert(is_complete_type<T>::value, "type T is not a complete type.");
 
   delete[] ptr;
   ptr = nullptr;
@@ -55,7 +57,7 @@ public:
    * Call checked_delete.
    * @param ptr pointer.
    */
-  void operator()( T*& ptr ) const { checked_delete( ptr ); }
+  void operator()(T*& ptr) const { checked_delete(ptr); }
 };
 
 /**
@@ -73,8 +75,14 @@ public:
    * Call checked_array_delete.
    * @param ptr pointer.
    */
-  void operator()( T*& ptr ) const { checked_array_delete( ptr ); }
+  void operator()(T*& ptr) const { checked_array_delete(ptr); }
 };
+} // namespace core
+
+using core::checked_array_delete;
+using core::checked_array_deleter;
+using core::checked_delete;
+using core::checked_deleter;
 } // namespace pyrite
 
 #endif // PYRITE_CHECKED_DELETE_HPP

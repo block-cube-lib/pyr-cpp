@@ -1,14 +1,13 @@
 /**
  * @file
  * @author    block
- * @copyright (c) 2017 block.
+ * @copyright (c) 2018 block.
  */
 
 #ifndef PYRITE_MATH_VECTOR_TRAITS_HPP
 #define PYRITE_MATH_VECTOR_TRAITS_HPP
 
-#include <pyrite/config/type.hpp>
-#include <pyrite/core/integral_constant.hpp>
+#include <pyrite/core/type.hpp>
 
 namespace pyrite
 {
@@ -41,7 +40,7 @@ struct vector_traits
    * @param[in] index Index of vector.
    * @return A reference to an element of an editable vector.
    */
-  static constexpr value_type& at( vector_type& vector, usize const& index )
+  static constexpr value_type& at(vector_type& vector, usize const& index)
   {
     return vector[index];
   }
@@ -53,7 +52,7 @@ struct vector_traits
    * @return A reference to an element of an uneditable vector.
    */
   static constexpr value_type const&
-    at( vector_type const& vector, usize const& index )
+    at(vector_type const& vector, usize const& index)
   {
     return vector[index];
   }
