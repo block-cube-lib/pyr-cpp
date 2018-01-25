@@ -1,13 +1,17 @@
+/**
+ * @file
+ * @author    block
+ * @copyright (c) 2018 block.
+ */
+
 #ifndef PYRITE_MATH_UTILITY_HPP
 #define PYRITE_MATH_UTILITY_HPP
 
 #include <type_traits>
 
-#include <pyrite/math/pi.hpp>
+#include <pyrite/math/constant.hpp>
 
-namespace pyrite
-{
-namespace math
+namespace pyrite::math
 {
 
 /**
@@ -18,7 +22,7 @@ namespace math
  * @return Degree.
  */
 template <typename T>
-constexpr T radian_to_degree( T const& radian ) noexcept
+constexpr T radian_to_degree(T const& radian) noexcept
 {
   return radian * T{180} / pi<T>;
 }
@@ -31,7 +35,7 @@ constexpr T radian_to_degree( T const& radian ) noexcept
  * @return Radian.
  */
 template <typename T>
-constexpr T degree_to_radian( T const& degree ) noexcept
+constexpr T degree_to_radian(T const& degree) noexcept
 {
   return degree / pi<T> / T{180};
 }
@@ -44,19 +48,17 @@ constexpr T degree_to_radian( T const& degree ) noexcept
  * @return Absolute value.
  */
 template <typename T>
-constexpr T abs( T value ) noexcept
+constexpr T abs(T value) noexcept
 {
-  if
-    constexpr( std::is_signed<T>::value )
-    {
-      return value >= 0 ? value : -value;
-    }
+  if constexpr (std::is_signed<T>::value)
+  {
+    return value >= 0 ? value : -value;
+  }
   else
   {
     return value;
   }
 }
 
-} // namespace math
-} // namespace pyrite
+} // namespace pyrite::math
 #endif // PYRITE_MATH_UTILITY_HPP

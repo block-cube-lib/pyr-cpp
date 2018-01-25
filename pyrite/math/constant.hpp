@@ -1,22 +1,18 @@
 /**
  * @file
  * @author    block
- * @copyright (c) 2017 block.
+ * @copyright (c) 2018 block.
  */
-#ifndef PYRITE_MATH_PI_HPP
-#define PYRITE_MATH_PI_HPP
 
-namespace pyrite
-{
-namespace math
-{
+#ifndef PYRITE_MATH_CONSTNT_HPP
+#define PYRITE_MATH_CONSTNT_HPP
 
+namespace pyrite::math
+{
 /**
  * pi
  */
 template <typename T>
-constexpr T pi = static_cast<T>( 3.141592653589793 );
-
-} // namespace math
-} // namespace pyrite
-#endif // PYRITE_MATH_PI_HPP
+constexpr T pi = static_cast<T>(3.141592653589793);
+} // namespace pyrite::math
+#endif // PYRITE_MATH_CONSTNT_HPP
