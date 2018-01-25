@@ -9,7 +9,7 @@
 
 #include <type_traits>
 
-#include <pyrite/math/constant.hpp>
+#include <pyrite/math/constants.hpp>
 
 namespace pyrite::math
 {
