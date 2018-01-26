@@ -37,7 +37,7 @@ constexpr T radian_to_degree(T const& radian) noexcept
 template <typename T>
 constexpr T degree_to_radian(T const& degree) noexcept
 {
-  return degree / pi<T> / T{180};
+  return degree * pi<T> / T{180};
 }
 
 /**
