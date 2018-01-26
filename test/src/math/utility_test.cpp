@@ -75,3 +75,23 @@ TEST(utility_test, power)
     EXPECT_EQ(power(x, i), v);
   }
 }
+
+template <typename T>
+void sin_check(T rad)
+{
+  auto ss = std::sin(rad);
+  auto ps = pyrite::math::sin(rad);
+  EXPECT_LE(pyrite::math::abs(ps - ss), static_cast<T>(0.000001));
+}
+
+TEST(utility_test, sin)
+{
+  using pyrite::math::degree_to_radian;
+  for (int i = -7200; i < 7200; ++i)
+  {
+    auto const rad = degree_to_radian(i / 10.0l);
+    sin_check(static_cast<float>(rad));
+    sin_check(static_cast<double>(rad));
+    sin_check(rad);
+  }
+}
