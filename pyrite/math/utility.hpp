@@ -135,8 +135,9 @@ constexpr bool equal(T lhs, T rhs)
     }
     else
     {
-      constexpr auto epsilon = std::numeric_limits<T>::epsilon();
-      auto const     max     = std::max(abs(rhs), abs(lhs));
+      constexpr auto epsilon = (std::is_same_v<T, long double> ? 1000 : 10) *
+                               std::numeric_limits<T>::epsilon();
+      auto const max = std::max(abs(rhs), abs(lhs));
       return abs(lhs - rhs) <= epsilon || abs(lhs - rhs) <= max * epsilon;
     }
   }
