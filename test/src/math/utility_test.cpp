@@ -4,14 +4,6 @@
 
 #include <cmath>
 
-TEST(utility_test, radian_to_degree)
-{
-  //for(int i = -7200; i < 7200; ++i)
-  //{
-  //  double const rad = pyrite::math::degree_to_radian(deg);
-  //}
-}
-
 TEST(utility_test, degree_radian)
 {
   using pyrite::math::pi;
@@ -76,22 +68,97 @@ TEST(utility_test, power)
   }
 }
 
+TEST(utility_test, sqrt)
+{
+  for (int i = 0; i < 100000; ++i)
+  {
+    auto const s  = i / 10.0l;
+    auto       ss = std::sqrtl(s);
+    auto       ps = pyrite::math::sqrt(s);
+    EXPECT_LE(pyrite::math::abs(ps - ss), 0.000001l);
+  }
+}
+
 template <typename T>
 void sin_check(T rad)
 {
-  auto ss = std::sin(rad);
-  auto ps = pyrite::math::sin(rad);
-  EXPECT_LE(pyrite::math::abs(ps - ss), static_cast<T>(0.000001));
+  using pyrite::math::abs;
+  auto const ps = pyrite::math::sin(rad);
+  auto const ss = std::sin(rad);
+  EXPECT_LE(abs(ss - ps), 0.000001l);
 }
 
 TEST(utility_test, sin)
 {
   using pyrite::math::degree_to_radian;
-  for (int i = -7200; i < 7200; ++i)
+  for (int i = -72000; i < 72000; ++i)
   {
-    auto const rad = degree_to_radian(i / 10.0l);
+    auto const rad = degree_to_radian(i / 100.0l);
     sin_check(static_cast<float>(rad));
     sin_check(static_cast<double>(rad));
     sin_check(rad);
   }
+
+  constexpr auto rad = degree_to_radian(42.2l);
+  constexpr auto s   = pyrite::math::sin(rad);
+  EXPECT_LE(pyrite::math::abs(s - std::sin(rad)), 0.00001l);
+}
+
+template <typename T>
+void cos_check(T rad)
+{
+  auto pc = pyrite::math::cos(rad);
+  auto sc = std::cos(rad);
+  EXPECT_LE(abs(sc - pc), 0.000001l);
+}
+
+TEST(utility_test, cos)
+{
+  using pyrite::math::degree_to_radian;
+  for (int i = -72000; i < 72000; ++i)
+  {
+    auto const rad = degree_to_radian(i / 100.0l);
+    sin_check(static_cast<float>(rad));
+    sin_check(static_cast<double>(rad));
+    sin_check(rad);
+  }
+
+  constexpr auto rad = degree_to_radian(42.2l);
+  constexpr auto c   = pyrite::math::cos(rad);
+  EXPECT_LE(abs(c - std::cos(rad)), 0.000001l);
+}
+
+TEST(utility_test, sincos)
+{
+  using pyrite::math::degree_to_radian;
+  for (int i = -72000; i < 72000; ++i)
+  {
+    using pyrite::math::abs;
+    auto const x      = degree_to_radian(i / 100.0l);
+    auto const [s, c] = pyrite::math::sincos(x);
+    EXPECT_LE(abs(s - std::sin(x)), 0.000001l);
+    EXPECT_LE(abs(c - pyrite::math::cos(x)), 0.000001l);
+  }
+}
+
+TEST(utility_test, tan)
+{
+  using pyrite::math::abs;
+  using pyrite::math::degree_to_radian;
+  using pyrite::math::equal;
+
+  auto const deg_tan = [](auto deg)
+  {
+    auto const rad = degree_to_radian(deg);
+    return pyrite::math::tan(rad);
+  };
+
+  EXPECT_TRUE(equal(deg_tan(0), 0.0));
+  EXPECT_TRUE(equal(deg_tan(180), 0.0));
+  EXPECT_TRUE(equal(deg_tan(360), 0.0));
+
+  EXPECT_TRUE(equal(deg_tan(45.0l), 1.0l));
+  EXPECT_TRUE(equal(deg_tan(135.0l), -1.0l));
+  EXPECT_TRUE(equal(deg_tan(225.0l), 1.0l));
+  EXPECT_TRUE(equal(deg_tan(315.0l), -1.0l));
 }
