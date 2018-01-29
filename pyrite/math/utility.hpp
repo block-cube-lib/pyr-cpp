@@ -117,6 +117,14 @@ constexpr bool isnan(T value)
 }
 
 template <typename T>
+constexpr bool is_infinity(T value)
+{
+  static_assert(std::is_floating_point_v<T>);
+  return value == std::numeric_limits<T>::infinity() ||
+         value == std::numeric_limits<T>::infinity();
+}
+
+template <typename T>
 constexpr bool equal(T lhs, T rhs)
 {
   if constexpr (std::is_floating_point_v<T>)
@@ -127,10 +135,8 @@ constexpr bool equal(T lhs, T rhs)
     }
     else
     {
-      //constexpr auto epsilon = 100 * std::numeric_limits<T>::epsilon();
-      //return abs(lhs - rhs) <= epsilon;
       constexpr auto epsilon = std::numeric_limits<T>::epsilon();
-      auto const     max     = std::max(rhs, lhs);
+      auto const     max     = std::max(abs(rhs), abs(lhs));
       return abs(lhs - rhs) <= epsilon || abs(lhs - rhs) <= max * epsilon;
     }
   }
