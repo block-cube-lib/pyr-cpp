@@ -272,6 +272,18 @@ private:
    ****************************************************************************/
   T radian_ = T{0}; //!< radian
 };
+
+template <typename T>
+auto make_angle_from_radian(T radian)
+{
+  return angle<T>{radian, radian_tag};
+}
+
+template <typename T>
+auto make_angle_from_degree(T degree)
+{
+  return angle<T>{degree, degree_tag};
+}
 } // namespace pyrite::math
 
 #endif // PYRITE_MATH_ANGLE_HPP
