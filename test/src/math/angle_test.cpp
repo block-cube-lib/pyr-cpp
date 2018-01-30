@@ -174,4 +174,15 @@ TEST(angle_test, operators)
     EXPECT_TRUE(c >= a);
   });
 }
+
+TEST(angle_test, make_angle)
+{
+  loop(-7200, 7200, [](int i) {
+    float const rad = degree_to_radian(i);
+    float const deg = i;
+
+    EXPECT_EQ(make_angle_from_radian(rad), angle<float>(rad, radian_tag));
+    EXPECT_EQ(make_angle_from_degree(deg), angle<float>(deg, degree_tag));
+  });
+}
 } // namespace
