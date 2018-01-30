@@ -218,17 +218,22 @@ public:
 
   friend constexpr angle operator-(angle const& lhs, angle const& rhs)
   {
-    return std::move(angle(lhs) -= rhs);
+    return {lhs.radian_ - rhs.radian_, radian_tag};
   }
 
   friend constexpr angle operator*(angle const& a, T const& value)
   {
-    return std::move(angle(a) *= value);
+    return {a.radian_ * value, radian_tag};
   }
 
   friend constexpr angle operator/(angle const& a, T const& value)
   {
-    return std::move(angle(a) /= value);
+    return {a.radian_ / value, radian_tag};
+  }
+
+  friend constexpr angle operator*(T const& value, angle const& a)
+  {
+    return a * value;
   }
 
   friend constexpr bool operator==(angle const& lhs, angle const& rhs) noexcept
