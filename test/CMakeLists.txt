@@ -19,9 +19,13 @@ add_subdirectory(lib/googletest/googletest)
 # source
 set(pyrite_test_source
   ./src/core/is_complete_type_test.cpp
-  ./src/mpl/type_list_test.cpp
   ./src/core/type_test.cpp
+  ./src/math/angle_test.cpp
+  ./src/math/angle_literals_test.cpp
+  ./src/math/constants_test.cpp
+  ./src/math/utility_test.cpp
   ./src/math/vector_traits_test.cpp
+  ./src/mpl/type_list_test.cpp
   ./src/random_test.cpp
   ./src/scope_exit_test.cpp
   ./src/singleton_test.cpp
