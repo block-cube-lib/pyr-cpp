@@ -25,8 +25,15 @@ struct filter
 template <template <typename> typename F, typename... Args>
 struct filter<type_list<Args...>, F>
 {
-  using type = decltype(
-    (std::conditional_t<F<Args>::value, type_list<Args>, type_list<>>{} + ...));
+private:
+  static auto apply()
+  {
+    return (std::conditional_t<F<Args>::value, type_list<Args>, type_list<>>{} +
+            ...);
+  }
+
+public:
+  using type = decltype(apply());
 };
 
 template <typename List, template <typename> typename F>
