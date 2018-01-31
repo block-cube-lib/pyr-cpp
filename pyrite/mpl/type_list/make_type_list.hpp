@@ -26,12 +26,9 @@ struct sequence_to_list<T, std::index_sequence<Index...>>
 {
 private:
   template <std::size_t>
-  using index_to_type = T;
+  using index_to_type_list = type_list<T>;
 
-  static auto apply()
-  {
-    return (type_list<index_to_type<Index>>{} + ...);
-  }
+  static auto apply() { return (index_to_type_list<Index>{} + ...); }
 
 public:
   using type = decltype(apply());
