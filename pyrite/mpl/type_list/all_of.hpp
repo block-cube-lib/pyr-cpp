@@ -13,15 +13,34 @@
 
 namespace pyrite::mpl
 {
+
+namespace detail
+{
+namespace
+{
 template <typename List, template <typename> typename F>
-struct all_of
+struct all_of_base
 {
   static_assert(is_type_list_v<List>);
 };
 
 template <typename... T, template <typename> typename F>
-struct all_of<type_list<T...>, F>
-  : std::bool_constant<sizeof...(T) == 0 || (F<T>::value && ...)>
+struct all_of_base<type_list<T...>, F>
+{
+private:
+  static constexpr bool apply()
+  {
+    return sizeof...(T) == 0 || (F<T>::value && ...);
+  }
+
+public:
+  using type = std::bool_constant<apply()>;
+};
+} // namespace
+} // namespace detail
+
+template <typename List, template <typename> typename F>
+struct all_of : detail::all_of_base<List, F>::type
 {
 };
 
