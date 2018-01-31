@@ -14,7 +14,7 @@ namespace pyrite::math::literals
 #define DEF_LITERAL(TYPE, LITERAL, TAG)                                        \
   constexpr angle<TYPE> operator"" LITERAL(long double v)                      \
   {                                                                            \
-    return angle<TYPE>{v, TAG};                                                \
+    return angle<TYPE>{static_cast<TYPE>(v), TAG};                             \
   }                                                                            \
                                                                                \
   constexpr angle<TYPE> operator"" LITERAL(unsigned long long v)               \
@@ -35,13 +35,13 @@ DEF_LITERAL(long double, _degl, ::pyrite::math::degree_tag);
 #define PI_RAD_LITERAL(TYPE, LITERAL)                                          \
   constexpr angle<TYPE> operator"" LITERAL(long double v)                      \
   {                                                                            \
-    using namespace pyrite::math;                                            \
-    return angle<TYPE>{v * pi<TYPE>, radian_tag};                              \
+    using namespace pyrite::math;                                              \
+    return angle<TYPE>{static_cast<TYPE>(v) * pi<TYPE>, radian_tag};           \
   }                                                                            \
                                                                                \
   constexpr angle<TYPE> operator"" LITERAL(unsigned long long v)               \
   {                                                                            \
-    using namespace pyrite::math;                                            \
+    using namespace pyrite::math;                                              \
     return angle<TYPE>{static_cast<TYPE>(v) * pi<TYPE>, radian_tag};           \
   }
 
