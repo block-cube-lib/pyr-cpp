@@ -14,6 +14,7 @@
 #include <type_traits>
 #include <utility>
 
+#include <pyrite/core/type.hpp>
 #include <pyrite/math/constants.hpp>
 
 namespace pyrite::math
@@ -80,12 +81,13 @@ constexpr T mod(T x, T y)
   }
 }
 
-template <typename T = std::uintmax_t>
-constexpr T factorial(std::uintmax_t x)
+template <typename T = u64>
+constexpr T factorial(u64 x)
 {
   assert(0 <= x);
-  std::uintmax_t result{1};
-  for (std::uintmax_t i = 1u; i <= x; ++i)
+  assert(x < 21u); // overflow
+  u64 result{1};
+  for (u64 i = 1u; i <= x; ++i)
   {
     auto const new_value = result * i;
     assert(result <= new_value);
@@ -96,11 +98,11 @@ constexpr T factorial(std::uintmax_t x)
 }
 
 template <typename T>
-constexpr T power(T x, std::uintmax_t y)
+constexpr T power(T x, u64 y)
 {
   T result{1};
 
-  for (std::uintmax_t i = 1; i <= y; ++i)
+  for (u64 i = 1; i <= y; ++i)
   {
     result *= x;
   }
@@ -173,13 +175,13 @@ constexpr auto sqrt(T s)
 
 namespace detail
 {
-constexpr std::uintmax_t end_term = 10;
+constexpr u64 end_term = 9;
 
 template <typename T>
 constexpr T sin_term(T x)
 {
   T sum{0};
-  for (std::uintmax_t k = 0; k <= end_term; ++k)
+  for (u64 k = 0; k <= end_term; ++k)
   {
     int const sign = (k == 0 || k % 2 == 0) ? 1 : -1;
     sum += sign * power(x, 2 * k + 1) / factorial(2 * k + 1);
