@@ -1,0 +1,100 @@
+\hypertarget{structpyrite_1_1math_1_1vector__traits}{}\section{pyrite\+:\+:math\+:\+:vector\+\_\+traits$<$ T $>$ Struct Template Reference}
+\label{structpyrite_1_1math_1_1vector__traits}\index{pyrite\+::math\+::vector\+\_\+traits$<$ T $>$@{pyrite\+::math\+::vector\+\_\+traits$<$ T $>$}}
+
+
+{\ttfamily \#include $<$vector\+\_\+traits.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}{vector\+\_\+type}} = T
+\item 
+using \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}{value\+\_\+type}} = typename T\+::value\+\_\+type
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}{value\+\_\+type}} \& \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a4eb1d1180c18fd414ed2f080322f2533}{at}} (\mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}{vector\+\_\+type}} \&vector, \mbox{\hyperlink{type_8hpp_a3984e6dc0a53b867e054e8447f2f2be1}{usize}} const \&index)
+\item 
+static constexpr \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}{value\+\_\+type}} const  \& \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_af292435739fbef535f287c658525376b}{at}} (\mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}{vector\+\_\+type}} const \&vector, \mbox{\hyperlink{type_8hpp_a3984e6dc0a53b867e054e8447f2f2be1}{usize}} const \&index)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr \mbox{\hyperlink{type_8hpp_a3984e6dc0a53b867e054e8447f2f2be1}{usize}} \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a79d22d82f3fc84d91df6128e70c61382}{dimension}} = T\+::dimension
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+struct pyrite\+::math\+::vector\+\_\+traits$<$ T $>$}
+
+Traits for abstract access to vector type. 
+
+\subsection{Member Typedef Documentation}
+\mbox{\Hypertarget{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}\label{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}} 
+\index{pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}!value\+\_\+type@{value\+\_\+type}}
+\index{value\+\_\+type@{value\+\_\+type}!pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}}
+\subsubsection{\texorpdfstring{value\+\_\+type}{value\_type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits}{pyrite\+::math\+::vector\+\_\+traits}}$<$ T $>$\+::\mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}{value\+\_\+type}} =  typename T\+::value\+\_\+type}
+
+Element type of vector. \mbox{\Hypertarget{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}\label{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}} 
+\index{pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}!vector\+\_\+type@{vector\+\_\+type}}
+\index{vector\+\_\+type@{vector\+\_\+type}!pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}}
+\subsubsection{\texorpdfstring{vector\+\_\+type}{vector\_type}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+using \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits}{pyrite\+::math\+::vector\+\_\+traits}}$<$ T $>$\+::\mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}{vector\+\_\+type}} =  T}
+
+The type of vector. 
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{structpyrite_1_1math_1_1vector__traits_a4eb1d1180c18fd414ed2f080322f2533}\label{structpyrite_1_1math_1_1vector__traits_a4eb1d1180c18fd414ed2f080322f2533}} 
+\index{pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}!at@{at}}
+\index{at@{at}!pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static constexpr \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}{value\+\_\+type}}\& \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits}{pyrite\+::math\+::vector\+\_\+traits}}$<$ T $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}{vector\+\_\+type}} \&}]{vector,  }\item[{\mbox{\hyperlink{type_8hpp_a3984e6dc0a53b867e054e8447f2f2be1}{usize}} const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Access to elements of editable vector. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em vector} & vector \\
+\hline
+\mbox{\tt in}  & {\em index} & Index of vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to an element of an editable vector. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{structpyrite_1_1math_1_1vector__traits_af292435739fbef535f287c658525376b}\label{structpyrite_1_1math_1_1vector__traits_af292435739fbef535f287c658525376b}} 
+\index{pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}!at@{at}}
+\index{at@{at}!pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}}
+\subsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+static constexpr \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_a727892393454b3e72d96a1f3c15b37e2}{value\+\_\+type}} const\& \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits}{pyrite\+::math\+::vector\+\_\+traits}}$<$ T $>$\+::at (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits_abae24d3748d9ac5db627b6288822400f}{vector\+\_\+type}} const \&}]{vector,  }\item[{\mbox{\hyperlink{type_8hpp_a3984e6dc0a53b867e054e8447f2f2be1}{usize}} const \&}]{index }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Access to elements of uneditable vector. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em vector} & vector \\
+\hline
+\mbox{\tt in}  & {\em index} & Index of vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to an element of an uneditable vector. 
+\end{DoxyReturn}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{structpyrite_1_1math_1_1vector__traits_a79d22d82f3fc84d91df6128e70c61382}\label{structpyrite_1_1math_1_1vector__traits_a79d22d82f3fc84d91df6128e70c61382}} 
+\index{pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}!dimension@{dimension}}
+\index{dimension@{dimension}!pyrite\+::math\+::vector\+\_\+traits@{pyrite\+::math\+::vector\+\_\+traits}}
+\subsubsection{\texorpdfstring{dimension}{dimension}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr \mbox{\hyperlink{type_8hpp_a3984e6dc0a53b867e054e8447f2f2be1}{usize}} \mbox{\hyperlink{structpyrite_1_1math_1_1vector__traits}{pyrite\+::math\+::vector\+\_\+traits}}$<$ T $>$\+::dimension = T\+::dimension\hspace{0.3cm}{\ttfamily [static]}}
+
+Dimension of vector. 
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/math/\mbox{\hyperlink{vector__traits_8hpp}{vector\+\_\+traits.\+hpp}}\end{DoxyCompactItemize}

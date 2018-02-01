@@ -1,0 +1,66 @@
+\hypertarget{scope__exit_8hpp}{}\section{/\+Users/masato.tanaka/\+Development/cpp/pyrite/pyrite/scope\+\_\+exit.hpp File Reference}
+\label{scope__exit_8hpp}\index{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/scope\+\_\+exit.\+hpp@{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/scope\+\_\+exit.\+hpp}}
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$pyrite/core/noncopyable.\+hpp$>$}\newline
+{\ttfamily \#include $<$pyrite/type\+\_\+traits/is\+\_\+equality\+\_\+comparable.\+hpp$>$}\newline
+Include dependency graph for scope\+\_\+exit.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{df/dff/scope__exit_8hpp__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classpyrite_1_1scope__exit}{pyrite\+::scope\+\_\+exit$<$ F $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename F $>$ }\\scope\+\_\+exit$<$ F $>$ \mbox{\hyperlink{scope__exit_8hpp_a25d6d82ff2313d728afc19c8219209ba}{pyrite\+::make\+\_\+scope\+\_\+exit}} (F const \&function)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+block 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2018 block. 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{scope__exit_8hpp_file_a25d6d82ff2313d728afc19c8219209ba}\label{scope__exit_8hpp_file_a25d6d82ff2313d728afc19c8219209ba}} 
+\index{scope\+\_\+exit.\+hpp@{scope\+\_\+exit.\+hpp}!make\+\_\+scope\+\_\+exit@{make\+\_\+scope\+\_\+exit}}
+\index{make\+\_\+scope\+\_\+exit@{make\+\_\+scope\+\_\+exit}!scope\+\_\+exit.\+hpp@{scope\+\_\+exit.\+hpp}}
+\subsubsection{\texorpdfstring{make\+\_\+scope\+\_\+exit()}{make\_scope\_exit()}}
+{\footnotesize\ttfamily template$<$typename F $>$ \\
+scope\+\_\+exit$<$F$>$ pyrite\+::make\+\_\+scope\+\_\+exit (\begin{DoxyParamCaption}\item[{F const \&}]{function }\end{DoxyParamCaption})}
+
+Create scope\+\_\+exit with the received function as an argument. 
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\tt in}  & {\em function} & Function to be called when exiting the scope. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+scope\+\_\+exit witch calls the argument function. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{de/dde/scope__exit_8hpp_a25d6d82ff2313d728afc19c8219209ba_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=204pt]{de/dde/scope__exit_8hpp_a25d6d82ff2313d728afc19c8219209ba_icgraph}
+\end{center}
+\end{figure}

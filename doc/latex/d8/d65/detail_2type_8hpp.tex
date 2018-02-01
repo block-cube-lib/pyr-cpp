@@ -1,0 +1,78 @@
+\hypertarget{detail_2type_8hpp}{}\section{/\+Users/masato.tanaka/\+Development/cpp/pyrite/pyrite/core/detail/type.hpp File Reference}
+\label{detail_2type_8hpp}\index{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/core/detail/type.\+hpp@{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/core/detail/type.\+hpp}}
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$pyrite/core/mpl/type\+\_\+list.\+hpp$>$}\newline
+{\ttfamily \#include $<$pyrite/core/mpl/type\+\_\+list/find\+\_\+if.\+hpp$>$}\newline
+Include dependency graph for type.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{db/dd3/detail_2type_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d6/d13/detail_2type_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a7fd464f79f9188c8fe8ead38a1718b61}\label{detail_2type_8hpp_a7fd464f79f9188c8fe8ead38a1718b61}} 
+using {\bfseries pyrite\+::core\+::i8} = find\+\_\+from\+\_\+size\+\_\+t$<$ signed\+\_\+list, 1u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_ac48271d799022c1057c5ec78a9703a07}\label{detail_2type_8hpp_ac48271d799022c1057c5ec78a9703a07}} 
+using {\bfseries pyrite\+::core\+::i16} = find\+\_\+from\+\_\+size\+\_\+t$<$ signed\+\_\+list, 2u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_ae65a35cd17f4f6224c707d3b8939b7b0}\label{detail_2type_8hpp_ae65a35cd17f4f6224c707d3b8939b7b0}} 
+using {\bfseries pyrite\+::core\+::i32} = find\+\_\+from\+\_\+size\+\_\+t$<$ signed\+\_\+list, 4u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_aa74553a427e44eaa232057b02b67c8b3}\label{detail_2type_8hpp_aa74553a427e44eaa232057b02b67c8b3}} 
+using {\bfseries pyrite\+::core\+::i64} = find\+\_\+from\+\_\+size\+\_\+t$<$ signed\+\_\+list, 8u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a63dcab02b1104867fd219f2dc2a46a6c}\label{detail_2type_8hpp_a63dcab02b1104867fd219f2dc2a46a6c}} 
+using {\bfseries pyrite\+::core\+::u8} = find\+\_\+from\+\_\+size\+\_\+t$<$ unsigned\+\_\+list, 1u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a154bced535ef32062ff6969effd31c9a}\label{detail_2type_8hpp_a154bced535ef32062ff6969effd31c9a}} 
+using {\bfseries pyrite\+::core\+::u16} = find\+\_\+from\+\_\+size\+\_\+t$<$ unsigned\+\_\+list, 2u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a672cb423ff58f39502f116d00cab74dd}\label{detail_2type_8hpp_a672cb423ff58f39502f116d00cab74dd}} 
+using {\bfseries pyrite\+::core\+::u32} = find\+\_\+from\+\_\+size\+\_\+t$<$ unsigned\+\_\+list, 4u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a076b0568a7156266938bfacb53d17f7e}\label{detail_2type_8hpp_a076b0568a7156266938bfacb53d17f7e}} 
+using {\bfseries pyrite\+::core\+::u64} = find\+\_\+from\+\_\+size\+\_\+t$<$ unsigned\+\_\+list, 8u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_aa5cf207ff3d2d26ff45e63a78c0d7cda}\label{detail_2type_8hpp_aa5cf207ff3d2d26ff45e63a78c0d7cda}} 
+using {\bfseries pyrite\+::core\+::f32} = find\+\_\+from\+\_\+size\+\_\+t$<$ floating\+\_\+point\+\_\+list, 4u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_ac0bd1ecb2c19d585c3257837588acc31}\label{detail_2type_8hpp_ac0bd1ecb2c19d585c3257837588acc31}} 
+using {\bfseries pyrite\+::core\+::f64} = find\+\_\+from\+\_\+size\+\_\+t$<$ floating\+\_\+point\+\_\+list, 8u $>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_ac6463df11829a4d4891026f927acacdb}\label{detail_2type_8hpp_ac6463df11829a4d4891026f927acacdb}} 
+using {\bfseries pyrite\+::core\+::isize} = find\+\_\+from\+\_\+size\+\_\+t$<$ signed\+\_\+list, max(sizeof(std\+::size\+\_\+t), std\+::size\+\_\+t\{8u\})$>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a145f18ea1381c083f26a4397d8a82eb3}\label{detail_2type_8hpp_a145f18ea1381c083f26a4397d8a82eb3}} 
+using {\bfseries pyrite\+::core\+::usize} = find\+\_\+from\+\_\+size\+\_\+t$<$ unsigned\+\_\+list, max(sizeof(std\+::size\+\_\+t), std\+::size\+\_\+t\{8u\})$>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_ad78d654d9fe1e5861e7a01a33eba3507}\label{detail_2type_8hpp_ad78d654d9fe1e5861e7a01a33eba3507}} 
+using {\bfseries pyrite\+::core\+::iptr} = find\+\_\+from\+\_\+size\+\_\+t$<$ signed\+\_\+list, sizeof(int $\ast$)$>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a290fc2b170cf83d229c9f5f4d59417bb}\label{detail_2type_8hpp_a290fc2b170cf83d229c9f5f4d59417bb}} 
+using {\bfseries pyrite\+::core\+::uptr} = find\+\_\+from\+\_\+size\+\_\+t$<$ unsigned\+\_\+list, sizeof(int $\ast$)$>$
+\item 
+\mbox{\Hypertarget{detail_2type_8hpp_a516618865550504db165a0f2d5090d22}\label{detail_2type_8hpp_a516618865550504db165a0f2d5090d22}} 
+using {\bfseries pyrite\+::core\+::ptrdiff} = decltype(std\+::declval$<$ int $\ast$ $>$() -\/ std\+::declval$<$ int $\ast$ $>$())
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+block 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2018 block. 
+\end{DoxyCopyright}

@@ -1,0 +1,59 @@
+\hypertarget{classpyrite_1_1core_1_1checked__deleter}{}\section{pyrite\+:\+:core\+:\+:checked\+\_\+deleter$<$ T $>$ Class Template Reference}
+\label{classpyrite_1_1core_1_1checked__deleter}\index{pyrite\+::core\+::checked\+\_\+deleter$<$ T $>$@{pyrite\+::core\+::checked\+\_\+deleter$<$ T $>$}}
+
+
+{\ttfamily \#include $<$checked\+\_\+delete.\+hpp$>$}
+
+\subsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classpyrite_1_1core_1_1checked__deleter_a9b4af33bca1305708dfa58ce7b42091a}\label{classpyrite_1_1core_1_1checked__deleter_a9b4af33bca1305708dfa58ce7b42091a}} 
+using \mbox{\hyperlink{classpyrite_1_1core_1_1checked__deleter_a9b4af33bca1305708dfa58ce7b42091a}{result\+\_\+type}} = void
+\begin{DoxyCompactList}\small\item\em The result type of the operator(). \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classpyrite_1_1core_1_1checked__deleter_a98bbd81bf7af52f5595955fccc79433a}\label{classpyrite_1_1core_1_1checked__deleter_a98bbd81bf7af52f5595955fccc79433a}} 
+using \mbox{\hyperlink{classpyrite_1_1core_1_1checked__deleter_a98bbd81bf7af52f5595955fccc79433a}{argument\+\_\+type}} = T $\ast$\&
+\begin{DoxyCompactList}\small\item\em The argument type of the operator(). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classpyrite_1_1core_1_1checked__deleter_a214d518516d6f75bb36b941e4f345f6d}{operator()}} (T $\ast$\&ptr) const
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class pyrite\+::core\+::checked\+\_\+deleter$<$ T $>$}
+
+A function object thet calls checked\+\_\+delete with operator(). 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Must be a complete type. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{classpyrite_1_1core_1_1checked__deleter_a214d518516d6f75bb36b941e4f345f6d}\label{classpyrite_1_1core_1_1checked__deleter_a214d518516d6f75bb36b941e4f345f6d}} 
+\index{pyrite\+::core\+::checked\+\_\+deleter@{pyrite\+::core\+::checked\+\_\+deleter}!operator()@{operator()}}
+\index{operator()@{operator()}!pyrite\+::core\+::checked\+\_\+deleter@{pyrite\+::core\+::checked\+\_\+deleter}}
+\subsubsection{\texorpdfstring{operator()()}{operator()()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void \mbox{\hyperlink{classpyrite_1_1core_1_1checked__deleter}{pyrite\+::core\+::checked\+\_\+deleter}}$<$ T $>$\+::operator() (\begin{DoxyParamCaption}\item[{T $\ast$\&}]{ptr }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Call checked\+\_\+delete. 
+\begin{DoxyParams}{Parameters}
+{\em ptr} & pointer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{dc/d24/classpyrite_1_1core_1_1checked__deleter_a214d518516d6f75bb36b941e4f345f6d_cgraph}
+\end{center}
+\end{figure}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/core/\mbox{\hyperlink{checked__delete_8hpp}{checked\+\_\+delete.\+hpp}}\end{DoxyCompactItemize}

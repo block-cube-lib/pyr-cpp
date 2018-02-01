@@ -1,0 +1,111 @@
+\hypertarget{checked__delete_8hpp}{}\section{/\+Users/masato.tanaka/\+Development/cpp/pyrite/pyrite/core/checked\+\_\+delete.hpp File Reference}
+\label{checked__delete_8hpp}\index{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/core/checked\+\_\+delete.\+hpp@{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/core/checked\+\_\+delete.\+hpp}}
+{\ttfamily \#include $<$pyrite/core/is\+\_\+complete\+\_\+type.\+hpp$>$}\newline
+Include dependency graph for checked\+\_\+delete.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=238pt]{d0/d32/checked__delete_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=346pt]{de/d3e/checked__delete_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classpyrite_1_1core_1_1checked__deleter}{pyrite\+::core\+::checked\+\_\+deleter$<$ T $>$}}
+\item 
+class \mbox{\hyperlink{classpyrite_1_1core_1_1checked__array__deleter}{pyrite\+::core\+::checked\+\_\+array\+\_\+deleter$<$ T $>$}}
+\end{DoxyCompactItemize}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{checked__delete_8hpp_a27af49b4f86442c78de48cda0818eb72}{pyrite\+::core\+::checked\+\_\+delete}} (T $\ast$\&ptr)
+\item 
+{\footnotesize template$<$typename T $>$ }\\void \mbox{\hyperlink{checked__delete_8hpp_a47e9f6f9578e0518074ca6da633d7ea8}{pyrite\+::core\+::checked\+\_\+array\+\_\+delete}} (T $\ast$\&ptr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+block 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2018 block. 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{checked__delete_8hpp_file_a47e9f6f9578e0518074ca6da633d7ea8}\label{checked__delete_8hpp_file_a47e9f6f9578e0518074ca6da633d7ea8}} 
+\index{checked\+\_\+delete.\+hpp@{checked\+\_\+delete.\+hpp}!checked\+\_\+array\+\_\+delete@{checked\+\_\+array\+\_\+delete}}
+\index{checked\+\_\+array\+\_\+delete@{checked\+\_\+array\+\_\+delete}!checked\+\_\+delete.\+hpp@{checked\+\_\+delete.\+hpp}}
+\subsubsection{\texorpdfstring{checked\+\_\+array\+\_\+delete()}{checked\_array\_delete()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void pyrite\+::core\+::checked\+\_\+array\+\_\+delete (\begin{DoxyParamCaption}\item[{T $\ast$\&}]{ptr }\end{DoxyParamCaption})}
+
+After deleting the pointer, assing nullptr. Array version of checked\+\_\+delete. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & T must be a complete type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & pointer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{d5/d3a/checked__delete_8hpp_a47e9f6f9578e0518074ca6da633d7ea8_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d5/d3a/checked__delete_8hpp_a47e9f6f9578e0518074ca6da633d7ea8_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{checked__delete_8hpp_file_a27af49b4f86442c78de48cda0818eb72}\label{checked__delete_8hpp_file_a27af49b4f86442c78de48cda0818eb72}} 
+\index{checked\+\_\+delete.\+hpp@{checked\+\_\+delete.\+hpp}!checked\+\_\+delete@{checked\+\_\+delete}}
+\index{checked\+\_\+delete@{checked\+\_\+delete}!checked\+\_\+delete.\+hpp@{checked\+\_\+delete.\+hpp}}
+\subsubsection{\texorpdfstring{checked\+\_\+delete()}{checked\_delete()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+void pyrite\+::core\+::checked\+\_\+delete (\begin{DoxyParamCaption}\item[{T $\ast$\&}]{ptr }\end{DoxyParamCaption})}
+
+After deleting the pointer, assing nullptr. 
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & T must be a complete type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & pointer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=188pt]{d5/d3a/checked__delete_8hpp_a27af49b4f86442c78de48cda0818eb72_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=333pt]{d5/d3a/checked__delete_8hpp_a27af49b4f86442c78de48cda0818eb72_icgraph}
+\end{center}
+\end{figure}

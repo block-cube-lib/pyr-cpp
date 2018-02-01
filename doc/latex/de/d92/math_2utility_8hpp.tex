@@ -1,0 +1,206 @@
+\hypertarget{math_2utility_8hpp}{}\section{/\+Users/masato.tanaka/\+Development/cpp/pyrite/pyrite/math/utility.hpp File Reference}
+\label{math_2utility_8hpp}\index{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/math/utility.\+hpp@{/\+Users/masato.\+tanaka/\+Development/cpp/pyrite/pyrite/math/utility.\+hpp}}
+{\ttfamily \#include $<$cassert$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$type\+\_\+traits$>$}\newline
+{\ttfamily \#include $<$utility$>$}\newline
+{\ttfamily \#include $<$pyrite/core/type.\+hpp$>$}\newline
+{\ttfamily \#include $<$pyrite/math/constants.\+hpp$>$}\newline
+Include dependency graph for utility.\+hpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{d9/db1/math_2utility_8hpp__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=207pt]{dc/dba/math_2utility_8hpp__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{math_2utility_8hpp_afce463579e8cdcd87af0ec36c84a682a}{pyrite\+::math\+::radian\+\_\+to\+\_\+degree}} (T const \&radian) noexcept
+\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr auto \mbox{\hyperlink{math_2utility_8hpp_ad258a76b08feb9b53b17e4711110332f}{pyrite\+::math\+::degree\+\_\+to\+\_\+radian}} (T const \&degree) noexcept
+\item 
+{\footnotesize template$<$typename T $>$ }\\constexpr T \mbox{\hyperlink{math_2utility_8hpp_ad62192e560fef257b324e8058794aa60}{pyrite\+::math\+::abs}} (T value) noexcept
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a178d5118226ee99296b9328307830ebd}\label{math_2utility_8hpp_a178d5118226ee99296b9328307830ebd}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr T {\bfseries pyrite\+::math\+::mod} (T x, T y)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_ae696951e6328973c1e707333b76a1fe1}\label{math_2utility_8hpp_ae696951e6328973c1e707333b76a1fe1}} 
+{\footnotesize template$<$typename T  = u64$>$ }\\constexpr T {\bfseries pyrite\+::math\+::factorial} (u64 x)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_ae8dd371add042eed0d7d5b9c1c3426bc}\label{math_2utility_8hpp_ae8dd371add042eed0d7d5b9c1c3426bc}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr T {\bfseries pyrite\+::math\+::power} (T x, u64 y)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a9d1acfc6c1cca6b7bb0a8c610682b267}\label{math_2utility_8hpp_a9d1acfc6c1cca6b7bb0a8c610682b267}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr bool {\bfseries pyrite\+::math\+::isnan} (T value)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a28090064dc391a1f13b195a793644981}\label{math_2utility_8hpp_a28090064dc391a1f13b195a793644981}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr bool {\bfseries pyrite\+::math\+::is\+\_\+infinity} (T value)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a79f1f6b3bcdced8cd953a61026db3f6e}\label{math_2utility_8hpp_a79f1f6b3bcdced8cd953a61026db3f6e}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr bool {\bfseries pyrite\+::math\+::equal} (T lhs, T rhs)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a76e8dd8e7d018a2877ba153e48d96d85}\label{math_2utility_8hpp_a76e8dd8e7d018a2877ba153e48d96d85}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr auto {\bfseries pyrite\+::math\+::sqrt} (T s)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_ae9ca85898e7cc3dfe4f72e5ea0c3635e}\label{math_2utility_8hpp_ae9ca85898e7cc3dfe4f72e5ea0c3635e}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr T {\bfseries pyrite\+::math\+::detail\+::sin\+\_\+term} (T x)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_ab637794075de3be3527ac010a8788178}\label{math_2utility_8hpp_ab637794075de3be3527ac010a8788178}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr T {\bfseries pyrite\+::math\+::detail\+::sin\+\_\+convert} (T x)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a834ac4120f32fdd77444dc9895ad5bc2}\label{math_2utility_8hpp_a834ac4120f32fdd77444dc9895ad5bc2}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr T {\bfseries pyrite\+::math\+::sin} (T x)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a0ecac70de41de2ab080d4b5124cecac7}\label{math_2utility_8hpp_a0ecac70de41de2ab080d4b5124cecac7}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr auto {\bfseries pyrite\+::math\+::cos} (T x)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a75fa6ccb490d6bfb6eb73ea36dbd390a}\label{math_2utility_8hpp_a75fa6ccb490d6bfb6eb73ea36dbd390a}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr auto {\bfseries pyrite\+::math\+::sincos} (T x)
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_a97b4ad430436d90094ff660ab08003a5}\label{math_2utility_8hpp_a97b4ad430436d90094ff660ab08003a5}} 
+{\footnotesize template$<$typename T $>$ }\\constexpr auto {\bfseries pyrite\+::math\+::tan} (T x)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{math_2utility_8hpp_ae04f5a2e396ee4a7a1abfffd426fa7d1}\label{math_2utility_8hpp_ae04f5a2e396ee4a7a1abfffd426fa7d1}} 
+constexpr u64 {\bfseries pyrite\+::math\+::detail\+::end\+\_\+term} = 9
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+block 
+\end{DoxyAuthor}
+\begin{DoxyCopyright}{Copyright}
+(c) 2018 block. 
+\end{DoxyCopyright}
+
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{math_2utility_8hpp_file_ad62192e560fef257b324e8058794aa60}\label{math_2utility_8hpp_file_ad62192e560fef257b324e8058794aa60}} 
+\index{math/utility.\+hpp@{math/utility.\+hpp}!abs@{abs}}
+\index{abs@{abs}!math/utility.\+hpp@{math/utility.\+hpp}}
+\subsubsection{\texorpdfstring{abs()}{abs()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr T pyrite\+::math\+::abs (\begin{DoxyParamCaption}\item[{T}]{value }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Computes the absolute value.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Absolute value. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{de/d92/math_2utility_8hpp_ad62192e560fef257b324e8058794aa60_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=170pt]{de/d92/math_2utility_8hpp_ad62192e560fef257b324e8058794aa60_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{math_2utility_8hpp_file_ad258a76b08feb9b53b17e4711110332f}\label{math_2utility_8hpp_file_ad258a76b08feb9b53b17e4711110332f}} 
+\index{math/utility.\+hpp@{math/utility.\+hpp}!degree\+\_\+to\+\_\+radian@{degree\+\_\+to\+\_\+radian}}
+\index{degree\+\_\+to\+\_\+radian@{degree\+\_\+to\+\_\+radian}!math/utility.\+hpp@{math/utility.\+hpp}}
+\subsubsection{\texorpdfstring{degree\+\_\+to\+\_\+radian()}{degree\_to\_radian()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr auto pyrite\+::math\+::degree\+\_\+to\+\_\+radian (\begin{DoxyParamCaption}\item[{T const \&}]{degree }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Convert Degree to Radian.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Radian type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em degree} & Degree. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Radian. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=185pt]{de/d92/math_2utility_8hpp_ad258a76b08feb9b53b17e4711110332f_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=319pt]{de/d92/math_2utility_8hpp_ad258a76b08feb9b53b17e4711110332f_icgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{math_2utility_8hpp_file_afce463579e8cdcd87af0ec36c84a682a}\label{math_2utility_8hpp_file_afce463579e8cdcd87af0ec36c84a682a}} 
+\index{math/utility.\+hpp@{math/utility.\+hpp}!radian\+\_\+to\+\_\+degree@{radian\+\_\+to\+\_\+degree}}
+\index{radian\+\_\+to\+\_\+degree@{radian\+\_\+to\+\_\+degree}!math/utility.\+hpp@{math/utility.\+hpp}}
+\subsubsection{\texorpdfstring{radian\+\_\+to\+\_\+degree()}{radian\_to\_degree()}}
+{\footnotesize\ttfamily template$<$typename T $>$ \\
+constexpr T pyrite\+::math\+::radian\+\_\+to\+\_\+degree (\begin{DoxyParamCaption}\item[{T const \&}]{radian }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+Convert Radian to Degree.
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Degree type. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em radian} & Radian. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Degree. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=182pt]{de/d92/math_2utility_8hpp_afce463579e8cdcd87af0ec36c84a682a_cgraph}
+\end{center}
+\end{figure}
+Here is the caller graph for this function\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=316pt]{de/d92/math_2utility_8hpp_afce463579e8cdcd87af0ec36c84a682a_icgraph}
+\end{center}
+\end{figure}
