@@ -13,6 +13,11 @@
 
 namespace pyrite::mpl
 {
+
+namespace detail
+{
+namespace
+{
 template <typename List, template <typename> typename F>
 struct any_of
 {
@@ -21,7 +26,17 @@ struct any_of
 
 template <typename... T, template <typename> typename F>
 struct any_of<type_list<T...>, F>
-  : std::bool_constant<sizeof...(T) == 0 || (F<T>::value || ...)>
+{
+  static constexpr bool apply()
+  {
+    return sizeof...(T) == 0 || (F<T>::value || ...);
+  }
+};
+} // namespace
+} // namespace detail
+
+template <typename List, template <typename> typename F>
+struct any_of : std::bool_constant<detail::any_of<List, F>::apply()>
 {
 };
 

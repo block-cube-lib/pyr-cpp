@@ -252,18 +252,6 @@ TEST(type_list_test, reverse)
                                 type_list<_3, _2, _1>>();
 }
 
-TEST(type_list_test, make_type_list)
-{
-  using t = int;
-  ::testing::StaticAssertTypeEq<make_type_list<t, 0>, type_list<>>();
-  ::testing::StaticAssertTypeEq<make_type_list<t, 1>, type_list<t>>();
-  ::testing::StaticAssertTypeEq<make_type_list<t, 2>, type_list<t, t>>();
-  ::testing::StaticAssertTypeEq<make_type_list<t, 3>, type_list<t, t, t>>();
-  ::testing::StaticAssertTypeEq<make_type_list<t, 4>, type_list<t, t, t, t>>();
-
-  EXPECT_EQ((make_type_list<t, 2000>::size), 2000u);
-}
-
 template <typename List,
           template <typename> typename Pred,
           typename NewType,

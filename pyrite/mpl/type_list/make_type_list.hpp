@@ -18,21 +18,30 @@ namespace pyrite::mpl
 {
 namespace make_type_list_
 {
+template <typename T, typename Sequence>
+struct sequence_to_list;
+
+template <typename T, std::size_t... Index>
+struct sequence_to_list<T, std::index_sequence<Index...>>
+{
+private:
+  template <std::size_t>
+  using index_to_type_list = type_list<T>;
+
+  static auto apply() { return (index_to_type_list<Index>{} + ...); }
+
+public:
+  using type = decltype(apply());
+};
+
 template <typename T, std::size_t Size>
 struct make_type_list
 {
 private:
-  template <std::size_t Index>
-  using index_to_type = T;
-
-  template <std::size_t... Index>
-  static auto apply(std::index_sequence<Index...>)
-    -> decltype((type_list<index_to_type<Index>>{} + ...));
-
   using sequence = std::make_index_sequence<Size>;
 
 public:
-  using type = decltype(apply(sequence{}));
+  using type = typename sequence_to_list<T, sequence>::type;
 };
 
 template <typename T>
