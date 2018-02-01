@@ -27,6 +27,4 @@
 #include <pyrite/mpl/type_list/transform.hpp>
 #include <pyrite/mpl/type_list/zip.hpp>
 
-#include <pyrite/mpl/type_list/make_type_list.hpp>
-
 #endif // PYRITE_MPL_TYPE_LIST_HPP
