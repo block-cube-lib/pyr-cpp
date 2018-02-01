@@ -41,7 +41,7 @@ private:
   using sequence = std::make_index_sequence<Size>;
 
 public:
-  using type = sequence_to_list<T, sequence>;
+  using type = typename sequence_to_list<T, sequence>::type;
 };
 
 template <typename T>
