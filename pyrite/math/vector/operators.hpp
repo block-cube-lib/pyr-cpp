@@ -7,23 +7,6 @@
 
 namespace pyrite::math
 {
-namespace detail::vector
-{
-using ::pyrite::math::vector;
-
-template <typename T, usize Dimension, typename Operator>
-constexpr vector<T, Dimension>&
-  loop(vector<T, Dimension>& lhs, vector<T, Dimension> const& rhs, Operator op)
-{
-  for (usize i = 0; i < Dimension; ++i)
-  {
-    op(lhs[i], rhs[i]);
-  }
-
-  return lhs;
-}
-} // namespace detail::vector
-
 template <typename T, usize Dimension>
 constexpr bool
   operator==(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
@@ -98,6 +81,73 @@ constexpr vector<T, Dimension>& operator/=(vector<T, Dimension>& vec, T scalar)
     vec[i] /= scalar;
   }
   return vec;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator+(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
+{
+  vector<T, Dimension> v{lhs};
+  return v += rhs;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator-(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
+{
+  vector<T, Dimension> v{lhs};
+  return v -= rhs;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator*(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
+{
+  vector<T, Dimension> v{lhs};
+  return v *= rhs;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator*(vector<T, Dimension> const& vec, T scalar)
+{
+  vector<T, Dimension> v{vec};
+  return v *= scalar;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator*(T scalar, vector<T, Dimension> const& vec)
+{
+  return vec * scalar;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator/(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
+{
+  vector<T, Dimension> v{lhs};
+  return v /= rhs;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension>
+  operator/(vector<T, Dimension> const& vec, T scalar)
+{
+  vector<T, Dimension> v{vec};
+  return v /= scalar;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension> operator+(vector<T, Dimension> const& vec)
+{
+  return vec;
+}
+
+template <typename T, usize Dimension>
+constexpr vector<T, Dimension> operator-(vector<T, Dimension> const& vec)
+{
+  return vec * T{-1};
 }
 
 } // namespace pyrite::math
