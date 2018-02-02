@@ -23,12 +23,25 @@ template <typename T, usize Dimension>
 class vector
 {
 public:
+  /****************************************************************************
+   * assertion
+   ****************************************************************************/
   static_assert(0 < Dimension);
   static_assert(std::is_floating_point_v<T>);
 
+  /****************************************************************************
+   * type alias
+   ****************************************************************************/
   using value_type                 = T;
+
+  /****************************************************************************
+   * static constexpr value
+   ****************************************************************************/
   static constexpr usize dimension = dimension;
 
+  /****************************************************************************
+   * constructor
+   ****************************************************************************/
   constexpr vector() noexcept = default;
   constexpr vector(vector const& other) noexcept : vector(other.elements) {}
   constexpr vector(vector && other) noexcept : vector(std::move(other.elements)) {}
@@ -41,6 +54,9 @@ public:
   {
   }
 
+  /****************************************************************************
+   * member function
+   ****************************************************************************/
   constexpr T length() const;
   constexpr T length_squared() const;
 
@@ -50,6 +66,9 @@ public:
   constexpr T distance(vector const& other) const;
   constexpr T dot(vector const& other) const;
 
+  /****************************************************************************
+   * operator
+   ****************************************************************************/
   constexpr T&       operator[](usize index) { return elements[index]; }
   constexpr T const& operator[](usize index) const { return elements[index]; }
 
@@ -71,6 +90,9 @@ public:
   }
 
 private:
+  /****************************************************************************
+   * private constructor
+   ****************************************************************************/
   template <std::size_t... Index>
   constexpr vector(T const (&v)[Dimension], std::index_sequence<Index...>)
     : elements{v[Index]...}
@@ -98,7 +120,10 @@ private:
   }
 
 public:
-  T elements[Dimension] = {};
+  /****************************************************************************
+   * member variable
+   ****************************************************************************/
+  T elements[Dimension] = {}; //!< elements
 };
 } // namespace pyrite::math
 
