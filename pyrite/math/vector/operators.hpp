@@ -26,6 +26,13 @@ constexpr bool
 }
 
 template <typename T, usize Dimension>
+constexpr bool
+  operator!=(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
+{
+  return !(lhs == rhs);
+}
+
+template <typename T, usize Dimension>
 constexpr vector<T, Dimension>&
   operator+=(vector<T, Dimension>& lhs, vector<T, Dimension> const& rhs)
 {
