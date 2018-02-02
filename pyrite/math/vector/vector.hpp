@@ -12,7 +12,7 @@
 #include <utility>
 
 #include <pyrite/core/type.hpp>
-#include <pyrite/math/utility.hpp>
+#include <pyrite/math/vector/utility_fwd.hpp>
 #include <pyrite/math/vector/vector_fwd.hpp>
 
 namespace pyrite::math
@@ -94,14 +94,25 @@ public:
   /****************************************************************************
    * member function
    ****************************************************************************/
-  constexpr T length() const;
-  constexpr T length_squared() const;
+  constexpr T dot(vector const& other) const { return dot(*this, other); }
 
-  constexpr T normalize();
-  constexpr T normalized() const;
+  constexpr T distance(vector const& other) const
+  {
+    return distance(*this, other);
+  }
 
-  constexpr T distance(vector const& other) const;
-  constexpr T dot(vector const& other) const;
+  constexpr T distance_squared(vector const& other) const
+  {
+    return distance_squared(*this, other);
+  }
+
+  constexpr T length() const { return length(*this); }
+
+  constexpr T length_squared() const { return length_squared(*this); }
+
+  constexpr vector& normalize() { return normalize(*this); }
+
+  constexpr vector normalized() const { return normalized(*this); }
 
   /****************************************************************************
    * operator
@@ -208,5 +219,7 @@ public:
   T elements[Dimension] = {}; //!< elements
 };
 } // namespace pyrite::math
+
+#  include <pyrite/math/vector/utility.hpp>
 
 #endif // PYRITE_MATH_VECTOR_VECTOR_HPP
