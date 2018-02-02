@@ -3,7 +3,7 @@
 
 #include <pyrite/core/type.hpp>
 #include <pyrite/math/utility.hpp>
-#include <pyrite/math/vector.hpp>
+#include <pyrite/math/vector/vector.hpp>
 
 namespace pyrite::math
 {
