@@ -32,7 +32,7 @@ public:
   /****************************************************************************
    * type alias
    ****************************************************************************/
-  using value_type                 = T;
+  using value_type = T;
 
   /****************************************************************************
    * static constexpr value
@@ -44,7 +44,9 @@ public:
    ****************************************************************************/
   constexpr vector() noexcept = default;
   constexpr vector(vector const& other) noexcept : vector(other.elements) {}
-  constexpr vector(vector && other) noexcept : vector(std::move(other.elements)) {}
+  constexpr vector(vector&& other) noexcept : vector(std::move(other.elements))
+  {
+  }
   constexpr vector(T const (&v)[Dimension])
     : vector(v, std::make_index_sequence<Dimension>{})
   {
@@ -100,7 +102,7 @@ private:
   }
 
   template <std::size_t... Index>
-  constexpr vector(T const (&&v)[Dimension], std::index_sequence<Index...>)
+  constexpr vector(T const(&&v)[Dimension], std::index_sequence<Index...>)
     : elements{std::move(v[Index])...}
   {
   }
