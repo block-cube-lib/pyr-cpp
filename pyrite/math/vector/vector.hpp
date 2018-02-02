@@ -31,6 +31,7 @@ public:
 
   constexpr vector() noexcept = default;
   constexpr vector(vector const& other) noexcept : vector(other.elements) {}
+  constexpr vector(vector && other) noexcept : vector(std::move(other.elements)) {}
   constexpr vector(T const (&v)[Dimension])
     : vector(v, std::make_index_sequence<Dimension>{})
   {
@@ -75,6 +76,13 @@ private:
     : elements{v[Index]...}
   {
   }
+
+  template <std::size_t... Index>
+  constexpr vector(T const (&&v)[Dimension], std::index_sequence<Index...>)
+    : elements{std::move(v[Index])...}
+  {
+  }
+
   template <std::size_t... Index>
   constexpr vector(std::initializer_list<T> const& list,
                    std::index_sequence<Index...>)
