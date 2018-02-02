@@ -29,13 +29,15 @@ public:
   using value_type                 = T;
   static constexpr usize dimension = dimension;
 
-  constexpr vector() noexcept                    = default;
-  constexpr vector(vector const& other) noexcept = default;
-  template <typename... Args>
-  constexpr vector(Args&&... args) : elements{{static_cast<T>(std::forward<Args>(args))...}}
+  constexpr vector() noexcept = default;
+  constexpr vector(vector const& other) noexcept : vector(other.elements) {}
+  constexpr vector(T const (&v)[Dimension])
+    : vector(v, std::make_index_sequence<Dimension>{})
   {
-    using list = mpl::type_list<Args...>;
-    static_assert(list::size == Dimension);
+  }
+  constexpr vector(std::initializer_list<T> const& list)
+    : vector(list, std::make_index_sequence<Dimension>{})
+  {
   }
 
   constexpr T length() const;
@@ -50,10 +52,45 @@ public:
   constexpr T&       operator[](usize index) { return elements[index]; }
   constexpr T const& operator[](usize index) const { return elements[index]; }
 
-  constexpr vector& operator=(vector const& other);
-  constexpr vector& operator=(vector&& other);
+  constexpr vector& operator=(vector const& other)
+  {
+    for (usize i = 0; i < Dimension; ++i)
+    {
+      elements[i] = other.elements[i];
+    }
+    return *this;
+  }
+  constexpr vector& operator=(vector&& other)
+  {
+    for (usize i = 0; i < Dimension; ++i)
+    {
+      elements[i] = std::move(other.elements[i]);
+    }
+    return *this;
+  }
 
-  std::array<T, Dimension> elements;
+private:
+  template <std::size_t... Index>
+  constexpr vector(T const (&v)[Dimension], std::index_sequence<Index...>)
+    : elements{v[Index]...}
+  {
+  }
+  template <std::size_t... Index>
+  constexpr vector(std::initializer_list<T> const& list,
+                   std::index_sequence<Index...>)
+    : elements{get_initializer_list_element(list, Index)...}
+  {
+  }
+
+  static constexpr T
+    get_initializer_list_element(std::initializer_list<T> const& list,
+                                 std::size_t                     index)
+  {
+    return index < list.size() ? (*(list.begin() + index)) : T{0};
+  }
+
+public:
+  T elements[Dimension] = {};
 };
 } // namespace pyrite::math
 
