@@ -83,6 +83,14 @@ public:
   {
   }
 
+  /**
+   */
+  template <typename U>
+  constexpr explicit vector(vector<U, Dimension> const& other)
+    : vector(other, std::make_index_sequence<Dimension>{})
+  {
+  }
+
   /****************************************************************************
    * member function
    ****************************************************************************/
@@ -181,6 +189,16 @@ private:
                                  std::size_t                     index)
   {
     return index < ilist.size() ? (*(ilist.begin() + index)) : T{0};
+  }
+
+  /**
+   * construct from another type vector
+   */
+  template <typename U, std::size_t... Index>
+  constexpr vector(vector<U, Dimension> const& other,
+                   std::index_sequence<Index...>)
+    : elements{static_cast<T>(other.elements[Index])...}
+  {
   }
 
 public:
