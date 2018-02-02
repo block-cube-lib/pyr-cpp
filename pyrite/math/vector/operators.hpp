@@ -7,16 +7,22 @@
 
 namespace pyrite::math
 {
+namespace detail::vector
+{
+template <typename T, usize Dimension, std::size_t... Index>
+constexpr auto equal(::pyrite::math::vector<T, Dimension> const& v1,
+                     ::pyrite::math::vector<T, Dimension> const& v2,
+                     std::index_sequence<Index...>)
+{
+  return (::pyrite::math::equal(v1[Index], v2[Index]) && ...);
+}
+} // namespace detail::vector
+
 template <typename T, usize Dimension>
 constexpr bool
   operator==(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs)
 {
-  bool result = true;
-  for (usize i = 0; result && i < Dimension; ++i)
-  {
-    result = result && equal(lhs[i], rhs[i]);
-  }
-  return result;
+  return detail::vector::equal(lhs, rhs, std::make_index_sequence<Dimension>{});
 }
 
 template <typename T, usize Dimension>
