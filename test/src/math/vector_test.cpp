@@ -3,25 +3,9 @@
 #include "gtest/gtest.h"
 
 #include <iostream>
+#include <string>
 #include <type_traits>
 #include <utility>
-#include <string>
-
-namespace pyrite::math
-{
-template <typename T, usize Dimension>
-void PrintTo(vector<T, Dimension> const& v, ::std::ostream* os)
-{
-  for (usize i = 0; i < Dimension; ++i)
-  {
-    *os << v[i];
-    if (i != Dimension - 1)
-    {
-      *os << ", ";
-    }
-  }
-}
-} // namespace pyrite::math
 
 namespace
 {
@@ -153,7 +137,7 @@ struct constructor_test
       constexpr vector<float, Dimension>       a{v};
       constexpr vector<double, Dimension>      b{v};
       constexpr vector<long double, Dimension> c{v};
-      for(usize i = 0; i < Dimension; ++i)
+      for (usize i = 0; i < Dimension; ++i)
       {
         value_equal(static_cast<float>(v[i]), a[i]);
         value_equal(static_cast<double>(v[i]), b[i]);
