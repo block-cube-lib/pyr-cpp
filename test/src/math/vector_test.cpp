@@ -42,11 +42,11 @@ void vector_equal(T const& a, T const& b)
   }
 }
 
-template <template <typename, pyrite::usize> typename Func,
+template <template <typename, usize> typename Func,
           typename Seq = std::make_index_sequence<20>>
 struct tester;
 
-template <template <typename, pyrite::usize> typename Func, std::size_t... I>
+template <template <typename, usize> typename Func, std::size_t... I>
 struct tester<Func, std::index_sequence<I...>>
 {
   void operator()()
@@ -61,18 +61,19 @@ template <typename T,
           usize Dimension,
           typename Sequence = std::make_index_sequence<Dimension>>
 struct make_test_array;
+
 template <typename T, usize Dimension, std::size_t... Index>
 struct make_test_array<T, Dimension, std::index_sequence<Index...>>
 {
-  static constexpr T value0[Dimension]{static_cast<T>(Index * 1.1)...};
-  static constexpr T value1[Dimension]{static_cast<T>(Index * 2.01)...};
-  static constexpr T value2[Dimension]{static_cast<T>(Index * 3.2)...};
+  static constexpr T value0[Dimension]{static_cast<T>((Index + 1) * 1.1)...};
+  static constexpr T value1[Dimension]{static_cast<T>((Index + 1) * 2.01)...};
+  static constexpr T value2[Dimension]{static_cast<T>((Index + 1) * 3.2)...};
 };
 
 /******************************************************************************
  * constructors
  ******************************************************************************/
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct constructor_test
 {
   void operator()()
@@ -139,7 +140,7 @@ TEST(vector_test, constructor) { tester<constructor_test>{}(); }
 /******************************************************************************
  * operators
  ******************************************************************************/
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_eq_test
 {
   void operator()()
@@ -157,7 +158,7 @@ struct operator_eq_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_plus_eq_test
 {
   void operator()()
@@ -177,7 +178,7 @@ struct operator_plus_eq_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_minus_eq_test
 {
   void operator()()
@@ -198,7 +199,7 @@ struct operator_minus_eq_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_mul_eq_test
 {
   void operator()()
@@ -224,7 +225,7 @@ struct operator_mul_eq_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_dev_eq_test
 {
   void operator()()
@@ -250,7 +251,7 @@ struct operator_dev_eq_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_plus_test
 {
   void operator()()
@@ -266,7 +267,7 @@ struct operator_plus_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_minus_test
 {
   void operator()()
@@ -282,7 +283,7 @@ struct operator_minus_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_mul_test
 {
   void operator()()
@@ -302,7 +303,7 @@ struct operator_mul_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct operator_dev_test
 {
   void operator()()
@@ -322,7 +323,7 @@ struct operator_dev_test
   }
 };
 
-template <typename T, pyrite::usize Dimension>
+template <typename T, usize Dimension>
 struct unary_operator_test
 {
   void operator()()
@@ -351,10 +352,101 @@ TEST(vector_test, operators)
   tester<unary_operator_test>{}();
 }
 
-TEST(vector_test, dot)
+/******************************************************************************
+ * member function
+ ******************************************************************************/
+template <typename T, usize Dimension>
+struct dot_test
 {
-  using vector_t = vector<float, 3>;
-  auto d         = dot(vector_t{0, 1, 2}, vector_t{0, 1, 2});
-  EXPECT_FLOAT_EQ(d, 5.0f);
-}
+  using vector_t = vector<T, Dimension>;
+
+  void operator()()
+  {
+    vector_t v1{make_test_array<T, Dimension>::value1};
+    vector_t v2{make_test_array<T, Dimension>::value2};
+    T        dot_value{0};
+    for (usize i = 0; i < Dimension; i++)
+    {
+      dot_value += v1[i] * v2[i];
+    }
+
+    value_equal(v1.dot(v2), dot_value);
+  }
+};
+
+TEST(vector_test, dot) { tester<dot_test>{}(); }
+
+template <typename T, usize Dimension>
+struct distance_test
+{
+  using vector_t = vector<T, Dimension>;
+
+  void operator()()
+  {
+    vector_t v1{make_test_array<T, Dimension>::value1};
+    vector_t v2{make_test_array<T, Dimension>::value2};
+
+    T dist{0};
+    for (usize i = 0; i < Dimension; i++)
+    {
+      dist += power(v1[i] - v2[i], 2);
+    }
+
+    value_equal(dist, v1.distance_squared(v2));
+    value_equal(sqrt(dist), v1.distance(v2));
+  }
+};
+
+TEST(vector_test, distance) { tester<distance_test>{}(); }
+
+template <typename T, usize Dimension>
+struct length_test
+{
+  using vector_t = vector<T, Dimension>;
+
+  void operator()()
+  {
+    vector_t v{make_test_array<T, Dimension>::value1};
+
+    T len{0};
+    for (usize i = 0; i < Dimension; i++)
+    {
+      len += power(v[i], 2);
+    }
+    value_equal(len, v.length_squared());
+    value_equal(sqrt(len), v.length());
+  }
+};
+
+TEST(vector_test, length) { tester<length_test>{}(); }
+
+template <typename T, usize Dimension>
+struct normalize_test
+{
+  using vector_t = vector<T, Dimension>;
+
+  void operator()()
+  {
+    std::cout << "dimension = " << Dimension << std::endl;
+    // length == 0
+    {
+      vector_t v;
+      vector_equal(v.normalized(), vector_t{});
+      value_equal(v.length(), T{0});
+      vector_equal(v.normalize(), vector_t{});
+      value_equal(v.length(), T{0});
+    }
+
+    vector_t v1{make_test_array<T, Dimension>::value1};
+    vector_t v2{make_test_array<T, Dimension>::value2};
+    vector_equal(v1.normalized(), v1 / v1.length());
+    value_equal(v1.normalized().length(), T{1});
+
+    v1.normalize();
+    value_equal(v1.length(), T{1});
+    value_equal(v1.dot(v2), v2.length());
+  }
+};
+
+TEST(vector_test, normalize) { tester<normalize_test>{}(); }
 } // namespace
