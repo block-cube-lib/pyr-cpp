@@ -38,15 +38,6 @@ constexpr T distance_squared(vector<T, Dimension> const& lhs,
                              vector<T, Dimension> const& rhs);
 
 /**
- * returns the length of the vector squared.
- *
- * @param v vector.
- * @param the vector's length squared.
- */
-template <typename T, usize Dimension>
-constexpr T length_squared(vector<T, Dimension> const& v);
-
-/**
  * returns the length of the vector.
  *
  * @param v vector.
@@ -54,6 +45,15 @@ constexpr T length_squared(vector<T, Dimension> const& v);
  */
 template <typename T, usize Dimension>
 constexpr T length(vector<T, Dimension> const& v);
+
+/**
+ * returns the length of the vector squared.
+ *
+ * @param v vector.
+ * @param the vector's length squared.
+ */
+template <typename T, usize Dimension>
+constexpr T length_squared(vector<T, Dimension> const& v);
 
 /**
  * normalize the specified vector.

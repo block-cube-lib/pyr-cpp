@@ -158,7 +158,7 @@ public:
    */
   constexpr vector normalized() const
   {
-    return pyrite::math::normalized(*this);
+    return ::pyrite::math::normalized(*this);
   }
 
   /****************************************************************************
