@@ -94,30 +94,68 @@ public:
   /****************************************************************************
    * member function
    ****************************************************************************/
+  /**
+   * returns the dot product of two vectors.
+   *
+   * @param other the other vector.
+   * @return the dot product.
+   */
   constexpr T dot(vector const& other) const
   {
     return ::pyrite::math::dot(*this, other);
   }
 
+  /**
+   * returns the Euclidean distance between the two given points.
+   *
+   * @param other the first vector.
+   * @return the distance.
+   */
   constexpr T distance(vector const& other) const
   {
     return ::pyrite::math::distance(*this, other);
   }
 
+  /**
+   * returns the Euclidean distance between the two given points.
+   *
+   * @param other the other vector.
+   * @return the distance.
+   */
   constexpr T distance_squared(vector const& other) const
   {
     return ::pyrite::math::distance_squared(*this, other);
   }
 
+  /**
+   * returns the length of the this vector.
+   *
+   * @param the vector's length.
+   */
   constexpr T length() const { return ::pyrite::math::length(*this); }
 
+  /**
+   * returns the length of the this vector squared.
+   *
+   * @param the vector's length.
+   */
   constexpr T length_squared() const
   {
     return ::pyrite::math::length_squared(*this);
   }
 
+  /**
+   * normalize itself and return reference to its.
+   *
+   * @return the reference to this.
+   */
   constexpr vector& normalize() { return ::pyrite::math::normalize(*this); }
 
+  /**
+   * returns normalized this vector.
+   *
+   * @return the normalized this vector.
+   */
   constexpr vector normalized() const
   {
     return pyrite::math::normalized(*this);
