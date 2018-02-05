@@ -10,7 +10,7 @@ constexpr T dot(vector<T, Dimension> const& v1, vector<T, Dimension> const& v2);
 
 template <typename T, usize Dimension>
 constexpr T
-  distance(vector<T, Dimension> const& lhs, vector<T, Dimension> const& rhs);
+  distance(vector<T, Dimension> const& v1, vector<T, Dimension> const& v2);
 
 template <typename T, usize Dimension>
 constexpr T distance_squared(vector<T, Dimension> const& lhs,
