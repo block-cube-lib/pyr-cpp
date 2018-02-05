@@ -84,6 +84,7 @@ public:
   }
 
   /**
+   * initialize from another vector type.
    */
   template <typename U>
   constexpr explicit vector(vector<U, Dimension> const& other)
@@ -268,5 +269,6 @@ public:
 } // namespace pyrite::math
 
 #  include <pyrite/math/vector/utility.hpp>
+#  include <pyrite/math/vector/vector2.hpp>
 
 #endif // PYRITE_MATH_VECTOR_VECTOR_HPP
