@@ -41,7 +41,7 @@ public:
   /****************************************************************************
    * static constexpr value
    ****************************************************************************/
-  static constexpr usize dimension = dimension; //!< dimension of vector
+  static constexpr usize dimension = Dimension; //!< dimension of vector
 
   /****************************************************************************
    * constructor
