@@ -2,8 +2,26 @@
 
 #include "gtest/gtest.h"
 
+#include <iostream>
 #include <type_traits>
 #include <utility>
+#include <string>
+
+namespace pyrite::math
+{
+template <typename T, usize Dimension>
+void PrintTo(vector<T, Dimension> const& v, ::std::ostream* os)
+{
+  for (usize i = 0; i < Dimension; ++i)
+  {
+    *os << v[i];
+    if (i != Dimension - 1)
+    {
+      *os << ", ";
+    }
+  }
+}
+} // namespace pyrite::math
 
 namespace
 {
@@ -21,14 +39,17 @@ void value_equal(T a, T b)
 {
   if constexpr (std::is_same_v<T, float>)
   {
+    SCOPED_TRACE("float");
     EXPECT_FLOAT_EQ(a, b);
   }
   else if constexpr (std::is_same_v<T, double>)
   {
+    SCOPED_TRACE("double");
     EXPECT_DOUBLE_EQ(a, b);
   }
   else
   {
+    SCOPED_TRACE("long double");
     EXPECT_DOUBLE_EQ(static_cast<double>(a), static_cast<double>(b));
   }
 }
@@ -51,9 +72,17 @@ struct tester<Func, std::index_sequence<I...>>
 {
   void operator()()
   {
-    (void)((Func<float, I + 1>{}(), 0) + ...);
-    (void)((Func<double, I + 1>{}(), 0) + ...);
-    (void)((Func<long double, I + 1>{}(), 0) + ...);
+    (void)((call<float, I + 1>(), 0) + ...);
+    (void)((call<double, I + 1>(), 0) + ...);
+    (void)((call<long double, I + 1>(), 0) + ...);
+  }
+
+private:
+  template <typename T, usize Dimension>
+  void call()
+  {
+    SCOPED_TRACE("dimension = " + std::to_string(Dimension + 1));
+    Func<T, Dimension>{}();
   }
 };
 
@@ -83,6 +112,7 @@ struct constructor_test
 
     // default
     {
+      SCOPED_TRACE("default");
       constexpr vector_type v{};
       for (usize i = 0; i < Dimension; ++i)
       {
@@ -92,6 +122,7 @@ struct constructor_test
 
     // array
     {
+      SCOPED_TRACE("array");
       constexpr vector_type v{array};
       for (usize i = 0; i < Dimension; ++i)
       {
@@ -101,6 +132,7 @@ struct constructor_test
 
     // copy
     {
+      SCOPED_TRACE("copy");
       constexpr vector_type a{array};
       constexpr vector_type b{a};
       vector_equal(a, b);
@@ -108,6 +140,7 @@ struct constructor_test
 
     // move
     {
+      SCOPED_TRACE("move");
       constexpr vector_type a{array};
       constexpr vector_type b{std::move(a)};
       vector_equal(a, b);
@@ -115,17 +148,22 @@ struct constructor_test
 
     // another type
     {
+      SCOPED_TRACE("another type");
       constexpr vector_type                    v{array};
       constexpr vector<float, Dimension>       a{v};
       constexpr vector<double, Dimension>      b{v};
       constexpr vector<long double, Dimension> c{v};
-      vector_equal(v, vector_type{a});
-      vector_equal(v, vector_type{b});
-      vector_equal(v, vector_type{c});
+      for(usize i = 0; i < Dimension; ++i)
+      {
+        value_equal(static_cast<float>(v[i]), a[i]);
+        value_equal(static_cast<double>(v[i]), b[i]);
+        value_equal(static_cast<long double>(v[i]), c[i]);
+      }
     }
 
     // initializer_list
     {
+      SCOPED_TRACE("initializer_list");
       constexpr vector_type v{0, 10, 20, 30, 40, 50, 60, 70, 80, 90};
       for (usize i = 0; i < Dimension; ++i)
       {
@@ -427,7 +465,6 @@ struct normalize_test
 
   void operator()()
   {
-    std::cout << "dimension = " << Dimension << std::endl;
     // length == 0
     {
       vector_t v;
