@@ -94,25 +94,34 @@ public:
   /****************************************************************************
    * member function
    ****************************************************************************/
-  constexpr T dot(vector const& other) const { return dot(*this, other); }
+  constexpr T dot(vector const& other) const
+  {
+    return ::pyrite::math::dot(*this, other);
+  }
 
   constexpr T distance(vector const& other) const
   {
-    return distance(*this, other);
+    return ::pyrite::math::distance(*this, other);
   }
 
   constexpr T distance_squared(vector const& other) const
   {
-    return distance_squared(*this, other);
+    return ::pyrite::math::distance_squared(*this, other);
   }
 
-  constexpr T length() const { return length(*this); }
+  constexpr T length() const { return ::pyrite::math::length(*this); }
 
-  constexpr T length_squared() const { return length_squared(*this); }
+  constexpr T length_squared() const
+  {
+    return ::pyrite::math::length_squared(*this);
+  }
 
-  constexpr vector& normalize() { return normalize(*this); }
+  constexpr vector& normalize() { return ::pyrite::math::normalize(*this); }
 
-  constexpr vector normalized() const { return normalized(*this); }
+  constexpr vector normalized() const
+  {
+    return pyrite::math::normalized(*this);
+  }
 
   /****************************************************************************
    * operator

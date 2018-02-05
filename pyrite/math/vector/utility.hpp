@@ -19,6 +19,14 @@ constexpr T dot(::pyrite::math::vector<T, Dimension> const& v1,
 {
   return (... + (v1[Index] * v2[Index]));
 }
+
+template <typename T, usize Dimension, std::size_t... Index>
+constexpr T distance_squared(::pyrite::math::vector<T, Dimension> const& v1,
+                             ::pyrite::math::vector<T, Dimension> const& v2,
+                             std::index_sequence<Index...>)
+{
+  return (... + power(v1[Index] - v2[Index], 2));
+}
 } // namespace detail::vector
 
 template <typename T, usize Dimension>
@@ -35,40 +43,37 @@ constexpr T
 }
 
 template <typename T, usize Dimension>
-constexpr T distance_squared(vector<T, Dimension> const& lhs,
-                             vector<T, Dimension> const& rhs)
+constexpr T distance_squared(vector<T, Dimension> const& v1,
+                             vector<T, Dimension> const& v2)
 {
-  T result{0};
-  for (usize i = 0; i < Dimension; ++i)
-  {
-    result += power(lhs[i] - rhs[i], 2);
-  }
-  return result;
+  return detail::vector::distance_squared(
+    v1, v2, std::make_index_sequence<Dimension>{});
 }
 
 template <typename T, usize Dimension>
 constexpr T length_squared(vector<T, Dimension> const& v)
 {
-  return distance_squared(v, vector<T, Dimension>{});
+  return dot(v, v);
 }
 
 template <typename T, usize Dimension>
 constexpr T length(vector<T, Dimension> const& v)
 {
-  return distance(v, vector<T, Dimension>{});
+  return sqrt(length_squared(v));
 }
 
 template <typename T, usize Dimension>
 constexpr vector<T, Dimension>& normalize(vector<T, Dimension>& v)
 {
-  auto const len = length(v);
-  return equal(len, T{0}) ? v : v / len;
+  auto const len_sq = length_squared(v);
+  return equal(len_sq, T{0}) ? v : (v /= sqrt(len_sq));
 }
 
 template <typename T, usize Dimension>
-constexpr vector<T, Dimension> normalize(vector<T, Dimension> const& v)
+constexpr vector<T, Dimension> normalized(vector<T, Dimension> const& v)
 {
-  return normalize(vector<T, Dimension>(v));
+  vector<T, Dimension> vec{v};
+  return normalize(vec);
 }
 } // namespace pyrite::math
 
