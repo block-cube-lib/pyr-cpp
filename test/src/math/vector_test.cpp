@@ -171,16 +171,23 @@ struct subscript_operator_test
     auto const& array = make_test_array<T, Dimension>::value0;
     vector_type v{array};
 
-    if constexpr (2 == Dimension)
+    if constexpr (Dimension == 2)
     {
       EXPECT_EQ(&v[0], &v.x);
       EXPECT_EQ(&v[1], &v.y);
     }
-    else if constexpr (3 == Dimension)
+    else if constexpr (Dimension == 3)
     {
       EXPECT_EQ(&v[0], &v.x);
       EXPECT_EQ(&v[1], &v.y);
       EXPECT_EQ(&v[2], &v.z);
+    }
+    else if constexpr (Dimension == 4)
+    {
+      EXPECT_EQ(&v[0], &v.x);
+      EXPECT_EQ(&v[1], &v.y);
+      EXPECT_EQ(&v[2], &v.z);
+      EXPECT_EQ(&v[3], &v.w);
     }
   }
 };

@@ -4,33 +4,25 @@
  * @copyright (c) 2018 block.
  */
 
-#ifndef PYRITE_MATH_VECTOR_VECTOR_HPP
-#define PYRITE_MATH_VECTOR_VECTOR_HPP
+#ifndef PYRITE_MATH_VECTOR_VECTOR4_HPP
+#define PYRITE_MATH_VECTOR_VECTOR4_HPP
 
 #include <initializer_list>
 #include <type_traits>
-#include <utility>
 
 #include <pyrite/core/type.hpp>
-#include <pyrite/math/vector/utility_fwd.hpp>
+#include <pyrite/math/utility.hpp>
 #include <pyrite/math/vector/vector_fwd.hpp>
 
 namespace pyrite::math
 {
-/**
- * vector
- *
- * @tparam T         type of vector element.
- * @tparam Dimension dimension of vector.
- */
-template <typename T, usize Dimension>
-class vector
+template <typename T>
+class vector<T, 4>
 {
 public:
   /****************************************************************************
    * assertion
    ****************************************************************************/
-  static_assert(0 < Dimension);
   static_assert(std::is_floating_point_v<T>);
 
   /****************************************************************************
@@ -41,7 +33,7 @@ public:
   /****************************************************************************
    * static constexpr value
    ****************************************************************************/
-  static constexpr usize dimension = Dimension; //!< dimension of vector
+  static constexpr usize dimension = 4; //!< dimension of vector
 
   /****************************************************************************
    * constructor
@@ -52,25 +44,31 @@ public:
   constexpr vector() noexcept = default;
 
   /**
+   * creates a vector whose elements have the specified values.
+   * @param x x element.
+   * @param y y element.
+   * @param z z element.
+   * @param w w element.
+   */
+  constexpr vector(T x, T y, T z, T w) : x{x}, y{y}, z{z}, w{w} {}
+
+  /**
    * copy constructor.
    * @param other source
    */
-  constexpr vector(vector const& other) noexcept : vector(other.elements) {}
+  constexpr vector(vector const& other) noexcept = default;
 
   /**
    * move constructor.
    * @param other source
    */
-  constexpr vector(vector&& other) noexcept : vector(std::move(other.elements))
-  {
-  }
+  constexpr vector(vector&& other) noexcept = default;
 
   /**
    * initialize from array.
    * @param v array
    */
-  constexpr vector(T const (&v)[Dimension])
-    : vector(v, std::make_index_sequence<Dimension>{})
+  constexpr vector(T const (&v)[dimension]) : x{v[0]}, y{v[1]}, z{v[2]}, w{v[3]}
   {
   }
 
@@ -79,7 +77,7 @@ public:
    * @param other source
    */
   constexpr vector(std::initializer_list<T> const& ilist)
-    : vector(ilist, std::make_index_sequence<Dimension>{})
+    : vector(ilist, std::make_index_sequence<dimension>{})
   {
   }
 
@@ -87,8 +85,11 @@ public:
    * initialize from another vector type.
    */
   template <typename U>
-  constexpr explicit vector(vector<U, Dimension> const& other)
-    : vector(other, std::make_index_sequence<Dimension>{})
+  constexpr explicit vector(vector<U, dimension> const& other)
+    : x{static_cast<T>(other.x)}
+    , y{static_cast<T>(other.y)}
+    , z{static_cast<T>(other.z)}
+    , w{static_cast<T>(other.w)}
   {
   }
 
@@ -171,7 +172,26 @@ public:
    * @param  index index of the element to return.
    * @return reference to the requested element.
    */
-  constexpr T& operator[](usize index) { return elements[index]; }
+  constexpr T& operator[](usize index)
+  {
+    assert(0 <= index || index <= 3);
+    if (index == 0)
+    {
+      return x;
+    }
+    else if (index == 1)
+    {
+      return y;
+    }
+    else if (index == 2)
+    {
+      return z;
+    }
+    else
+    {
+      return w;
+    }
+  }
 
   /**
    * access specified element.
@@ -179,7 +199,26 @@ public:
    * @param  index index of the element to return.
    * @return const reference to the requested element.
    */
-  constexpr T const& operator[](usize index) const { return elements[index]; }
+  constexpr T const& operator[](usize index) const
+  {
+    assert(0 <= index || index <= 3);
+    if (index == 0)
+    {
+      return x;
+    }
+    else if (index == 1)
+    {
+      return y;
+    }
+    else if (index == 2)
+    {
+      return z;
+    }
+    else
+    {
+      return w;
+    }
+  }
 
   /**
    * copy assignment operator.
@@ -189,10 +228,10 @@ public:
    */
   constexpr vector& operator=(vector const& other)
   {
-    for (usize i = 0; i < Dimension; ++i)
-    {
-      elements[i] = other.elements[i];
-    }
+    x = other.x;
+    y = other.y;
+    z = other.z;
+    w = other.w;
     return *this;
   }
 
@@ -204,10 +243,10 @@ public:
    */
   constexpr vector& operator=(vector&& other)
   {
-    for (usize i = 0; i < Dimension; ++i)
-    {
-      elements[i] = std::move(other.elements[i]);
-    }
+    x = std::move(other.x);
+    y = std::move(other.y);
+    z = std::move(other.z);
+    w = std::move(other.w);
     return *this;
   }
 
@@ -216,30 +255,15 @@ private:
    * private constructor
    ****************************************************************************/
   /**
-   * construct from array
-   */
-  template <std::size_t... Index>
-  constexpr vector(T const (&v)[Dimension], std::index_sequence<Index...>)
-    : elements{v[Index]...}
-  {
-  }
-
-  /**
-   * move from array
-   */
-  template <std::size_t... Index>
-  constexpr vector(T const(&&v)[Dimension], std::index_sequence<Index...>)
-    : elements{std::move(v[Index])...}
-  {
-  }
-
-  /**
    * construct from std::initializer_list
    */
   template <std::size_t... Index>
   constexpr vector(std::initializer_list<T> const& ilist,
                    std::index_sequence<Index...>)
-    : elements{get_initializer_list_element(ilist, Index)...}
+    : x{get_initializer_list_element(ilist, 0)}
+    , y{get_initializer_list_element(ilist, 1)}
+    , z{get_initializer_list_element(ilist, 2)}
+    , w{get_initializer_list_element(ilist, 3)}
   {
   }
 
@@ -250,28 +274,15 @@ private:
     return index < ilist.size() ? (*(ilist.begin() + index)) : T{0};
   }
 
-  /**
-   * construct from another type vector
-   */
-  template <typename U, std::size_t... Index>
-  constexpr vector(vector<U, Dimension> const& other,
-                   std::index_sequence<Index...>)
-    : elements{static_cast<T>(other.elements[Index])...}
-  {
-  }
-
 public:
   /****************************************************************************
    * member variable
    ****************************************************************************/
-  T elements[Dimension] = {}; //!< elements
+  T x = T{0};
+  T y = T{0};
+  T z = T{0};
+  T w = T{0};
 };
 } // namespace pyrite::math
 
-#  include <pyrite/math/vector/vector2.hpp>
-#  include <pyrite/math/vector/vector3.hpp>
-#  include <pyrite/math/vector/vector4.hpp>
-
-#  include <pyrite/math/vector/utility.hpp>
-
-#endif // PYRITE_MATH_VECTOR_VECTOR_HPP
+#endif // PYRITE_MATH_VECTOR_VECTOR4_HPP
