@@ -163,6 +163,29 @@ TEST(vector_test, constructor) { tester<constructor_test>{}(); }
  * operators
  ******************************************************************************/
 template <typename T, usize Dimension>
+struct subscript_operator_test
+{
+  void operator()()
+  {
+    using vector_type = vector<T, Dimension>;
+    auto const& array = make_test_array<T, Dimension>::value0;
+    vector_type v{array};
+
+    if constexpr (2 == Dimension)
+    {
+      EXPECT_EQ(&v[0], &v.x);
+      EXPECT_EQ(&v[1], &v.y);
+    }
+    else if constexpr (3 == Dimension)
+    {
+      EXPECT_EQ(&v[0], &v.x);
+      EXPECT_EQ(&v[1], &v.y);
+      EXPECT_EQ(&v[2], &v.z);
+    }
+  }
+};
+
+template <typename T, usize Dimension>
 struct operator_eq_test
 {
   void operator()()
@@ -360,6 +383,7 @@ struct unary_operator_test
 
 TEST(vector_test, operators)
 {
+  tester<subscript_operator_test>{}();
   tester<operator_eq_test>{}();
   tester<operator_plus_eq_test>{}();
   tester<operator_minus_eq_test>{}();
