@@ -19,6 +19,11 @@
 
 namespace pyrite::math
 {
+namespace detail
+{
+template <typename T>
+using result_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
+}
 
 /**
  * Convert Radian to Degree.
@@ -28,9 +33,9 @@ namespace pyrite::math
  * @return Degree.
  */
 template <typename T>
-constexpr T radian_to_degree(T const& radian) noexcept
+constexpr auto radian_to_degree(T const& radian) noexcept
 {
-  using result_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
+  using result_t = detail::result_t<T>;
   return radian * result_t{180} / pi<result_t>;
 }
 
@@ -44,7 +49,7 @@ constexpr T radian_to_degree(T const& radian) noexcept
 template <typename T>
 constexpr auto degree_to_radian(T const& degree) noexcept
 {
-  using result_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
+  using result_t = detail::result_t<T>;
   return degree * pi<result_t> / result_t{180};
 }
 
@@ -85,13 +90,16 @@ template <typename T = u64>
 constexpr T factorial(u64 x)
 {
   assert(0 <= x);
-  assert(x < 21u); // overflow
-  u64 result{1};
+  if constexpr (std::is_integral_v<T>)
+  {
+    assert(x < 21u); // overflow
+  }
+
+  using calc_t = std::conditional_t<std::is_integral_v<T>, u64, f64>;
+  calc_t result{1};
   for (u64 i = 1u; i <= x; ++i)
   {
-    auto const new_value = result * i;
-    assert(result <= new_value);
-    result = new_value;
+    result *= static_cast<calc_t>(i);
   }
 
   return static_cast<T>(result);
@@ -152,10 +160,10 @@ constexpr bool equal(T lhs, T rhs)
 template <typename T>
 constexpr auto sqrt(T s)
 {
-  using result_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
+  using result_t = detail::result_t<T>;
 
   constexpr result_t zero{0};
-  if (equal(s, zero))
+  if (equal(static_cast<result_t>(s), zero))
   {
     return zero;
   }
