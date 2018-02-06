@@ -147,8 +147,7 @@ TEST(utility_test, tan)
   using pyrite::math::degree_to_radian;
   using pyrite::math::equal;
 
-  auto const deg_tan = [](auto deg)
-  {
+  auto const deg_tan = [](auto deg) {
     auto const rad = degree_to_radian(deg);
     return pyrite::math::tan(rad);
   };
@@ -161,4 +160,17 @@ TEST(utility_test, tan)
   EXPECT_TRUE(equal(deg_tan(135.0l), -1.0l));
   EXPECT_TRUE(equal(deg_tan(225.0l), 1.0l));
   EXPECT_TRUE(equal(deg_tan(315.0l), -1.0l));
+}
+
+TEST(utility_test, asin)
+{
+  using namespace pyrite::math;
+  for (int i = -7200; i < 7200; ++i)
+  {
+    auto const x = static_cast<double>(i) / 10;
+    SCOPED_TRACE(std::to_string(x));
+    auto const rad = degree_to_radian<double>(x);
+    auto const s   = std::sin(rad);
+    EXPECT_NEAR(std::asin(s), pyrite::math::asin(s), 0.000001);
+  }
 }
