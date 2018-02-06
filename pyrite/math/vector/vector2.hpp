@@ -7,7 +7,6 @@
 #ifndef PYRITE_MATH_VECTOR_VECTOR2_HPP
 #define PYRITE_MATH_VECTOR_VECTOR2_HPP
 
-#include <array>
 #include <initializer_list>
 #include <type_traits>
 
