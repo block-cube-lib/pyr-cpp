@@ -44,6 +44,11 @@ public:
    */
   constexpr vector() noexcept = default;
 
+  /**
+   * creates a vector whose elements have the specified values.
+   * @param x x element.
+   * @param y y element.
+   */
   constexpr vector(T x, T y) : x{x}, y{y} {}
 
   /**
