@@ -66,7 +66,7 @@ public:
    * initialize from array.
    * @param v array
    */
-  constexpr vector(T const (&v)[2]) : x{v[0]}, y{v[1]} {}
+  constexpr vector(T const (&v)[dimension]) : x{v[0]}, y{v[1]} {}
 
   /**
    * initialize from std::initializer_list.
