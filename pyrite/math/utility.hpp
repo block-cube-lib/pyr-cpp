@@ -262,5 +262,43 @@ constexpr auto tan(T x)
   return sin / cos;
 }
 
+namespace detail
+{
+template <typename T>
+constexpr auto asin(T x)
+{
+  auto const term = [x = static_cast<f64>(x)](u64 n) {
+    auto const k = 2u * n + 1u;
+    return (power(x, k) * factorial<f64>(2u * n)) /
+           (power(4u, n) * power(factorial<f64>(n), 2u) * k);
+  };
+
+  f64 result{0};
+  for (u64 i = 0; i <= 13; ++i)
+  {
+    result += term(i);
+  }
+
+  return static_cast<T>(result);
+}
+} // namespace detail
+
+template <typename T>
+constexpr auto asin(T x)
+{
+  using result_t = detail::result_t<T>;
+  assert(abs(x) <= T{1});
+
+  if (1 / sqrt(2) < abs(x) && abs(x) <= 1)
+  {
+    auto const result = pi<result_t> / 2 - detail::asin(sqrt(1 - power(x, 2)));
+    return 0 <= x ? result : -result;
+  }
+  else
+  {
+    return detail::asin(x);
+  }
+}
+
 } // namespace pyrite::math
 #endif // PYRITE_MATH_UTILITY_HPP
