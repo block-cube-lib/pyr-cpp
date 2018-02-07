@@ -7,24 +7,10 @@
 #ifndef PYRITE_MATH_UTILITY_HPP
 #define PYRITE_MATH_UTILITY_HPP
 
-#include <cassert>
-#include <cstdint>
-#include <iostream>
-#include <limits>
-#include <type_traits>
-#include <utility>
-
 #include <pyrite/core/type.hpp>
-#include <pyrite/math/constants.hpp>
 
 namespace pyrite::math
 {
-namespace detail
-{
-template <typename T>
-using result_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
-}
-
 /**
  * Convert Radian to Degree.
  *
@@ -33,11 +19,7 @@ using result_t = std::conditional_t<std::is_floating_point_v<T>, T, double>;
  * @return Degree.
  */
 template <typename T>
-constexpr auto radian_to_degree(T const& radian) noexcept
-{
-  using result_t = detail::result_t<T>;
-  return radian * result_t{180} / pi<result_t>;
-}
+constexpr auto radian_to_degree(T const& radian) noexcept;
 
 /**
  * Convert Degree to Radian.
@@ -47,11 +29,7 @@ constexpr auto radian_to_degree(T const& radian) noexcept
  * @return Radian.
  */
 template <typename T>
-constexpr auto degree_to_radian(T const& degree) noexcept
-{
-  using result_t = detail::result_t<T>;
-  return degree * pi<result_t> / result_t{180};
-}
+constexpr auto degree_to_radian(T const& degree) noexcept;
 
 /**
  * Computes the absolute value.
@@ -61,244 +39,45 @@ constexpr auto degree_to_radian(T const& degree) noexcept
  * @return Absolute value.
  */
 template <typename T>
-constexpr T abs(T value) noexcept
-{
-  if constexpr (std::is_signed<T>::value)
-  {
-    return value >= 0 ? value : -value;
-  }
-  else
-  {
-    return value;
-  }
-}
+constexpr T abs(T value) noexcept;
 
 template <typename T>
-constexpr T mod(T x, T y)
-{
-  if constexpr (std::is_floating_point_v<T>)
-  {
-    return x - static_cast<std::intmax_t>(x / y) * y;
-  }
-  else
-  {
-    return x % y;
-  }
-}
+constexpr T mod(T x, T y);
 
 template <typename T = u64>
-constexpr T factorial(u64 x)
-{
-  assert(0 <= x);
-  if constexpr (std::is_integral_v<T>)
-  {
-    assert(x < 21u); // overflow
-  }
-
-  using calc_t = std::conditional_t<std::is_integral_v<T>, u64, f64>;
-  calc_t result{1};
-  for (u64 i = 1u; i <= x; ++i)
-  {
-    result *= static_cast<calc_t>(i);
-  }
-
-  return static_cast<T>(result);
-}
+constexpr T factorial(u64 x);
 
 template <typename T>
-constexpr T power(T x, u64 y)
-{
-  T result{1};
-
-  for (u64 i = 1; i <= y; ++i)
-  {
-    result *= x;
-  }
-
-  return result;
-}
+constexpr T power(T x, u64 y);
 
 template <typename T>
-constexpr bool isnan(T value)
-{
-  static_assert(std::is_floating_point_v<T>);
-  return value == std::numeric_limits<T>::quiet_NaN() ||
-         value == std::numeric_limits<T>::signaling_NaN();
-}
+constexpr bool isnan(T value);
 
 template <typename T>
-constexpr bool is_infinity(T value)
-{
-  static_assert(std::is_floating_point_v<T>);
-  return value == std::numeric_limits<T>::infinity() ||
-         value == std::numeric_limits<T>::infinity();
-}
+constexpr bool is_infinity(T value);
 
 template <typename T>
-constexpr bool equal(T lhs, T rhs)
-{
-  if constexpr (std::is_floating_point_v<T>)
-  {
-    if (isnan(lhs) || isnan(rhs))
-    {
-      return false;
-    }
-    else
-    {
-      constexpr auto epsilon = (std::is_same_v<T, long double> ? 1000 : 10) *
-                               std::numeric_limits<T>::epsilon();
-      auto const max = std::max(abs(rhs), abs(lhs));
-      return abs(lhs - rhs) <= epsilon || abs(lhs - rhs) <= max * epsilon;
-    }
-  }
-  else
-  {
-    return lhs == rhs;
-  }
-}
+constexpr bool equal(T lhs, T rhs);
 
 template <typename T>
-constexpr auto sqrt(T s)
-{
-  using result_t = detail::result_t<T>;
-
-  constexpr result_t zero{0};
-  if (equal(static_cast<result_t>(s), zero))
-  {
-    return zero;
-  }
-
-  assert(zero <= s);
-  constexpr int end_term = 100;
-  result_t      x        = s / 2;
-  result_t      prev     = 0;
-  for (int i = 0; i < end_term && !equal(x, prev); ++i)
-  {
-    prev = x;
-    x    = (x + s / x) / 2;
-  }
-
-  return x;
-}
-
-namespace detail
-{
-constexpr u64 end_term = 9;
+constexpr auto sqrt(T s);
 
 template <typename T>
-constexpr T sin_term(T x)
-{
-  T sum{0};
-  for (u64 k = 0; k <= end_term; ++k)
-  {
-    int const sign = (k == 0 || k % 2 == 0) ? 1 : -1;
-    sum += sign * power(x, 2 * k + 1) / factorial(2 * k + 1);
-  }
-  return sum;
-}
+constexpr T sin(T x);
 
 template <typename T>
-constexpr T sin_convert(T x)
-{
-  assert(-pi<T> <= x && x <= pi<T>);
-
-  if (abs(x) > pi<T> / 2) // x < -pi/2 || pi/2 < x
-  {
-    return sin_term(mod(pi<T> - x, pi<T>) * static_cast<int>(x * 2 / pi<T>));
-  }
-  else
-  {
-    return sin_term(x);
-  }
-}
-} // namespace detail
+constexpr auto cos(T x);
 
 template <typename T>
-constexpr T sin(T x)
-{
-  static_assert(std::is_floating_point_v<T>);
-  auto const sign = static_cast<int>(x / pi<T>) % 2 == 0 ? 1 : -1;
-  x               = mod(x, pi<T>); // -pi < x < pi
-  return sign * detail::sin_convert(x);
-}
+constexpr auto sincos(T x);
 
 template <typename T>
-constexpr auto cos(T x)
-{
-  static_assert(std::is_floating_point_v<T>);
-  constexpr auto pi_half = pi<T> / 2;
-  return equal(abs(mod(x, 2 * pi<T>)), pi_half) ? 0 : sin(x + pi_half);
-}
+constexpr auto tan(T x);
 
 template <typename T>
-constexpr auto sincos(T x)
-{
-  static_assert(std::is_floating_point_v<T>);
-  x = mod(x, 2 * pi<T>);
-  if (x < 0)
-  {
-    x = 2 * pi<T> - -x;
-  }
-
-  auto const s = pyrite::math::sin(x);
-
-  constexpr auto pi_half = pi<T> / 2;
-  if (equal(x, pi_half) || equal(x, pi_half * 3))
-  {
-    return std::pair<T, T>{s, 0};
-  }
-  else
-  {
-    auto const sign = (x <= pi_half || pi_half * 3 < x) ? 1 : -1;
-    auto const c    = sign * sqrt(1 - s * s);
-    return std::pair<T, T>{s, c};
-  }
-}
-
-template <typename T>
-constexpr auto tan(T x)
-{
-  auto const [sin, cos] = sincos(x);
-  return sin / cos;
-}
-
-namespace detail
-{
-template <typename T>
-constexpr auto asin(T x)
-{
-  auto const term = [x = static_cast<f64>(x)](u64 n) {
-    auto const k = 2u * n + 1u;
-    return (power(x, k) * factorial<f64>(2u * n)) /
-           (power(4u, n) * power(factorial<f64>(n), 2u) * k);
-  };
-
-  f64 result{0};
-  for (u64 i = 0; i <= 13; ++i)
-  {
-    result += term(i);
-  }
-
-  return static_cast<T>(result);
-}
-} // namespace detail
-
-template <typename T>
-constexpr auto asin(T x)
-{
-  using result_t = detail::result_t<T>;
-  assert(abs(x) <= T{1});
-
-  if (1 / sqrt(2) < abs(x) && abs(x) <= 1)
-  {
-    auto const result = pi<result_t> / 2 - detail::asin(sqrt(1 - power(x, 2)));
-    return 0 <= x ? result : -result;
-  }
-  else
-  {
-    return detail::asin(x);
-  }
-}
-
+constexpr auto asin(T x);
 } // namespace pyrite::math
+
+#  include <pyrite/math/utility/implementation.hpp>
+
 #endif // PYRITE_MATH_UTILITY_HPP
