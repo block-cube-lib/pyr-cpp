@@ -11,6 +11,7 @@ project(pyrite_test)
 include_directories(
   ../
   ./lib/googletest/googletest/include/
+  ./include/
   )
 
 # test
