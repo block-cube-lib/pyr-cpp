@@ -25,6 +25,7 @@ template <typename T>
 using calc_t =
   std::conditional_t<std::is_integral_v<T>, std::intmax_t, long double>;
 }
+
 template <typename T>
 constexpr auto radian_to_degree(T const& radian) noexcept
 {
