@@ -10,5 +10,6 @@
 #include <pyrite/core/type.hpp>
 #include <pyrite/core/endian.hpp>
 #include <pyrite/core/checked_delete.hpp>
+#include <pyrite/utility/clamp.hpp>
 
 #endif // PYRITE_UTILITY_HPP
