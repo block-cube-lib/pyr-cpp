@@ -21,6 +21,7 @@ add_subdirectory(lib/googletest/googletest)
 set(pyrite_test_source
   ./src/core/is_complete_type_test.cpp
   ./src/core/type_test.cpp
+  ./src/graphics/color_test.cpp
   ./src/math/angle_literals_test.cpp
   ./src/math/angle_test.cpp
   ./src/math/constants_test.cpp
