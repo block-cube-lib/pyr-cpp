@@ -26,6 +26,7 @@ public:
   constexpr color() noexcept = default;
   constexpr color(T r, T g, T b, T a = max_value) noexcept;
   constexpr color(color const& other) noexcept = default;
+  constexpr color(u32 rrggbbaa) noexcept;
 
   template <typename U>
   constexpr color(color<U> const& other);

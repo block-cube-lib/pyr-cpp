@@ -23,6 +23,15 @@ constexpr color<T>::color(T r, T g, T b, T a) noexcept : r{r}, g{g}, b{b}, a{a}
 {
 }
 
+template <typename T>
+constexpr color<T>::color(u32 rrggbbaa) noexcept
+  : color(color<u8>(static_cast<u8>((rrggbbaa >> 24) & 0x0ff),
+                    static_cast<u8>((rrggbbaa >> 16) & 0x0ff),
+                    static_cast<u8>((rrggbbaa >> 8) & 0x0ff),
+                    static_cast<u8>(rrggbbaa & 0x0ff)))
+{
+}
+
 template <typename T> // from
 template <typename U> // to
 constexpr color<T>::color(color<U> const& other)
