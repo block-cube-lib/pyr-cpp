@@ -96,15 +96,13 @@ constexpr color<T>::operator pyrite::math::vector<U, 4>() const
 namespace detail::color
 {
 template <typename T>
-constexpr bool is_floating_point = std::is_floating_point_v<T>;
+constexpr bool is_real = std::is_floating_point_v<T>;
 template <typename T>
 constexpr bool is_integeral = std::is_integral_v<T>;
 template <typename T>
-constexpr bool          is_signed_integeral =
-  std::is_signed_v<T>&& std::is_integral_v<T>;
+constexpr bool is_int = std::is_signed_v<T>&& std::is_integral_v<T>;
 template <typename T>
-constexpr bool            is_unsigned_integeral =
-  std::is_unsigned_v<T>&& std::is_integral_v<T>;
+constexpr bool is_uint = std::is_unsigned_v<T>&& std::is_integral_v<T>;
 
 template <typename To, typename From>
 constexpr To convert(From from)
@@ -114,75 +112,62 @@ constexpr To convert(From from)
   constexpr auto to_max   = std::numeric_limits<To>::max();
   constexpr auto to_min   = std::numeric_limits<To>::min();
 
-  auto const round = [](long double v) {
-    if (-0.5l < v && v < 0.5l)
-    {
-      return 0.0l;
-    }
-    else if (v < 0)
-    {
-      return static_cast<long double>(static_cast<i64>(v + 0.5l));
-    }
-    else // if(0 < v)
-    {
-      return static_cast<long double>(static_cast<i64>(v - 0.5l));
-    }
-  };
+  auto const to_real = [](auto v) { return static_cast<long double>(v); };
 
-  if constexpr (std::is_same_v<From, To>)
+  if constexpr (std::is_same_v<From, To>) // same
   {
     return from;
   }
-  else if constexpr (is_floating_point<From> && is_floating_point<To>)
+  else if constexpr (is_real<From> && is_real<To>) // real to real
   {
     return static_cast<To>(from);
   }
-  else if constexpr (is_unsigned_integeral<From> && is_floating_point<To>)
+  else if constexpr (is_uint<From> && is_real<To>) // uint to real
   {
-    return static_cast<To>(static_cast<long double>(from) / from_max);
+    return static_cast<To>(to_real(from) / from_max);
   }
-  else if constexpr (is_signed_integeral<From> && is_floating_point<To>)
+  else if constexpr (is_int<From> && is_real<To>) // int to real
   {
     if (0 <= from)
     {
-      return static_cast<To>(static_cast<long double>(from) / from_max);
+      return static_cast<To>(to_real(from) / from_max);
     }
     else // if(from < 0)
     {
-      return -static_cast<To>(static_cast<long double>(from) / from_min);
+      return -static_cast<To>(to_real(from) / from_min);
     }
   }
-  else if constexpr (is_signed_integeral<From> && is_signed_integeral<To>)
+  else if constexpr (is_int<From> && is_int<To>) // int to int
   {
     if (0 <= from)
     {
-      auto const v = round(static_cast<long double>(from) / from_max * to_max);
+      auto const v = to_real(from) / from_max * to_max;
       return static_cast<To>(v);
     }
     else
     {
-      auto const v = round(static_cast<long double>(from) / from_min * to_min);
+      auto const v = to_real(from) / from_min * to_min;
       return static_cast<To>(v);
     }
   }
-  else if constexpr (is_signed_integeral<From> && is_unsigned_integeral<To>)
+  else if constexpr (is_int<From> && is_uint<To>) // int to uint
   {
     if (from < 0)
     {
-      from = 0;
+      return From{0};
     }
-    auto const v = from / static_cast<long double>(from_max);
-    return static_cast<To>(round(v * to_max));
+    auto const v = from / to_real(from_max);
+    return static_cast<To>(v * to_max);
   }
-  else if constexpr ((is_unsigned_integeral<From> && is_signed_integeral<To>) ||
-                     (is_unsigned_integeral<From> && is_unsigned_integeral<To>))
+  else if constexpr ((is_uint<From> && is_int<To>) || // uint to int
+                     (is_uint<From> && is_uint<To>))  // uint to uint
   {
-    auto const v = static_cast<long double>(from) / from_max * to_max;
-    return static_cast<To>(round(v));
+    auto const v = to_real(from) / from_max * to_max;
+    return static_cast<To>(v);
   }
-  else if constexpr (is_floating_point<From> && is_signed_integeral<To>)
+  else if constexpr (is_real<From> && is_int<To>) // real to int
   {
-    auto const v = pyrite::clamp(static_cast<long double>(from), -1.0l, 1.0l);
+    auto const v = pyrite::clamp(to_real(from), -1.0l, 1.0l);
     if (0.0l <= v)
     {
       return static_cast<To>(v * to_max);
@@ -192,9 +177,9 @@ constexpr To convert(From from)
       return static_cast<To>(-v * to_min);
     }
   }
-  else if constexpr (is_floating_point<From> && is_unsigned_integeral<To>)
+  else if constexpr (is_real<From> && is_uint<To>) // real to uint
   {
-    auto const v = pyrite::clamp(static_cast<long double>(from), 0.0l, 1.0l);
+    auto const v = pyrite::clamp(to_real(from), 0.0l, 1.0l);
     return static_cast<To>(v * to_max);
   }
   else
