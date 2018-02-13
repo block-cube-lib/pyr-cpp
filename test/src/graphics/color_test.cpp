@@ -1,84 +1,15 @@
-#include <pyrite/graphics/color.hpp>
-
-#include "gtest/gtest.h"
-
-#include "utility.h"
-
-#include <limits>
-#include <type_traits>
+#include "graphics/color_test.h"
 
 #include <pyrite/core/type.hpp>
 
-inline namespace test
-{
 using namespace ::pyrite;
 using namespace ::pyrite::graphics;
 
-template <typename T>
-class graphics_color_test : public ::testing::Test
+inline namespace test
 {
-private:
-  static constexpr std::pair<T, T> make_minmax()
-  {
-    if constexpr (std::is_floating_point_v<T>)
-    {
-      return {T{0}, T{1}};
-    }
-    else
-    {
-      return {std::numeric_limits<T>::min(), std::numeric_limits<T>::max()};
-    }
-  }
-
-public:
-  using value_type             = T;
-  using color_type             = color<T>;
-  static constexpr T zero      = T{0};
-  static constexpr T min_value = make_minmax().first;
-  static constexpr T max_value = make_minmax().second;
-
-  static void equal(color_type const& a, color_type const& b)
-  {
-    equal(a, b.r, b.g, b.b, b.a);
-  }
-
-  static void equal(color_type const& c,
-                    value_type        r,
-                    value_type        g,
-                    value_type        b,
-                    value_type        a)
-  {
-    {
-      SCOPED_TRACE("r");
-      expect_equal(c.r, r);
-    }
-    {
-      SCOPED_TRACE("g");
-      expect_equal(c.g, g);
-    }
-    {
-      SCOPED_TRACE("b");
-      expect_equal(c.b, b);
-    }
-    {
-      SCOPED_TRACE("a");
-      expect_equal(c.a, a);
-    }
-  }
-
-  static auto to_string(color_type const& color)
-  {
-    return "(r: " + std::to_string(color.r) + "g: " + std::to_string(color.g) +
-           "b: " + std::to_string(color.b) + "a: " + std::to_string(color.a) +
-           ")";
-  }
-};
-
-TYPED_TEST_CASE_P(graphics_color_test);
-
 TYPED_TEST_P(graphics_color_test, constructor)
 {
-  //using value_type         = typename TestFixture::value_type;
+  using value_type         = typename TestFixture::value_type;
   using color_type         = typename TestFixture::color_type;
   constexpr auto max_value = TestFixture::max_value;
   constexpr auto zero      = TestFixture::zero;
@@ -99,18 +30,32 @@ TYPED_TEST_P(graphics_color_test, constructor)
 
   constexpr color_type c4{c3};
   TestFixture::equal(c4, c3);
+
+  auto const make_color_element = [](u8 v) {
+    auto const elm_ld = (static_cast<long double>(v) / 0xff) * max_value;
+    return static_cast<value_type>(elm_ld);
+  };
+  constexpr color_type c5{0xffaa9908};
+  TestFixture::equal(c5,
+                     make_color_element(0xff),
+                     make_color_element(0xaa),
+                     make_color_element(0x99),
+                     make_color_element(0x08));
 }
 
-template <typename From, typename To = long double>
+template <typename From, typename To>
 void convert_test(color<From> const& c)
 {
-  [[maybe_unused]] auto const converted = c.template convert<To>();
-  {
-    SCOPED_TRACE("convert constructor : from " +
-                 graphics_color_test<From>::to_string(c));
-    graphics_color_test<To>::equal(converted, color<To>{c});
-    graphics_color_test<From>::equal(c, converted.template convert<From>());
-  }
+  SCOPED_TRACE("convert constructor : from " +
+               graphics_color_test<From>::to_string(c));
+  auto const converted = c.template convert<To>();
+
+  graphics_color_test<To>::equal(converted, color<To>{c});
+  graphics_color_test<To>::equal(converted,
+                                 convert_value<From, To>(c.r),
+                                 convert_value<From, To>(c.g),
+                                 convert_value<From, To>(c.b),
+                                 convert_value<From, To>(c.a));
 }
 
 TYPED_TEST_P(graphics_color_test, convert)
@@ -124,10 +69,22 @@ TYPED_TEST_P(graphics_color_test, convert)
   constexpr value_type r = min_value;
   constexpr value_type g = max_value;
   constexpr value_type b = zero;
-  constexpr value_type a = max_value / 2;
+  constexpr value_type a = max_value / 3;
 
   [[maybe_unused]] constexpr color_type c{r, g, b, a};
-  convert_test(c);
+#define cvt_test(type)                                                         \
+  {                                                                            \
+    SCOPED_TRACE("to " #type);                                                 \
+    convert_test<value_type, type>(c);                                         \
+  }
+
+  cvt_test(u8);
+  cvt_test(i16);
+  cvt_test(u16);
+  cvt_test(i32);
+  cvt_test(f32);
+  cvt_test(f64);
+#undef cvt_test
 }
 
 TYPED_TEST_P(graphics_color_test, vector_convert)
