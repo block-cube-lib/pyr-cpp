@@ -23,7 +23,7 @@ struct random_state
 /**
  * compares random_state objects
  */
-bool operator==(random_state const& lhs, random_state const& rhs) noexcept
+inline bool operator==(random_state const& lhs, random_state const& rhs) noexcept
 {
   return lhs.seed == rhs.seed && lhs.count == rhs.count;
 }
@@ -31,7 +31,7 @@ bool operator==(random_state const& lhs, random_state const& rhs) noexcept
 /**
  * compares random_state objects
  */
-bool operator!=(random_state const& lhs, random_state const& rhs) noexcept
+inline bool operator!=(random_state const& lhs, random_state const& rhs) noexcept
 {
   return !(lhs == rhs);
 }

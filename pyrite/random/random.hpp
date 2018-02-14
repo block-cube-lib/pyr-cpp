@@ -30,35 +30,35 @@ public:
    *
    * initialized with true random number.
    */
-  random();
+  inline random();
 
   /**
    * Constructor initialized with random_state.
    *
    * @param[in] state Random_state object.
    */
-  explicit random(random_state const& state);
+  inline explicit random(random_state const& state);
 
   /**
    * Constructor initialized with seed.
    *
    * @param[in] seed Seed for initialize random number generator.
    */
-  explicit random(seed_type seed);
+  inline explicit random(seed_type seed);
 
   /**
    * Copy constructor.
    *
    * @param[in] other original.
    */
-  random(random const& other);
+  inline random(random const& other);
 
   /**
    * Copy constructor.
    *
    * @param[in] other Move source.
    */
-  random(random&& other);
+  inline random(random&& other);
 
   /**
    * Destructor.
@@ -76,7 +76,7 @@ public:
    *         then if T is floating point, type return [0, 1].
    */
   template <typename T>
-  auto next();
+  inline auto next();
 
   /**
    * Generate random number.
@@ -88,17 +88,17 @@ public:
    * @return [min, max]
    */
   template <typename T>
-  auto next(T const& min, T const& max);
+  inline auto next(T const& min, T const& max);
 
   /**
    * Get seed.
    */
-  seed_type seed() const noexcept;
+  inline seed_type seed() const noexcept;
 
   /**
    * Get object state.
    */
-  random_state state() const noexcept;
+  inline random_state state() const noexcept;
 
   /**
    * Advances the internal state by z times.
@@ -106,26 +106,26 @@ public:
    *
    * @param z Integer value specifying the number of times to advance the state by.
    */
-  void discard(u64 z);
+  inline void discard(u64 z);
 
   /**
    * Reset the random number generator without changing the seed.
    */
-  void reset();
+  inline void reset();
 
   /**
    * Reset the random number generator with the new seed.
    *
    * @param seed new seed.
    */
-  void reset(seed_type seed);
+  inline void reset(seed_type seed);
 
   /**
    * Restore ther state of random number generator from state object.
    *
    * @param state state object.
    */
-  void reset(random_state const& state);
+  inline void reset(random_state const& state);
 
   /**
    * Compare two random object.
@@ -133,27 +133,27 @@ public:
    *
    * @return Return true if state object is the same.
    */
-  bool operator==(random const& rhs) const noexcept;
+  inline bool operator==(random const& rhs) const noexcept;
 
   /**
    * Compare two random object.
    *
    * @return !(*this != rhs);
    */
-  bool operator!=(random const& rhs) const noexcept;
+  inline bool operator!=(random const& rhs) const noexcept;
 
   /**
    * Copy assignment operator.
    */
-  random& operator=(random const& rhs);
+  inline random& operator=(random const& rhs);
 
   /**
    * Move assignment operator.
    */
-  random& operator=(random&& rhs);
+  inline random& operator=(random&& rhs);
 
 private:
-  static seed_type generate_seed();
+  inline static seed_type generate_seed();
 
   random_state    state_;  //!< object state
   std::mt19937_64 engine_; //!< random number generator
