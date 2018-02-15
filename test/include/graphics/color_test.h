@@ -3,11 +3,12 @@
 
 #include <pyrite/graphics/color.hpp>
 
-#include "gtest/gtest.h"
-
 #include "utility.h"
-
+#include "gtest/gtest.h"
 #include <limits>
+#include <pyrite/random.hpp>
+#include <string>
+#include <string_view>
 #include <type_traits>
 
 inline namespace test
@@ -35,33 +36,27 @@ public:
   static constexpr T min_value = make_minmax().first;
   static constexpr T max_value = make_minmax().second;
 
-  static void equal(color_type const& a, color_type const& b)
+  static void expect_equal(color_type const& a,
+                           color_type const& b,
+                           std::string_view  scope = "")
   {
-    equal(a, b.r, b.g, b.b, b.a);
+    expect_equal(a, b.r, b.g, b.b, b.a, scope);
   }
 
-  static void equal(color_type const& c,
-                    value_type        r,
-                    value_type        g,
-                    value_type        b,
-                    value_type        a)
+  static void expect_equal(color_type const& c,
+                           value_type        r,
+                           value_type        g,
+                           value_type        b,
+                           value_type        a,
+                           std::string_view  scope = "")
   {
-    {
-      SCOPED_TRACE("r");
-      expect_equal(c.r, r);
-    }
-    {
-      SCOPED_TRACE("g");
-      expect_equal(c.g, g);
-    }
-    {
-      SCOPED_TRACE("b");
-      expect_equal(c.b, b);
-    }
-    {
-      SCOPED_TRACE("a");
-      expect_equal(c.a, a);
-    }
+    SCOPED_TRACE(scope);
+    SCOPED_TRACE(to_string(c) + " equal " + to_string(color_type(r, g, b, a)));
+
+    ::expect_equal(c.r, r, "r");
+    ::expect_equal(c.g, g, "g");
+    ::expect_equal(c.b, b, "b");
+    ::expect_equal(c.a, a, "a");
   }
 
   static auto to_string(color_type const& color)
@@ -70,6 +65,15 @@ public:
            ", g: " + std::to_string(color.g) +
            ", b: " + std::to_string(color.b) +
            ", a: " + std::to_string(color.a) + ")";
+  }
+
+  static color_type get_random_color()
+  {
+    static thread_local pyrite::random random;
+    return {random.next<value_type>(),
+            random.next<value_type>(),
+            random.next<value_type>(),
+            random.next<value_type>()};
   }
 };
 
