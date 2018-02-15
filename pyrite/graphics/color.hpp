@@ -49,6 +49,54 @@ public:
   template <typename U = vector_value_type>
   explicit constexpr operator pyrite::math::vector<U, 4>() const;
 
+  constexpr T&       operator[](usize index);
+  constexpr T const& operator[](usize index) const;
+
+  friend constexpr bool operator==(color const& lhs, color const& rhs) noexcept;
+  friend constexpr bool operator!=(color const& lhs, color const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>&
+    operator+=(color<U>& lhs, color<U> const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>&
+    operator-=(color<U>& lhs, color<U> const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>&
+    operator*=(color<U>& lhs, color<U> const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>& operator/=(color<U>& lhs, color<U> const& rhs);
+
+  template <typename U>
+  friend constexpr color<U>& operator*=(color<U>& c, T v) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>& operator/=(color<U>& c, T v);
+
+  template <typename U>
+  friend constexpr color<U>
+    operator+(color<U> lhs, color<U> const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>
+    operator-(color<U> lhs, color<U> const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U>
+    operator*(color<U> lhs, color<U> const& rhs) noexcept;
+
+  template <typename U>
+  friend constexpr color<U> operator/(color<U> lhs, color<U> const& rhs);
+
+  template <typename U>
+  friend constexpr color<U> operator*(color<U> c, T v) noexcept;
+
+  template <typename U>
+  friend constexpr color<U> operator/(color<U> c, T v);
+
   /****************************************************************************
    * member variable
    ****************************************************************************/

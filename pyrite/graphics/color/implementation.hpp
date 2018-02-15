@@ -99,6 +99,214 @@ constexpr color<T>::operator pyrite::math::vector<U, 4>() const
   return {c.r, c.g, c.b, c.a};
 }
 
+template <typename T>
+constexpr T& color<T>::operator[](usize index)
+{
+  assert(0 <= index && index < 4); // out of range
+  if (index == 0)
+  {
+    return r;
+  }
+  else if (index == 1)
+  {
+    return g;
+  }
+  else if (index == 2)
+  {
+    return b;
+  }
+  else
+  {
+    return a;
+  }
+}
+
+template <typename T>
+constexpr T const& color<T>::operator[](usize index) const
+{
+  assert(0 <= index && index < 4); // out of range
+  if (index == 0)
+  {
+    return r;
+  }
+  else if (index == 1)
+  {
+    return g;
+  }
+  else if (index == 2)
+  {
+    return b;
+  }
+  else
+  {
+    return a;
+  }
+}
+
+template <typename T>
+constexpr bool operator==(color<T> const& lhs, color<T> const& rhs) noexcept
+{
+  return pyrite::math::equal(lhs.r, rhs.r) &&
+         pyrite::math::equal(lhs.g, rhs.g) &&
+         pyrite::math::equal(lhs.b, rhs.b) && pyrite::math::equal(lhs.a, rhs.a);
+}
+
+template <typename T>
+constexpr bool operator!=(color<T> const& lhs, color<T> const& rhs) noexcept
+{
+  return !(lhs == rhs);
+}
+
+template <typename T>
+constexpr color<T>& operator+=(color<T>& lhs, color<T> const& rhs) noexcept
+{
+  if constexpr (std::is_floating_point_v<T>)
+  {
+    lhs.r += rhs.r;
+    lhs.g += rhs.g;
+    lhs.a += rhs.a;
+    lhs.b += rhs.b;
+  }
+  else
+  {
+    auto lhs_ld = lhs.template convert<long double>();
+    lhs_ld += rhs.template convert<long double>();
+    lhs = lhs_ld.template convert<T>();
+  }
+  return lhs;
+}
+
+template <typename T>
+constexpr color<T>& operator-=(color<T>& lhs, color<T> const& rhs) noexcept
+{
+  if constexpr (std::is_floating_point_v<T>)
+  {
+    lhs.r -= rhs.r;
+    lhs.g -= rhs.g;
+    lhs.a -= rhs.a;
+    lhs.b -= rhs.b;
+  }
+  else
+  {
+    auto lhs_ld = lhs.template convert<long double>();
+    lhs_ld -= rhs.template convert<long double>();
+    lhs = lhs_ld.template convert<T>();
+  }
+  return lhs;
+}
+
+template <typename T>
+constexpr color<T>& operator*=(color<T>& lhs, color<T> const& rhs) noexcept
+{
+  if constexpr (std::is_floating_point_v<T>)
+  {
+    lhs.r *= rhs.r;
+    lhs.g *= rhs.g;
+    lhs.a *= rhs.a;
+    lhs.b *= rhs.b;
+  }
+  else
+  {
+    auto lhs_ld = lhs.template convert<long double>();
+    lhs_ld *= rhs.template convert<long double>();
+    lhs = lhs_ld.template convert<T>();
+  }
+  return lhs;
+}
+
+template <typename T>
+constexpr color<T>& operator/=(color<T>& lhs, color<T> const& rhs)
+{
+  if constexpr (std::is_floating_point_v<T>)
+  {
+    lhs.r /= rhs.r;
+    lhs.g /= rhs.g;
+    lhs.a /= rhs.a;
+    lhs.b /= rhs.b;
+  }
+  else
+  {
+    auto lhs_ld = lhs.template convert<long double>();
+    lhs_ld /= rhs.template convert<long double>();
+    lhs = lhs_ld.template convert<T>();
+  }
+  return lhs;
+}
+
+template <typename T>
+constexpr color<T>& operator*=(color<T>& c, T v) noexcept
+{
+  if constexpr (std::is_floating_point_v<T>)
+  {
+    c.r *= v;
+    c.g *= v;
+    c.a *= v;
+    c.b *= v;
+  }
+  else
+  {
+    auto c_ld = c.template convert<long double>();
+    c_ld *= static_cast<long double>(v);
+    c = c_ld.template convert<T>();
+  }
+  return c;
+}
+
+template <typename T>
+constexpr color<T>& operator/=(color<T>& c, T v)
+{
+  if constexpr (std::is_floating_point_v<T>)
+  {
+    c.r /= v;
+    c.g /= v;
+    c.a /= v;
+    c.b /= v;
+  }
+  else
+  {
+    auto c_ld = c.template convert<long double>();
+    c_ld /= static_cast<long double>(v);
+    c = c_ld.template convert<T>();
+  }
+  return c;
+}
+
+template <typename T>
+constexpr color<T> operator+(color<T> lhs, color<T> const& rhs) noexcept
+{
+  return lhs += rhs;
+}
+
+template <typename T>
+constexpr color<T> operator-(color<T> lhs, color<T> const& rhs) noexcept
+{
+  return lhs -= rhs;
+}
+
+template <typename T>
+constexpr color<T> operator*(color<T> lhs, color<T> const& rhs) noexcept
+{
+  return lhs *= rhs;
+}
+
+template <typename T>
+constexpr color<T> operator/(color<T> lhs, color<T> const& rhs)
+{
+  return lhs /= rhs;
+}
+
+template <typename T>
+constexpr color<T> operator*(color<T> c, T v) noexcept
+{
+  return c *= v;
+}
+
+template <typename T>
+constexpr color<T> operator/(color<T> c, T v)
+{
+  return c /= v;
+}
+
 /******************************************************************************
  * detail
  ******************************************************************************/
